@@ -56,9 +56,9 @@ class Product extends Component {
             <RightSideProductColorContainer>
               <RightSideProductColorTitle>COLOR:</RightSideProductColorTitle>
               <RightSideProductColorBoxContainer>
-                <RightSideProductColorBox bgcolor="#D3D2D5"></RightSideProductColorBox>
-                <RightSideProductColorBox bgcolor="#2B2B2B"></RightSideProductColorBox>
-                <RightSideProductColorBox bgcolor=" #0F6450"></RightSideProductColorBox>
+                <RightSideProductColorBox bgcolor="#D3D2D5" />
+                <RightSideProductColorBox bgcolor="#2B2B2B" />
+                <RightSideProductColorBox bgcolor=" #0F6450" />
               </RightSideProductColorBoxContainer>
               <RightSideProductPriceContainer>
                 <RightSideProductPriceLabel>PRICE:</RightSideProductPriceLabel>
