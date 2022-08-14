@@ -39,7 +39,7 @@ export const ProductCard = styled.div`
     margin-right: 40px;
   }
   &:hover {
-    filter: drop-shadow(0px 4px 35px rgba(168, 172, 176, 0.19));
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   }
 `;
 
