@@ -35,6 +35,7 @@ export const ProductCard = styled.div`
   width: 413px;
   height: 444px;
   padding: 16px;
+  opacity: ${(props) => (props.outOfStock ? 0.3 : 1)};
   &:not(:last-child) {
     margin-right: 40px;
   }
@@ -85,11 +86,32 @@ export const CardContentPrice = styled.span`
 `;
 
 export const CardCartIcon = styled.img`
+  display: none;
   position: absolute;
   width: 60px;
   height: 60px;
   right: 30px;
   bottom: 66px;
-  filter: drop-shadow(0px 4px 11px rgba(29, 31, 34, 0.1));
   cursor: pointer;
+`;
+
+export const OutOfStockOverlay = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding-top: 180px;
+`;
+
+export const OutOfStockText = styled.h4`
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 160%;
+  align-items: center;
+  text-align: center;
+  text-transform: uppercase;
+  color: #000; ;
 `;

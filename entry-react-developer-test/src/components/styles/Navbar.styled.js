@@ -32,6 +32,7 @@ export const RightContainer = styled.div`
   flex: 30%;
   display: flex;
   justify-content: flex-end;
+  position: relative;
 `;
 
 export const NavbarInnerContainer = styled.div`
@@ -95,5 +96,19 @@ export const CartContainer = styled.img`
   height: 20px;
   object-fit: contain;
   margin-top: 28px;
+  cursor: pointer;
 `;
+
+export const CartItemNumber = styled.span`
+  text-align: center;
+  position: absolute;
+  border-radius: 100%;
+  padding: 10px;
+  top: 5px;
+  left: 395px;
+  background: #1d1f22;
+  color: #fff;
+  z-index: -1;
+`;
+
 export const NavbarExtendedContainer = styled.div``;

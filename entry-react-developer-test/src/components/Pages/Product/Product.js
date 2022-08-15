@@ -24,6 +24,40 @@ import {
 } from "./../../styles/Product.styled";
 import Image1 from "./../../../assets/Image1.png";
 
+const size = [
+  {
+    id: 1,
+    size: "XS",
+  },
+  {
+    id: 2,
+    size: "S",
+  },
+  {
+    id: 3,
+    size: "M",
+  },
+  {
+    id: 4,
+    size: "L",
+  },
+];
+
+const colors = [
+  {
+    id: 1,
+    color: "#D3D2D5",
+  },
+  {
+    id: 2,
+    color: "#2B2B2B",
+  },
+  {
+    id: 3,
+    color: "#0F6450",
+  },
+];
+
 class Product extends Component {
   render() {
     return (
@@ -40,25 +74,22 @@ class Product extends Component {
             <RightSideProductName>Running Short</RightSideProductName>
             <RightSideProductSizeTitle>SIZE:</RightSideProductSizeTitle>
             <RightSideProductSizeBoxContainer>
-              <ProductSizeBox>
-                <ProductSizeLable>XS</ProductSizeLable>
-              </ProductSizeBox>
-              <ProductSizeBox size="s">
-                <ProductSizeLable size="s">S</ProductSizeLable>
-              </ProductSizeBox>
-              <ProductSizeBox>
-                <ProductSizeLable>M</ProductSizeLable>
-              </ProductSizeBox>
-              <ProductSizeBox>
-                <ProductSizeLable>L</ProductSizeLable>
-              </ProductSizeBox>
+              {size.map((item, index) => (
+                <ProductSizeBox key={item.id} index={index}>
+                  <ProductSizeLable index={index}>{item.size}</ProductSizeLable>
+                </ProductSizeBox>
+              ))}
             </RightSideProductSizeBoxContainer>
             <RightSideProductColorContainer>
               <RightSideProductColorTitle>COLOR:</RightSideProductColorTitle>
               <RightSideProductColorBoxContainer>
-                <RightSideProductColorBox bgcolor="#D3D2D5" />
-                <RightSideProductColorBox bgcolor="#2B2B2B" />
-                <RightSideProductColorBox bgcolor=" #0F6450" />
+                {colors.map((item, index) => (
+                  <RightSideProductColorBox
+                    key={item.id}
+                    bgcolor={item.color}
+                    index={index}
+                  />
+                ))}
               </RightSideProductColorBoxContainer>
               <RightSideProductPriceContainer>
                 <RightSideProductPriceLabel>PRICE:</RightSideProductPriceLabel>

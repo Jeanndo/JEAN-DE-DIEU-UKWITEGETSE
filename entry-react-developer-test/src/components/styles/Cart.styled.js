@@ -7,15 +7,11 @@ export const CartContainer = styled.div`
 `;
 
 export const CartTitle = styled.h2`
-  width: 299px;
-  height: 68px;
   font-family: "Raleway";
   font-style: normal;
   font-weight: 400;
   font-size: 32px;
   line-height: 160%;
-  display: flex;
-  align-items: center;
   color: #1d1f22;
 `;
 
@@ -24,7 +20,7 @@ export const CartCard = styled.div`
   justify-content: space-between;
   width: 100%;
   height: 400px;
-  padding: 24px 0px;
+  padding: 20px 0px;
   border-top: 2px solid #e5e5e5;
 `;
 
@@ -33,8 +29,6 @@ export const CartCardLeftSide = styled.div`
   height: 100%;
 `;
 export const ProductBrandName = styled.h2`
-  width: 292px;
-  height: 27px;
   font-family: "Raleway";
   font-style: normal;
   font-weight: 600;
@@ -45,8 +39,6 @@ export const ProductBrandName = styled.h2`
 `;
 
 export const ProductName = styled.h2`
-  width: 292px;
-  height: 27px;
   font-family: "Raleway";
   font-style: normal;
   font-weight: 400;
@@ -59,8 +51,6 @@ export const ProductName = styled.h2`
 `;
 
 export const ProductPriceFigures = styled.h4`
-  width: 86px;
-  height: 46px;
   font-family: "Raleway";
   font-style: normal;
   font-weight: 700;
@@ -70,16 +60,13 @@ export const ProductPriceFigures = styled.h4`
   color: #1d1f22;
 `;
 export const ProductSizeTitle = styled.h4`
-  width: 38px;
-  height: 18px;
   font-family: "Raleway";
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
   line-height: 18px;
-  align-items: center;
-  text-align: center;
   color: #1d1f22;
+  margin-top: 20px;
 `;
 export const ProductSizeBoxContainer = styled.div`
   display: flex;
@@ -89,40 +76,34 @@ export const ProductSizeBoxContainer = styled.div`
 `;
 
 export const ProductSizeBox = styled.div`
-  width: 25%;
-  height: 45px;
+  width: 46px;
+  height: 35px;
   border: 1px solid #1d1f22;
   text-align: center;
-  padding-top: 10px;
-  background-color: ${(props) => (props.size === "s" ? "#000" : "#fff")};
+  padding-top: 6px;
+  background-color: ${(props) => (props.index === 1 ? "#1d1f22" : "#fff")};
   &:not(:last-child) {
     margin-right: 12px;
   }
 `;
 export const ProductSizeLable = styled.label`
-  width: 18px;
-  height: 18px;
   font-family: "Raleway";
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 18px;
   letter-spacing: 0.05em;
-  color: ${(props) => (props.size === "s" ? "#fff" : "#1d1f22")};
+  color: ${(props) => (props.index === 1 ? "#fff" : "#1d1f22")};
 `;
 export const ProductColorContainer = styled.div`
   width: 100%;
 `;
 export const ProductColorTitle = styled.h4`
-  width: 55px;
-  height: 18px;
   font-family: "Raleway";
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
   line-height: 18px;
-  align-items: center;
-  text-align: center;
   color: #1d1f22;
   margin-bottom: 10px;
 `;
@@ -140,6 +121,7 @@ export const ProductColorBoxContainer = styled.div`
 export const ProductColorBox = styled.div`
   width: 32px;
   height: 32px;
+  border: ${(props) => (props.index === 0 ? "1px solid #5ece7b" : "")};
   background: ${(props) => props.bgcolor};
 `;
 
@@ -232,10 +214,97 @@ export const CartSlidePrevButton = styled.button`
   outline: none;
 `;
 
-export const CardOrderCard = styled.div`
+export const CartOrderCard = styled.div`
   width: 100%;
-  height: 162px;
   padding: 32px 0px;
   border-top: 2px solid #e5e5e5;
-  background-color: green;
+`;
+export const CartOrderItemContainer = styled.div`
+  width: 100%;
+  &:not(:last-child) {
+    margin-bottom: 8px;
+  }
+`;
+export const CartOrderTax = styled.span`
+  width: 184px;
+  height: 28px;
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 28px;
+  color: #555;
+  margin-right: 20px;
+`;
+
+export const CartOrderTaxValue = styled.span`
+  width: 184px;
+  height: 28px;
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 28px;
+  color: #1d1f22;
+`;
+
+export const CartOrderQuantity = styled.span`
+  width: 184px;
+  height: 28px;
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 28px;
+  color: #555;
+  margin-right: 20px;
+`;
+
+export const CartOrderQuantityValue = styled.span`
+  width: 184px;
+  height: 28px;
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 28px;
+  color: #1d1f22;
+`;
+
+export const CartOrderTotal = styled.span`
+  width: 184px;
+  height: 28px;
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 28px;
+  color: #1d1f22;
+  margin-right: 20px;
+`;
+export const CartOrderTotalValue = styled.span`
+  width: 184px;
+  height: 28px;
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 28px;
+  color: #1d1f22;
+`;
+
+export const CartOrderButton = styled.button`
+  border-style: none;
+  align-items: center;
+  padding: 16px 32px;
+  width: 279px;
+  height: 52px;
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 120%;
+  color: #ffffff;
+  cursor: pointer;
+  background: #5ece7b;
 `;
