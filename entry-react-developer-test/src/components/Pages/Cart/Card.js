@@ -26,6 +26,20 @@ import {
 } from "./../../styles/Cart.styled";
 
 class Card extends Component {
+  constructor() {
+    super();
+    this.state = {
+      quantity: 1,
+    };
+  }
+
+  handleQuantityIncreament() {
+    this.setState({ quantity: this.state.quantity + 1 });
+  }
+  handleQuantityDecreament() {
+    this.setState({ quantity: this.state.quantity - 1 });
+  }
+
   render() {
     return (
       <CartCard>
@@ -35,33 +49,55 @@ class Card extends Component {
           <ProductPriceFigures>{this.props.price}</ProductPriceFigures>
           <ProductSizeTitle>SIZE:</ProductSizeTitle>
           <ProductSizeBoxContainer>
-            <ProductSizeBox>
-              <ProductSizeLable>{this.props.xs}</ProductSizeLable>
-            </ProductSizeBox>
-            <ProductSizeBox size="s">
-              <ProductSizeLable size="s">{this.props.s}</ProductSizeLable>
-            </ProductSizeBox>
-            <ProductSizeBox>
-              <ProductSizeLable>{this.props.m}</ProductSizeLable>
-            </ProductSizeBox>
-            <ProductSizeBox>
-              <ProductSizeLable>{this.props.l}</ProductSizeLable>
-            </ProductSizeBox>
+            {this.props.size.map((item, index) => (
+              <ProductSizeBox
+                key={item.id}
+                size={item.size === "S" ? "S" : ""}
+                index={index}
+              >
+                <ProductSizeLable
+                  size={item.size === "S" ? "S" : ""}
+                  index={index}
+                >
+                  {item.size}
+                </ProductSizeLable>
+              </ProductSizeBox>
+            ))}
           </ProductSizeBoxContainer>
           <ProductColorContainer>
             <ProductColorTitle>COLOR:</ProductColorTitle>
             <ProductColorBoxContainer>
-              <ProductColorBox bgcolor={this.props.color1} />
-              <ProductColorBox bgcolor={this.props.color2} />
-              <ProductColorBox bgcolor={this.props.color3} />
+              {this.props.colors.map((item, index) => (
+                <ProductColorBox
+                  key={item.id}
+                  bgcolor={item.color}
+                  index={index}
+                />
+              ))}
             </ProductColorBoxContainer>
           </ProductColorContainer>
         </CartCardLeftSide>
         <CartCardRight>
           <CartActionButtonsContainer>
-            <CartIncreamentButton>+</CartIncreamentButton>
-            <CartQuantityBox>1</CartQuantityBox>
-            <CartDecreamentButton>-</CartDecreamentButton>
+            <CartIncreamentButton
+              onClick={() => {
+                this.setState({
+                  quantity: this.state.quantity + 1,
+                });
+              }}
+            >
+              +
+            </CartIncreamentButton>
+            <CartQuantityBox>{this.state.quantity}</CartQuantityBox>
+            <CartDecreamentButton
+              onClick={() => {
+                this.setState({
+                  quantity: this.state.quantity - 1,
+                });
+              }}
+            >
+              -
+            </CartDecreamentButton>
           </CartActionButtonsContainer>
           <CartProductImageContainer>
             <CartProductImage src={this.props.img} alt="cart product " />

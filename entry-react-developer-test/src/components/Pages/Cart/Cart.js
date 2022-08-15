@@ -2,12 +2,78 @@ import React, { Component } from "react";
 import {
   CartContainer,
   CartTitle,
-  CardOrderCard,
+  CartOrderCard,
+  CartOrderTax,
+  CartOrderTaxValue,
+  CartOrderQuantity,
+  CartOrderQuantityValue,
+  CartOrderItemContainer,
+  CartOrderTotal,
+  CartOrderTotalValue,
+  CartOrderButton,
 } from "./../../styles/Cart.styled";
 import Image1 from "./../../../assets/Image1.png";
 import Glasses from "./../../../assets/glasses.png";
-
 import CartCard from "./Card";
+
+const size1 = [
+  {
+    id: 1,
+    size: "XS",
+  },
+  {
+    id: 2,
+    size: "S",
+  },
+  {
+    id: 3,
+    size: "M",
+  },
+  {
+    id: 4,
+    size: "L",
+  },
+];
+
+const size2 = [
+  {
+    id: 1,
+    size: "S",
+  },
+  {
+    id: 2,
+    size: "M",
+  },
+];
+const cardOneColors = [
+  {
+    id: 1,
+    color: "#D3D2D5",
+  },
+  {
+    id: 2,
+    color: "#2B2B2B",
+  },
+  {
+    id: 3,
+    color: "#0F6450",
+  },
+];
+
+const cardTwoColors = [
+  {
+    id: 1,
+    color: "#1D1F22",
+  },
+  {
+    id: 2,
+    color: "#15A4C3",
+  },
+  {
+    id: 3,
+    color: "#EA8120",
+  },
+];
 
 class Cart extends Component {
   render() {
@@ -19,26 +85,34 @@ class Cart extends Component {
           productName="Running Short"
           price="$50.00"
           img={Image1}
-          color1="#D3D2D5"
-          color2="#2B2B2B"
-          color3="#0F6450"
-          xs="XS"
-          s="S"
-          m="M"
-          l="L"
+          colors={cardOneColors}
+          size={size1}
         />
         <CartCard
           brandName="Jupiter"
           productName="Wayfarer"
           price="$75.00"
           img={Glasses}
-          color1="#1D1F22"
-          color2="#15A4C3"
-          color3=" #EA8120"
-          s="S"
-          m="M"
+          colors={cardTwoColors}
+          size={size2}
         />
-        <CardOrderCard></CardOrderCard>
+        <CartOrderCard>
+          <CartOrderItemContainer>
+            <CartOrderTax>Tax 21%:</CartOrderTax>
+            <CartOrderTaxValue>$42.00</CartOrderTaxValue>
+          </CartOrderItemContainer>
+          <CartOrderItemContainer>
+            <CartOrderQuantity>Quantity:</CartOrderQuantity>
+            <CartOrderQuantityValue>3</CartOrderQuantityValue>
+          </CartOrderItemContainer>
+          <CartOrderItemContainer>
+            <CartOrderTotal>Total:</CartOrderTotal>
+            <CartOrderTotalValue>$200.00</CartOrderTotalValue>
+          </CartOrderItemContainer>
+          <CartOrderItemContainer>
+            <CartOrderButton>ORDER</CartOrderButton>
+          </CartOrderItemContainer>
+        </CartOrderCard>
       </CartContainer>
     );
   }

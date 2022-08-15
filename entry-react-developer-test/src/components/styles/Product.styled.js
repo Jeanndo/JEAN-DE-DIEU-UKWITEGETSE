@@ -34,7 +34,7 @@ export const ProductRightSideImage = styled.img`
 `;
 
 export const ProductRightSideDetails = styled.div`
-  width: 355px;
+  width: 300px;
   height: 595px;
   margin-left: 50px;
 `;
@@ -90,12 +90,12 @@ export const RightSideProductSizeBoxContainer = styled.div`
 `;
 
 export const ProductSizeBox = styled.div`
-  width: 25%;
-  height: 45px;
+  width: 46px;
+  height: 35px;
   border: 1px solid #1d1f22;
   text-align: center;
-  padding-top: 10px;
-  background-color: ${(props) => (props.size === "s" ? "#000" : "#fff")};
+  padding-top: 8px;
+  background-color: ${(props) => (props.index === 1 ? "#000" : "#fff")};
   &:not(:last-child) {
     margin-right: 12px;
   }
@@ -109,7 +109,7 @@ export const ProductSizeLable = styled.label`
   font-size: 16px;
   line-height: 18px;
   letter-spacing: 0.05em;
-  color: ${(props) => (props.size === "s" ? "#fff" : "#1d1f22")};
+  color: ${(props) => (props.index === 1 ? "#fff" : "#1d1f22")};
 `;
 
 export const RightSideProductColorContainer = styled.div`
@@ -142,6 +142,7 @@ export const RightSideProductColorBoxContainer = styled.div`
 export const RightSideProductColorBox = styled.div`
   width: 32px;
   height: 32px;
+  border: ${(props) => (props.index === 0 ? "1px solid #5ece7b" : "")};
   background: ${(props) => props.bgcolor};
 `;
 export const RightSideProductPriceContainer = styled.div`
@@ -178,7 +179,7 @@ export const AddToCartButton = styled.button`
   border-style: none;
   align-items: center;
   padding: 16px 32px;
-  width: 100%;
+  width: 297px;
   height: 52px;
   font-family: "Raleway";
   font-style: normal;
