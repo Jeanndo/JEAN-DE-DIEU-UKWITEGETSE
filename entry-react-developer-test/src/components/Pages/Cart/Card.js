@@ -23,13 +23,14 @@ import {
   CartSlideButtonsContainer,
   CartSlidePrevButton,
   CartSlideNextButton,
-} from "./../../styles/Cart.styled";
+} from "./../../styles/Cart.styled.js";
 
 class Card extends Component {
   constructor() {
     super();
     this.state = {
       quantity: 1,
+      currentIndex: 1,
     };
   }
 
@@ -39,6 +40,43 @@ class Card extends Component {
   handleQuantityDecreament() {
     this.setState({ quantity: this.state.quantity - 1 });
   }
+
+  handleChange = (event) => {
+    console.log(event.target.value);
+  };
+
+  handleNext = () => {
+    this.setState((prevState) => ({
+      currentIndex:
+        prevState.currentIndex !== this.props?.products.length - 1
+          ? prevState.currentIndex + 1
+          : prevState.currentIndex,
+    }));
+    // this.setState({
+    //   currentIndex:
+    //     this.state.currentIndex !== this.props?.products.length - 1
+    //       ? this.state.currentIndex + 1
+    //       : this.state.currentIndex,
+    // });
+    console.log(this.state.currentIndex);
+  };
+
+  handlePrev = () => {
+    this.setState((prevState) => ({
+      currentIndex:
+        prevState.currentIndex !== -1
+          ? prevState.currentIndex - 1
+          : prevState.currentIndex,
+    }));
+
+    // this.setState({
+    //   currentIndex:
+    //     this.state.currentIndex !== -1
+    //       ? this.state.currentIndex - 1
+    //       : this.state.currentIndex,
+    // });
+    console.log(this.state.currentIndex);
+  };
 
   render() {
     return (
@@ -88,7 +126,11 @@ class Card extends Component {
             >
               +
             </CartIncreamentButton>
-            <CartQuantityBox>{this.state.quantity}</CartQuantityBox>
+            <CartQuantityBox
+              type="number"
+              defaultValue={this.state.quantity}
+              onchange={this.handleChange}
+            />
             <CartDecreamentButton
               onClick={() => {
                 this.setState({
@@ -100,10 +142,22 @@ class Card extends Component {
             </CartDecreamentButton>
           </CartActionButtonsContainer>
           <CartProductImageContainer>
-            <CartProductImage src={this.props.img} alt="cart product " />
+            {this.props?.products
+              ?.slice(this.state.currentIndex - 1, this.state.currentIndex)
+              .map((item, index) => (
+                <CartProductImage src={item} alt="cart product " key={index} />
+              ))}
             <CartSlideButtonsContainer>
-              <CartSlidePrevButton>←</CartSlidePrevButton>
-              <CartSlideNextButton>→</CartSlideNextButton>
+              {this.state.currentIndex !== 1 && (
+                <CartSlidePrevButton onClick={this.handlePrev}>
+                  ←
+                </CartSlidePrevButton>
+              )}
+              {this.state.currentIndex !== this.props?.products.length - 1 && (
+                <CartSlideNextButton onClick={this.handleNext}>
+                  →
+                </CartSlideNextButton>
+              )}
             </CartSlideButtonsContainer>
           </CartProductImageContainer>
         </CartCardRight>

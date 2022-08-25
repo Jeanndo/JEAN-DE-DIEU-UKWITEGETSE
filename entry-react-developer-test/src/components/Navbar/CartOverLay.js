@@ -10,9 +10,9 @@ import {
   TotalLabels,
   CheckoutActionButtonContainer,
   CheckoutActionButton,
-} from "./../styles/Overlay.styled";
+} from "./../styles/Overlay.styled.js";
 
-import Card from "./OverLayCard";
+import Card from "./OverLayCard.js";
 
 const size1 = [
   {

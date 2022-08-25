@@ -5,12 +5,20 @@ export const ProductContainer = styled.div`
   width: 100%;
   margin-top: 60px;
   padding: 0px 50px 0px 50px;
+  @media (max-width: 425px) {
+    flex-direction: column;
+    padding: 0px;
+  }
 `;
 
 export const ProductLeftSideDetails = styled.div`
   display: flex;
   flex-direction: column;
   margin-right: 40px;
+  @media (max-width: 425px) {
+    flex-direction: row;
+    padding-left: 50px;
+  }
 `;
 
 export const ProductLeftSideImage = styled.img`
@@ -21,22 +29,37 @@ export const ProductLeftSideImage = styled.img`
   &:not(:last-child) {
     margin-bottom: 40px;
   }
+  @media (max-width: 425px) {
+    margin-right: 40px;
+  }
 `;
 
 export const ProductRightSideContainer = styled.div`
   display: flex;
+
+  @media (max-width: 425px) {
+    gap: 50px;
+    flex-direction: column;
+  }
 `;
 
 export const ProductRightSideImage = styled.img`
   width: 610px;
   height: 511px;
   object-fit: contain;
+  @media (max-width: 425px) {
+    width: 100%;
+    height: 250px;
+  }
 `;
 
 export const ProductRightSideDetails = styled.div`
   width: 300px;
   height: 595px;
   margin-left: 50px;
+  /* @media (max-width: 425px) {
+    margin-left: 80px;
+  } */
 `;
 export const RightSideProductBrandName = styled.h2`
   width: 292px;
@@ -44,7 +67,7 @@ export const RightSideProductBrandName = styled.h2`
   font-family: "Raleway";
   font-style: normal;
   font-weight: 600;
-  font-size: 30px;
+  font-size: 25px;
   line-height: 27px;
   align-items: center;
   color: #1d1f22;

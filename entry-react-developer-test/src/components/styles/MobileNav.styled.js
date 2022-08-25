@@ -7,11 +7,13 @@ export const NavbarContainer = styled.nav`
   z-index: 100;
   width: 100%;
   height: 80px;
+  display: flex;
+  flex-direction: column;
   padding: 0px 50px;
-  background: #fff;
+  background: yellow;
   @media (max-width: 425px) {
+    height: 250px;
     padding: 0px;
-    background: #5ece7b;
   }
 `;
 export const NavbarInnerContainer = styled.div`
@@ -19,7 +21,6 @@ export const NavbarInnerContainer = styled.div`
   height: 80px;
   display: flex;
   @media (max-width: 425px) {
-    display: none;
     flex-direction: column;
   }
 `;
@@ -27,6 +28,7 @@ export const LeftContainer = styled.div`
   flex: 30%;
   align-items: center;
   justify-content: flex-start;
+  background: red;
 `;
 
 export const MiddleContainer = styled.div`
@@ -50,7 +52,7 @@ export const RightContainer = styled.div`
 
 export const NavbarLinkContainer = styled.div`
   display: flex;
-  gap: 50px;
+  background: green;
   margin-top: 30px;
   @media (max-width: 425px) {
     width: 100%;
@@ -63,6 +65,8 @@ export const NavbarLinkContainer = styled.div`
 
 export const NavigationItems = styled.span`
   position: relative;
+  width: 37px;
+  height: 20px;
   font-family: "Raleway";
   font-style: normal;
   font-weight: 400;
@@ -72,14 +76,17 @@ export const NavigationItems = styled.span`
   align-items: center;
   text-align: center;
   text-transform: uppercase;
-  color: ${(props) => (props.active ? "#5ece7b" : "")};
+  color: ${(props) => (props.active ? "#5ece7b" : "#1d1f22")};
   cursor: pointer;
   font-weight: ${(props) => (props.active ? 600 : 400)};
+  &:not(:last-child) {
+    margin-right: 40px;
+  }
 
   &::after {
     content: " ";
     position: absolute;
-    width: 100%;
+    width: 50px;
     height: 3px;
     top: 48px;
     left: 0px;
@@ -113,6 +120,7 @@ export const Switcher = styled.select`
   outline: none;
   border-style: none;
   cursor: pointer;
+  background-color: green;
   @media (max-width: 425px) {
     margin-top: 40px;
     margin-left: 150px;
@@ -152,17 +160,14 @@ export const CartItemNumber = styled.span`
   }
 `;
 
-export const MenuBar = styled.button`
+export const OpenLinksButton = styled.button`
   width: 70px;
   height: 50px;
   background: none;
   border: none;
-  color: #fff;
+  color: #000;
   font-size: 45px;
   cursor: pointer;
-  right: 0px;
-  position: absolute;
-  top: 10px;
 `;
 
 export const NavbarExtendedContainer = styled.div``;

@@ -5,123 +5,97 @@ import {
   MiddleContainer,
   RightContainer,
   NavbarInnerContainer,
-  NavbarExtendedContainer,
   NavbarLinkContainer,
   Logo,
-  Switcher,
   CartContainer,
   NavigationItems,
   CartItemNumber,
-} from "./../styles/Navbar.styled";
-import CartOverlay from "./CartOverLay";
+  MenuBar,
+} from "./../styles/Navbar.styled.js";
+import CartOverlay from "./CartOverLay.js";
 import LogoImg from "./../../assets/a-logo.png";
 import Cart from "./../../assets/EmptyCart.png";
+import { CurrencySwitcher } from "./Switcher.js";
+import gql from "graphql-tag";
+import { Query } from "react-apollo";
+
+const getAllCategories = gql`
+  query AllCategories {
+    categories {
+      name
+      products {
+        id
+      }
+    }
+  }
+`;
 
 class Navbar extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      isWomen: true,
-      isMen: false,
-      isKids: false,
       showCart: false,
     };
   }
 
-  handleWomenTab() {
+  handleShowCart = () => {
     this.setState({
-      isWomen: true,
-      isMen: false,
-      isKids: false,
+      showCart: !this.state.showCart,
     });
-  }
-
-  handleMenTab() {
-    this.setState({
-      isWomen: false,
-      isMen: true,
-      isKids: false,
-    });
-  }
-
-  handleKidsTab() {
-    this.setState({
-      isWomen: false,
-      isMen: false,
-      isKids: true,
-    });
-  }
+  };
 
   render() {
     return (
       <Fragment>
-        {this.state.showCart && <CartOverlay />}
-        <NavbarContainer>
-          <NavbarInnerContainer>
-            <LeftContainer>
-              <NavbarLinkContainer>
-                <NavigationItems
-                  active={this.state.isWomen}
-                  onClick={() => {
-                    this.setState({
-                      isWomen: true,
-                      isMen: false,
-                      isKids: false,
-                    });
-                  }}
-                >
-                  WOMEN
-                </NavigationItems>
-                <NavigationItems
-                  active={this.state.isMen}
-                  onClick={() => {
-                    this.setState({
-                      isWomen: false,
-                      isMen: true,
-                      isKids: false,
-                    });
-                  }}
-                >
-                  MEN
-                </NavigationItems>
-                <NavigationItems
-                  active={this.state.isKids}
-                  onClick={() => {
-                    this.setState({
-                      isWomen: false,
-                      isMen: false,
-                      isKids: true,
-                    });
-                  }}
-                >
-                  KIDS
-                </NavigationItems>
-              </NavbarLinkContainer>
-            </LeftContainer>
-            <MiddleContainer>
-              <Logo src={LogoImg} alt="logo" />
-            </MiddleContainer>
-            <RightContainer>
-              <Switcher>
-                <option value="$">$</option>
-                <option value="$">$ USD</option>
-                <option value="€">€ EUR</option>
-                <option value="£">￥JPY</option>
-              </Switcher>
-              <CartContainer
-                src={Cart}
-                alt="cart"
-                onClick={() => {
-                  this.setState({
-                    showCart: !this.state.showCart,
-                  });
-                }}
-              />
-              <CartItemNumber>30</CartItemNumber>
-            </RightContainer>
-          </NavbarInnerContainer>
-          <NavbarExtendedContainer></NavbarExtendedContainer>
-        </NavbarContainer>
+        <Query query={getAllCategories}>
+          {({ loading, data, error }) => {
+            if (loading) return <h1>Loading ...</h1>;
+            if (error) console.log(error);
+            return (
+              <NavbarContainer>
+                {this.state.showCart && <CartOverlay />}
+                <NavbarInnerContainer>
+                  <LeftContainer>
+                    <NavbarLinkContainer>
+                      <NavigationItems
+                        active={this?.props?.state?.isAll}
+                        onClick={this?.props?.handleAllTab}
+                      >
+                        ALL
+                      </NavigationItems>
+
+                      <NavigationItems
+                        active={this?.props?.state?.isClothes}
+                        onClick={this?.props?.handleClothesTab}
+                      >
+                        CLOTHES
+                      </NavigationItems>
+                      <NavigationItems
+                        active={this?.props?.state?.isTech}
+                        onClick={this?.props?.handleTechTab}
+                      >
+                        TECH
+                      </NavigationItems>
+                    </NavbarLinkContainer>
+                  </LeftContainer>
+                  <MiddleContainer>
+                    <Logo src={LogoImg} alt="logo" />
+                  </MiddleContainer>
+                  <RightContainer>
+                    <CurrencySwitcher />
+                    <CartContainer
+                      src={Cart}
+                      alt="cart"
+                      onClick={this.handleShowCart}
+                    />
+                    <CartItemNumber>30</CartItemNumber>
+                  </RightContainer>
+                </NavbarInnerContainer>
+                <MenuBar>&#8801;</MenuBar>
+              </NavbarContainer>
+            );
+          }}
+        </Query>
       </Fragment>
     );
   }

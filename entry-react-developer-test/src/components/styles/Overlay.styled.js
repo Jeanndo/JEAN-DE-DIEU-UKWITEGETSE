@@ -2,12 +2,15 @@ import styled from "styled-components";
 
 export const OverlayShow = styled.div`
   width: 100%;
-  height: 100%;
+  height: 100vh;
   position: absolute;
   left: 0px;
-  top: 0px;
+  top: 80px;
   background: rgba(57, 55, 72, 0.22);
   z-index: 1;
+  @media (max-width: 425px) {
+    top: 250px;
+  }
 `;
 
 export const OverlayContainer = styled.div`
@@ -17,9 +20,13 @@ export const OverlayContainer = styled.div`
   width: 325px;
   height: 677px;
   left: 1043px;
-  top: 78px;
+  top: 0px;
   background: #fff;
   z-index: 1;
+  @media (max-width: 425px) {
+    left: 50px;
+    top: 0px;
+  }
 `;
 
 export const CartTitle = styled.h4`
@@ -91,17 +98,15 @@ export const ProductSizeBoxContainer = styled.div`
   width: 100%;
   margin-top: 8px;
   margin-bottom: 10px;
+  gap: 5px;
 `;
 
 export const ProductSizeBox = styled.div`
-  width: 25%;
-  height: 25px;
+  width: 15%;
+  height: 20px;
   border: 1px solid #1d1f22;
   text-align: center;
   background-color: ${(props) => (props.index === 1 ? "#000" : "#fff")};
-  &:not(:last-child) {
-    margin-right: 12px;
-  }
 `;
 
 export const ProductSizeLable = styled.label`
