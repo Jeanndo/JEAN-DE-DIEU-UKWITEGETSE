@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Routes, Route } from "react-router-dom";
-import Category from "../components/Pages/Category/Category";
-import Product from "../components/Pages/Product/Product";
-import Cart from "../components/Pages/Cart/Cart";
+import Category from "../components/Pages/Category/Category.js";
+import Product from "../components/Pages/Product/Product.js";
+import Cart from "../components/Pages/Cart/Cart.js";
 
 class MyRoutes extends Component {
   render() {

@@ -22,11 +22,18 @@ export const CartCard = styled.div`
   height: 400px;
   padding: 20px 0px;
   border-top: 2px solid #e5e5e5;
+  @media (max-width: 425px) {
+    flex-direction: column;
+    height: 100%;
+  }
 `;
 
 export const CartCardLeftSide = styled.div`
   width: 400px;
   height: 100%;
+  @media (max-width: 425px) {
+    margin-bottom: 50px;
+  }
 `;
 export const ProductBrandName = styled.h2`
   font-family: "Raleway";
@@ -134,11 +141,16 @@ export const CartCardRight = styled.div`
 
 export const CartActionButtonsContainer = styled.div`
   display: flex;
+  gap: 10px;
   flex-direction: column;
   justify-content: space-around;
   width: 15%;
   height: 100%;
   margin-right: 10%;
+  @media (max-width: 425px) {
+    margin-top: 20px;
+    margin-right: 0%;
+  }
 `;
 
 export const CartIncreamentButton = styled.button`
@@ -149,18 +161,20 @@ export const CartIncreamentButton = styled.button`
   border: 1px solid #1d1f22;
   cursor: pointer;
   background: #fff;
+  @media (max-width: 425px) {
+    width: 80%;
+    height: 30px;
+  }
 `;
 
-export const CartQuantityBox = styled.label`
-  display: block;
-  font-family: "Raleway";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 160%;
-  align-items: center;
-  text-align: center;
-  color: #1d1f22;
+export const CartQuantityBox = styled.input`
+  width: 100%;
+  height: 45px;
+  text-indent: 20px;
+  @media (max-width: 425px) {
+    width: 80%;
+    height: 30px;
+  }
 `;
 export const CartDecreamentButton = styled.button`
   display: block;
@@ -170,6 +184,10 @@ export const CartDecreamentButton = styled.button`
   border: 1px solid #1d1f22;
   cursor: pointer;
   background: #fff;
+  @media (max-width: 425px) {
+    width: 80%;
+    height: 30px;
+  }
 `;
 
 export const CartProductImageContainer = styled.div`
@@ -182,6 +200,10 @@ export const CartProductImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: contain;
+  @media (max-width: 425px) {
+    width: 100%;
+    height: 150px;
+  }
 `;
 
 export const CartSlideButtonsContainer = styled.div`
@@ -192,6 +214,10 @@ export const CartSlideButtonsContainer = styled.div`
   height: 24px;
   top: 280px;
   left: 190px;
+  @media (max-width: 425px) {
+    top: 100px;
+    left: 100px;
+  }
 `;
 
 export const CartSlideNextButton = styled.button`

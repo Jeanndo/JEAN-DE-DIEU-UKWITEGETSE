@@ -3,7 +3,10 @@ import styled from "styled-components";
 export const CategoryContainer = styled.div`
   width: 100%;
   margin-top: 80px;
-  padding: 0px 50px 0px 50px;
+  padding: 0px 50px 50px 50px;
+  @media (max-width: 425px) {
+    padding: 0px;
+  }
 `;
 
 export const CategoryName = styled.h2`
@@ -16,6 +19,7 @@ export const CategoryName = styled.h2`
   line-height: 160%;
   display: flex;
   align-items: center;
+  text-transform: capitalize;
   color: #1d1f22;
 `;
 
@@ -23,7 +27,7 @@ export const ProductContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin-top: 80px;
-  margin-bottom: 103px;
+  margin-bottom: 20px;
 `;
 
 export const ProductCard = styled.div`
@@ -35,9 +39,10 @@ export const ProductCard = styled.div`
   width: 413px;
   height: 444px;
   padding: 16px;
-  opacity: ${(props) => (props.outOfStock ? 0.3 : 1)};
+  opacity: ${(props) => (props.outOfStock ? 0.5 : 1)};
+  cursor: pointer;
   &:not(:last-child) {
-    margin-right: 40px;
+    margin-right: 20px;
   }
   &:hover {
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -47,13 +52,13 @@ export const ProductCard = styled.div`
 export const ProductImage = styled.img`
   width: 100%;
   height: 330px;
+  object-fit: contain;
 `;
 
 export const CardContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 0px;
   width: 354px;
   height: 58px;
   padding: 16px;
@@ -86,7 +91,7 @@ export const CardContentPrice = styled.span`
 `;
 
 export const CardCartIcon = styled.img`
-  display: none;
+  visibility: ${(props) => (props.isHovered ? "visible" : "hidden")};
   position: absolute;
   width: 60px;
   height: 60px;
@@ -114,4 +119,22 @@ export const OutOfStockText = styled.h4`
   text-align: center;
   text-transform: uppercase;
   color: #000; ;
+`;
+export const ProductPagination = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+
+export const PaginationContainer = styled.div`
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+`;
+export const PaginationActionButton = styled.button`
+  border: none;
+  background: #5ece7b;
+  color: #fff;
+  width: 100px;
+  padding: 5px;
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
 `;

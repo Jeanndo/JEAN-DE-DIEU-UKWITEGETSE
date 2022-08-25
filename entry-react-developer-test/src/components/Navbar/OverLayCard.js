@@ -20,7 +20,7 @@ import {
   CartDecreamentButton,
   CartProductImageContainer,
   CartProductImage,
-} from "./../styles/Overlay.styled";
+} from "./../styles/Overlay.styled.js";
 
 class Card extends Component {
   render() {

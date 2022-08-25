@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
+import Navigation from "./../../Navbar/Navbar.js";
 import {
   CartContainer,
   CartTitle,
@@ -11,10 +12,30 @@ import {
   CartOrderTotal,
   CartOrderTotalValue,
   CartOrderButton,
-} from "./../../styles/Cart.styled";
-import Image1 from "./../../../assets/Image1.png";
-import Glasses from "./../../../assets/glasses.png";
-import CartCard from "./Card";
+} from "./../../styles/Cart.styled.js";
+import CartCard from "./Card.js";
+import gql from "graphql-tag";
+import { Query } from "react-apollo";
+
+const SINGLE_PRODUCT = gql`
+  query SingleProduct($productId: String!) {
+    product(id: $productId) {
+      name
+      inStock
+      gallery
+      description
+      category
+      prices {
+        amount
+        currency {
+          label
+          symbol
+        }
+      }
+      brand
+    }
+  }
+`;
 
 const size1 = [
   {
@@ -78,42 +99,58 @@ const cardTwoColors = [
 class Cart extends Component {
   render() {
     return (
-      <CartContainer>
-        <CartTitle>CART</CartTitle>
-        <CartCard
-          brandName="Appollo"
-          productName="Running Short"
-          price="$50.00"
-          img={Image1}
-          colors={cardOneColors}
-          size={size1}
-        />
-        <CartCard
-          brandName="Jupiter"
-          productName="Wayfarer"
-          price="$75.00"
-          img={Glasses}
-          colors={cardTwoColors}
-          size={size2}
-        />
-        <CartOrderCard>
-          <CartOrderItemContainer>
-            <CartOrderTax>Tax 21%:</CartOrderTax>
-            <CartOrderTaxValue>$42.00</CartOrderTaxValue>
-          </CartOrderItemContainer>
-          <CartOrderItemContainer>
-            <CartOrderQuantity>Quantity:</CartOrderQuantity>
-            <CartOrderQuantityValue>3</CartOrderQuantityValue>
-          </CartOrderItemContainer>
-          <CartOrderItemContainer>
-            <CartOrderTotal>Total:</CartOrderTotal>
-            <CartOrderTotalValue>$200.00</CartOrderTotalValue>
-          </CartOrderItemContainer>
-          <CartOrderItemContainer>
-            <CartOrderButton>ORDER</CartOrderButton>
-          </CartOrderItemContainer>
-        </CartOrderCard>
-      </CartContainer>
+      <Fragment>
+        <Navigation />
+        <Query
+          query={SINGLE_PRODUCT}
+          variables={{ productId: "huarache-x-stussy-le" }}
+        >
+          {({ loading, data, error }) => {
+            if (loading) return <h1>Loading...</h1>;
+            if (error) console.log(error);
+
+            console.log("data", data);
+            return (
+              <CartContainer>
+                <CartTitle>CART</CartTitle>
+                <CartCard
+                  brandName={data?.product?.brand}
+                  productName={data?.product?.name}
+                  price="$50.00"
+                  products={data?.product?.gallery}
+                  colors={cardOneColors}
+                  size={size1}
+                />
+                <CartCard
+                  brandName={data?.product?.brand}
+                  productName={data?.product?.name}
+                  price="$50.00"
+                  products={data?.product?.gallery}
+                  colors={cardTwoColors}
+                  size={size2}
+                />
+                <CartOrderCard>
+                  <CartOrderItemContainer>
+                    <CartOrderTax>Tax 21%:</CartOrderTax>
+                    <CartOrderTaxValue>$42.00</CartOrderTaxValue>
+                  </CartOrderItemContainer>
+                  <CartOrderItemContainer>
+                    <CartOrderQuantity>Quantity:</CartOrderQuantity>
+                    <CartOrderQuantityValue>3</CartOrderQuantityValue>
+                  </CartOrderItemContainer>
+                  <CartOrderItemContainer>
+                    <CartOrderTotal>Total:</CartOrderTotal>
+                    <CartOrderTotalValue>$200.00</CartOrderTotalValue>
+                  </CartOrderItemContainer>
+                  <CartOrderItemContainer>
+                    <CartOrderButton>ORDER</CartOrderButton>
+                  </CartOrderItemContainer>
+                </CartOrderCard>
+              </CartContainer>
+            );
+          }}
+        </Query>
+      </Fragment>
     );
   }
 }
