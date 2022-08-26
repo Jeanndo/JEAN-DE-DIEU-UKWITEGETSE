@@ -13,6 +13,19 @@ const getAllCurrencies = gql`
 `;
 
 export class CurrencySwitcher extends Component {
+  constructor(props) {
+    super();
+    this.state = {
+      currency: "",
+    };
+  }
+
+  handleCurrency = () => {
+    console.log("currency", this.state.currency);
+  };
+  componentDidUpdate() {
+    this.handleCurrency();
+  }
   render() {
     return (
       <Fragment>
@@ -21,10 +34,16 @@ export class CurrencySwitcher extends Component {
             if (loading) return <span>Loading...</span>;
             if (error) console.log(error);
 
-            // console.log(data);
-
             return (
-              <Switcher>
+              <Switcher
+                value={this.state.currency}
+                onChange={(event) =>
+                  this.setState({
+                    ...this.state,
+                    currency: event.target.value,
+                  })
+                }
+              >
                 <option value="$">$</option>
                 {data?.currencies?.map((currency) => (
                   <option value={currency.symbol} key={currency.symbol}>

@@ -85,19 +85,52 @@ class Product extends Component {
     super();
     this.state = {
       productIndex: 0,
+      isAll: true,
+      isClothes: false,
+      isTech: false,
+      categoryName: "all",
     };
   }
+  handleAllCategoriesTab = () => {
+    this.setState({
+      isAll: true,
+      isClothes: false,
+      isTech: false,
+      categoryName: "all",
+    });
+  };
+
+  handleClothesTab = () => {
+    this.setState({
+      isAll: false,
+      isClothes: true,
+      isTech: false,
+      categoryName: "clothes",
+    });
+  };
+
+  handleTechTab = () => {
+    this.setState({
+      isAll: false,
+      isClothes: false,
+      isTech: true,
+      categoryName: "tech",
+    });
+  };
 
   handleProductIndex = (index) => {
     this.setState({ productIndex: index });
-
-    console.log("index", this.state.productIndex);
   };
 
   render() {
     return (
       <Fragment>
-        <Navigation />
+        <Navigation
+          handleAllCategoriesTab={this.handleAllCategoriesTab}
+          handleClothesTab={this.handleClothesTab}
+          handleTechTab={this.handleTechTab}
+          state={this.state}
+        />
         <Query
           query={SINGLE_PRODUCT}
           variables={{ productId: localStorage.getItem("productId") }}
@@ -106,7 +139,12 @@ class Product extends Component {
             if (loading) return <h1>Loading...</h1>;
 
             if (error) console.log(error);
-
+            console.log("prices", data.product.prices);
+            const filteredPrice = data.product.prices.filter(
+              (item) => item.currency.label === "USD"
+            );
+            console.log("filtredPrice", filteredPrice);
+            const { amount, currency } = filteredPrice[0];
             return (
               <ProductContainer>
                 <ProductLeftSideDetails>
@@ -159,7 +197,8 @@ class Product extends Component {
                           PRICE:
                         </RightSideProductPriceLabel>
                         <RightSideProductPriceFigures>
-                          $50.00
+                          {currency.symbol}&nbsp;
+                          {amount}
                         </RightSideProductPriceFigures>
                       </RightSideProductPriceContainer>
                     </RightSideProductColorContainer>

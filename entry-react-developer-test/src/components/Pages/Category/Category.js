@@ -65,7 +65,7 @@ class Category extends Component {
     this.setState((prevState) => ({ currentPage: prevState.currentPage + 1 }));
   };
 
-  handleAllTab = () => {
+  handleAllCategoriesTab = () => {
     this.setState({
       isAll: true,
       isClothes: false,
@@ -104,7 +104,7 @@ class Category extends Component {
     return (
       <Fragment>
         <Navigation
-          handleAllTab={this.handleAllTab}
+          handleAllCategoriesTab={this.handleAllCategoriesTab}
           handleClothesTab={this.handleClothesTab}
           handleTechTab={this.handleTechTab}
           state={this.state}
