@@ -1,4 +1,6 @@
 import React, { Component, Fragment } from "react";
+import { connect } from "react-redux";
+import { ConvertCurrency } from "./../../Redux/Actions/ActionCreators/CurrencyAction.js";
 import { Switcher } from "./../styles/Navbar.styled.js";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
@@ -12,7 +14,7 @@ const getAllCurrencies = gql`
   }
 `;
 
-export class CurrencySwitcher extends Component {
+class CurrencySwitcher extends Component {
   constructor(props) {
     super();
     this.state = {
@@ -21,7 +23,8 @@ export class CurrencySwitcher extends Component {
   }
 
   handleCurrency = () => {
-    console.log("currency", this.state.currency);
+    ConvertCurrency(this.state.currency);
+    // console.log(this.props.currency);
   };
   componentDidUpdate() {
     this.handleCurrency();
@@ -46,7 +49,7 @@ export class CurrencySwitcher extends Component {
               >
                 <option value="$">$</option>
                 {data?.currencies?.map((currency) => (
-                  <option value={currency.symbol} key={currency.symbol}>
+                  <option value={currency.label} key={currency.symbol}>
                     {currency.symbol} {currency.label}
                   </option>
                 ))}
@@ -58,3 +61,11 @@ export class CurrencySwitcher extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    currency: state.currency,
+  };
+};
+
+export default connect(mapStateToProps, ConvertCurrency)(CurrencySwitcher);

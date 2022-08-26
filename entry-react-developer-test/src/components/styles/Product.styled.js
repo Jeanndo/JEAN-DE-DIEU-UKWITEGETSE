@@ -15,9 +15,14 @@ export const ProductLeftSideDetails = styled.div`
   display: flex;
   flex-direction: column;
   margin-right: 40px;
+  height: 300px;
+  overflow-y: scroll;
   @media (max-width: 425px) {
     flex-direction: row;
     padding-left: 50px;
+    height: 80px;
+    overflow-y: hidden;
+    overflow-x: scroll;
   }
 `;
 
