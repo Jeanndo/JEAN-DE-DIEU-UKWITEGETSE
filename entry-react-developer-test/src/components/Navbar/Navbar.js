@@ -11,6 +11,7 @@ import {
   NavigationItems,
   CartItemNumber,
   MenuBar,
+  NavbarLink,
 } from "./../styles/Navbar.styled.js";
 import CartOverlay from "./CartOverLay.js";
 import LogoImg from "./../../assets/a-logo.png";
@@ -57,29 +58,36 @@ class Navbar extends Component {
                 <NavbarInnerContainer>
                   <LeftContainer>
                     <NavbarLinkContainer>
-                      <NavigationItems
-                        active={this?.props?.state?.isAll}
-                        onClick={this?.props?.handleAllTab}
-                      >
-                        ALL
-                      </NavigationItems>
-
-                      <NavigationItems
-                        active={this?.props?.state?.isClothes}
-                        onClick={this?.props?.handleClothesTab}
-                      >
-                        CLOTHES
-                      </NavigationItems>
-                      <NavigationItems
-                        active={this?.props?.state?.isTech}
-                        onClick={this?.props?.handleTechTab}
-                      >
-                        TECH
-                      </NavigationItems>
+                      <NavbarLink to="/">
+                        <NavigationItems
+                          active={this?.props?.state?.isAll}
+                          onClick={this?.props?.handleAllCategoriesTab}
+                        >
+                          ALL
+                        </NavigationItems>
+                      </NavbarLink>
+                      <NavbarLink to="/">
+                        <NavigationItems
+                          active={this?.props?.state?.isClothes}
+                          onClick={this?.props?.handleClothesTab}
+                        >
+                          CLOTHES
+                        </NavigationItems>
+                      </NavbarLink>
+                      <NavbarLink to="/">
+                        <NavigationItems
+                          active={this?.props?.state?.isTech}
+                          onClick={this?.props?.handleTechTab}
+                        >
+                          TECH
+                        </NavigationItems>
+                      </NavbarLink>
                     </NavbarLinkContainer>
                   </LeftContainer>
                   <MiddleContainer>
-                    <Logo src={LogoImg} alt="logo" />
+                    <NavbarLink to="/">
+                      <Logo src={LogoImg} alt="logo" />
+                    </NavbarLink>
                   </MiddleContainer>
                   <RightContainer>
                     <CurrencySwitcher />

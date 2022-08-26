@@ -97,10 +97,53 @@ const cardTwoColors = [
 ];
 
 class Cart extends Component {
+  constructor(props) {
+    super();
+    this.state = {
+      productIndex: 0,
+      isAll: true,
+      isClothes: false,
+      isTech: false,
+      categoryName: "all",
+    };
+  }
+
+  handleAllCategoriesTab = () => {
+    this.setState({
+      isAll: true,
+      isClothes: false,
+      isTech: false,
+      categoryName: "all",
+    });
+  };
+
+  handleClothesTab = () => {
+    this.setState({
+      isAll: false,
+      isClothes: true,
+      isTech: false,
+      categoryName: "clothes",
+    });
+  };
+
+  handleTechTab = () => {
+    this.setState({
+      isAll: false,
+      isClothes: false,
+      isTech: true,
+      categoryName: "tech",
+    });
+  };
+
   render() {
     return (
       <Fragment>
-        <Navigation />
+        <Navigation
+          handleAllCategoriesTab={this.handleAllCategoriesTab}
+          handleClothesTab={this.handleClothesTab}
+          handleTechTab={this.handleTechTab}
+          state={this.state}
+        />
         <Query
           query={SINGLE_PRODUCT}
           variables={{ productId: "huarache-x-stussy-le" }}

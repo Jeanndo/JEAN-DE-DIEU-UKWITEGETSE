@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const NavbarContainer = styled.nav`
   position: sticky;
@@ -60,7 +61,10 @@ export const NavbarLinkContainer = styled.div`
     margin-top: 10px;
   }
 `;
-
+export const NavbarLink = styled(Link)`
+  text-decoration: none;
+  color: #000;
+`;
 export const NavigationItems = styled.span`
   position: relative;
   font-family: "Raleway";
@@ -72,6 +76,7 @@ export const NavigationItems = styled.span`
   align-items: center;
   text-align: center;
   text-transform: uppercase;
+  color: #000;
   color: ${(props) => (props.active ? "#5ece7b" : "")};
   cursor: pointer;
   font-weight: ${(props) => (props.active ? 600 : 400)};
