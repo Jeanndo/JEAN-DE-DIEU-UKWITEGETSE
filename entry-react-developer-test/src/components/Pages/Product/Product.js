@@ -139,16 +139,17 @@ class Product extends Component {
             if (loading) return <h1>Loading...</h1>;
 
             if (error) console.log(error);
-            console.log("prices", data.product.prices);
+            // console.log("prices", data.product.prices);
+            console.log(data?.product?.gallery.length - 1);
             const filteredPrice = data.product.prices.filter(
-              (item) => item.currency.label === "USD"
+              (item) => item.currency.label === "AUD"
             );
-            console.log("filtredPrice", filteredPrice);
+            // console.log("filtredPrice", filteredPrice);
             const { amount, currency } = filteredPrice[0];
             return (
               <ProductContainer>
                 <ProductLeftSideDetails>
-                  {data?.product?.gallery?.map((item, index) => (
+                  {data?.product?.gallery.map((item, index) => (
                     <ProductLeftSideImage
                       src={item}
                       alt="side product"

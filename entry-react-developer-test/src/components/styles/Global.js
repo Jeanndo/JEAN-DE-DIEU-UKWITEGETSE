@@ -7,7 +7,7 @@ export const GlobalStyles = createGlobalStyle`
   box-sizing:border-box;
  
 }
-::-webkit-scrollbar{
+ ::-webkit-scrollbar{
  display:none;
-}
+} 
 `;
