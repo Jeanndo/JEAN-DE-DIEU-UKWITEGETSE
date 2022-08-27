@@ -1,4 +1,4 @@
-import * as types from "./../Actions/Types/ActionTypes.js";
+import * as type from "./../Actions/Types/ActionTypes.js";
 
 const initialState = {
   currency: {
@@ -11,7 +11,7 @@ const initialState = {
 
 export const CurrencyReducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.CONVERT_CURRENCY_START:
+    case type.CONVERT_CURRENCY_START:
       return {
         ...state,
         currency: {
@@ -21,7 +21,7 @@ export const CurrencyReducer = (state = initialState, action) => {
           error: null,
         },
       };
-    case types.CONVERT_CURRENCY_SUCCESS:
+    case type.CONVERT_CURRENCY_SUCCESS:
       return {
         ...state,
         currency: {
@@ -31,7 +31,7 @@ export const CurrencyReducer = (state = initialState, action) => {
           error: null,
         },
       };
-    case types.CONVERT_CURRENCY_ERROR:
+    case type.CONVERT_CURRENCY_ERROR:
       return {
         ...state,
         currency: {

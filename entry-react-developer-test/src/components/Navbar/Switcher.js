@@ -24,8 +24,9 @@ class CurrencySwitcher extends Component {
 
   handleCurrency = () => {
     ConvertCurrency(this.state.currency);
-    // console.log(this.props.currency);
+    console.log(this.props);
   };
+
   componentDidUpdate() {
     this.handleCurrency();
   }
@@ -62,10 +63,10 @@ class CurrencySwitcher extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    currency: state.currency,
-  };
+const mapStateToProps = ({ CurrencyReducer }) => {
+  const { currency } = CurrencyReducer;
+
+  return { currency };
 };
 
 export default connect(mapStateToProps, ConvertCurrency)(CurrencySwitcher);
