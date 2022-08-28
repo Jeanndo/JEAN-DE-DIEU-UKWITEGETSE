@@ -15,7 +15,7 @@ import {
 } from "./../styles/Navbar.styled.js";
 import CartOverlay from "./CartOverLay.js";
 import LogoImg from "./../../assets/a-logo.png";
-import Cart from "./../../assets/EmptyCart.png";
+import Cart from "./../../assets/shoppingCart.png";
 import CurrencySwitcher from "./Switcher.js";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
