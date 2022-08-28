@@ -22,14 +22,15 @@ class CurrencySwitcher extends Component {
     };
   }
 
-  handleCurrency = () => {
-    ConvertCurrency(this.state.currency);
-    console.log(this.props);
+  handleCurrency = (event) => {
+    this.props.ConvertCurrency(event.target.value);
+    this.setState({ currency: event.target.value });
+    console.log("HAHAHAHA", this.props.currency);
   };
 
-  componentDidUpdate() {
-    this.handleCurrency();
-  }
+  // componentDidUpdate() {
+  //   this.handleCurrency();
+  // }
   render() {
     return (
       <Fragment>
@@ -41,12 +42,7 @@ class CurrencySwitcher extends Component {
             return (
               <Switcher
                 value={this.state.currency}
-                onChange={(event) =>
-                  this.setState({
-                    ...this.state,
-                    currency: event.target.value,
-                  })
-                }
+                onChange={(event) => this.handleCurrency(event)}
               >
                 <option value="$">$</option>
                 {data?.currencies?.map((currency) => (
@@ -69,4 +65,4 @@ const mapStateToProps = ({ CurrencyReducer }) => {
   return { currency };
 };
 
-export default connect(mapStateToProps, ConvertCurrency)(CurrencySwitcher);
+export default connect(mapStateToProps, { ConvertCurrency })(CurrencySwitcher);

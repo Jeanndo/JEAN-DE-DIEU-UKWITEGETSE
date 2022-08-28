@@ -62,9 +62,6 @@ export const ProductRightSideDetails = styled.div`
   width: 300px;
   height: 595px;
   margin-left: 50px;
-  /* @media (max-width: 425px) {
-    margin-left: 80px;
-  } */
 `;
 export const RightSideProductBrandName = styled.h2`
   width: 292px;
