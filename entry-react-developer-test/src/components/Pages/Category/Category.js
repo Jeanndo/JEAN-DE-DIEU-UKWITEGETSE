@@ -18,6 +18,7 @@ import {
 import Navigation from "./../../Navbar/Navbar.js";
 import CartIcon from "./../../../assets/CircleIcon.png";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
 
@@ -29,6 +30,13 @@ const getAllCategories = gql`
         id
         name
         inStock
+        prices {
+          amount
+          currency {
+            label
+            symbol
+          }
+        }
         gallery
       }
     }
@@ -113,44 +121,65 @@ class Category extends Component {
           {({ loading, data, error }) => {
             if (loading) return <h1>Loading ...</h1>;
             if (error) console.log(error);
+
+            console.log("categoryPage", this.props.currency);
             const filteredData = data.categories.filter(
               (category) => category.name === this.state.categoryName
             );
+
+            let currencyLabel;
+            const { message } = this.props.currency;
+
+            if (message) {
+              currencyLabel = message;
+            } else {
+              currencyLabel = "USD";
+            }
+
             return (
               <>
                 <CategoryContainer>
                   <CategoryName>{this.state.categoryName}</CategoryName>
                   <ProductContainer>
-                    {filteredData[0].products?.map((product) => (
-                      <ProductCard
-                        key={product.id}
-                        outOfStock={product.inStock}
-                        onMouseOver={this.handleHover}
-                        onMouseLeave={this.handelLeave}
-                        onClick={() => this.handleProductId(product.id)}
-                      >
-                        <Link to="/product">
-                          <ProductImage
-                            src={product.gallery[0]}
-                            alt={product.name}
+                    {filteredData[0].products?.map((product) => {
+                      const filteredPrice = product.prices.filter(
+                        (price) => price.currency.label === currencyLabel
+                      );
+                      const { amount, currency } = filteredPrice[0];
+                      return (
+                        <ProductCard
+                          key={product.id}
+                          outOfStock={product.inStock}
+                          onMouseOver={this.handleHover}
+                          onMouseLeave={this.handelLeave}
+                          onClick={() => this.handleProductId(product.id)}
+                        >
+                          <Link to="/product">
+                            <ProductImage
+                              src={product.gallery[0]}
+                              alt={product.name}
+                            />
+                          </Link>
+                          <CardCartIcon
+                            src={CartIcon}
+                            alt="cart icon"
+                            isHovered={this.state.isHovered}
                           />
-                        </Link>
-                        <CardCartIcon
-                          src={CartIcon}
-                          alt="cart icon"
-                          isHovered={this.state.isHovered}
-                        />
-                        <CardContent>
-                          <CardContentTitle>{product.name}</CardContentTitle>
-                          <CardContentPrice>{product.price}</CardContentPrice>
-                        </CardContent>
-                        {product.inStock && (
-                          <OutOfStockOverlay>
-                            <OutOfStockText>OUT OF STOCK</OutOfStockText>
-                          </OutOfStockOverlay>
-                        )}
-                      </ProductCard>
-                    ))}
+                          <CardContent>
+                            <CardContentTitle>{product.name}</CardContentTitle>
+                            <CardContentPrice>
+                              {currency.symbol}&nbsp;
+                              {amount}
+                            </CardContentPrice>
+                          </CardContent>
+                          {product.inStock && (
+                            <OutOfStockOverlay>
+                              <OutOfStockText>OUT OF STOCK</OutOfStockText>
+                            </OutOfStockOverlay>
+                          )}
+                        </ProductCard>
+                      );
+                    })}
                   </ProductContainer>
                   <ProductPagination>
                     <PaginationContainer>
@@ -191,5 +220,9 @@ class Category extends Component {
     );
   }
 }
+const mapStateToProps = ({ CurrencyReducer }) => {
+  const { currency } = CurrencyReducer;
 
-export default Category;
+  return { currency };
+};
+export default connect(mapStateToProps)(Category);

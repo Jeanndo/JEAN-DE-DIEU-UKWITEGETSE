@@ -23,6 +23,7 @@ import {
   AddToCartButton,
   ProductDescriptionText,
 } from "./../../styles/Product.styled.js";
+import { connect } from "react-redux";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
 
@@ -81,8 +82,8 @@ const colors = [
 ];
 
 class Product extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       productIndex: 0,
       isAll: true,
@@ -139,11 +140,19 @@ class Product extends Component {
             if (loading) return <h1>Loading...</h1>;
 
             if (error) console.log(error);
-            // console.log("prices", data.product.prices);
-            console.log(data?.product?.gallery.length - 1);
+            let currencyLabel;
+            const { message } = this.props.currency;
+
+            if (message) {
+              currencyLabel = message;
+            } else {
+              currencyLabel = "USD";
+            }
+
             const filteredPrice = data.product.prices.filter(
-              (item) => item.currency.label === "AUD"
+              (item) => item.currency.label === currencyLabel
             );
+
             // console.log("filtredPrice", filteredPrice);
             const { amount, currency } = filteredPrice[0];
             return (
@@ -217,5 +226,10 @@ class Product extends Component {
     );
   }
 }
+const mapStateToProps = ({ CurrencyReducer }) => {
+  const { currency } = CurrencyReducer;
 
-export default Product;
+  return { currency };
+};
+
+export default connect(mapStateToProps)(Product);
