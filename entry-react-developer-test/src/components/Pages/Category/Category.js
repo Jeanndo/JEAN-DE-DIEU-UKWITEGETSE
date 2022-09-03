@@ -19,6 +19,7 @@ import Navigation from "./../../Navbar/Navbar.js";
 import CartIcon from "./../../../assets/CircleIcon.png";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { addToCart } from "./../../../Redux/Actions/ActionCreators/shoppingAction.js";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
 
@@ -54,7 +55,6 @@ class Category extends Component {
       isClothes: false,
       isTech: false,
       categoryName: "all",
-      productId: "",
     };
   }
 
@@ -100,14 +100,6 @@ class Category extends Component {
     });
   };
 
-  handleProductId = (id) => {
-    this.setState({
-      productId: id,
-    });
-    localStorage.setItem("productId", id);
-    console.log("productId", this.state.productId);
-  };
-
   render() {
     return (
       <Fragment>
@@ -122,7 +114,7 @@ class Category extends Component {
             if (loading) return <h1>Loading ...</h1>;
             if (error) console.log(error);
 
-            console.log("categoryPage", this.props.currency);
+            // console.log("categoryPage", this.props);
             const filteredData = data.categories.filter(
               (category) => category.name === this.state.categoryName
             );
@@ -152,9 +144,8 @@ class Category extends Component {
                           outOfStock={product.inStock}
                           onMouseOver={this.handleHover}
                           onMouseLeave={this.handelLeave}
-                          onClick={() => this.handleProductId(product.id)}
                         >
-                          <Link to="/product">
+                          <Link to={`/product/${product?.id}`}>
                             <ProductImage
                               src={product.gallery[0]}
                               alt={product.name}
@@ -164,6 +155,9 @@ class Category extends Component {
                             src={CartIcon}
                             alt="cart icon"
                             isHovered={this.state.isHovered}
+                            onClick={() =>
+                              this.props.addToCart(product.id, product)
+                            }
                           />
                           <CardContent>
                             <CardContentTitle>{product.name}</CardContentTitle>
@@ -225,4 +219,11 @@ const mapStateToProps = ({ CurrencyReducer }) => {
 
   return { currency };
 };
-export default connect(mapStateToProps)(Category);
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addToCart: (id, product) => dispatch(addToCart(id, product)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Category);

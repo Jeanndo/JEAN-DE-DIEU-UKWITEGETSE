@@ -223,7 +223,7 @@ export const CartSlideButtonsContainer = styled.div`
 export const CartSlideNextButton = styled.button`
   width: 18px;
   height: 17.98px;
-  cursor: pointer;
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
   background: rgba(0, 0, 0, 0.73);
   color: #fff;
   border-style: none;
@@ -233,11 +233,17 @@ export const CartSlideNextButton = styled.button`
 export const CartSlidePrevButton = styled.button`
   width: 18px;
   height: 17.98px;
-  cursor: pointer;
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
   background: rgba(0, 0, 0, 0.73);
   color: #fff;
   border-style: none;
   outline: none;
+`;
+
+export const ArrowButton = styled.img`
+  width: 10px;
+  height: 10px;
+  object-fit: contain;
 `;
 
 export const CartOrderCard = styled.div`
@@ -333,4 +339,15 @@ export const CartOrderButton = styled.button`
   color: #ffffff;
   cursor: pointer;
   background: #5ece7b;
+`;
+
+/*=====EMPTY CART STYLING=====*/
+
+export const EmptyCart = styled.h1`
+  text-align: center;
+  text-transform: uppercase;
+  color: #555;
+  margin: 100px 0px;
+  font-size: 16px;
+  font-weight: 100;
 `;

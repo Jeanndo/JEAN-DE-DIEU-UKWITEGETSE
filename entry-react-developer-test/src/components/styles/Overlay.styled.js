@@ -228,7 +228,7 @@ export const CheckoutActionButtonContainer = styled.div`
 export const CheckoutActionButton = styled.button`
   text-align: center;
   padding: 16px 32px;
-  width: 49%;
+  /* width: 50%; */
   height: 43px;
   background: ${(props) => props.bgcolor};
   color: ${(props) => props.color};

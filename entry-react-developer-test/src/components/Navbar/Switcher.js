@@ -25,12 +25,8 @@ class CurrencySwitcher extends Component {
   handleCurrency = (event) => {
     this.props.ConvertCurrency(event.target.value);
     this.setState({ currency: event.target.value });
-    console.log("HAHAHAHA", this.props.currency);
   };
 
-  // componentDidUpdate() {
-  //   this.handleCurrency();
-  // }
   render() {
     return (
       <Fragment>

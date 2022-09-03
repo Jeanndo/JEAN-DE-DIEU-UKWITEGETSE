@@ -23,42 +23,42 @@ import {
   CartSlideButtonsContainer,
   CartSlidePrevButton,
   CartSlideNextButton,
+  ArrowButton,
 } from "./../../styles/Cart.styled.js";
+import { connect } from "react-redux";
+import {
+  adjustQuantity,
+  removeFromCart,
+} from "./../../../Redux/Actions/ActionCreators/shoppingAction.js";
+
+import ArrowRight from "./../../../assets/NextButton.png";
+import ArrowLeft from "./../../../assets/prevButton.png";
 
 class Card extends Component {
-  constructor() {
+  constructor(props) {
     super();
     this.state = {
-      quantity: 1,
-      currentIndex: 1,
+      input: props.product.qty,
+      currentIndex: 0,
     };
   }
 
-  handleQuantityIncreament() {
-    this.setState({ quantity: this.state.quantity + 1 });
-  }
-  handleQuantityDecreament() {
-    this.setState({ quantity: this.state.quantity - 1 });
-  }
-
-  handleChange = (event) => {
-    console.log(event.target.value);
+  handleQuantityIncreament = () => {
+    this.setState({ input: this.state.input === 0 ? 1 : this.state.input + 1 });
+    this.props.adjustQuantity(this.props.product.id, this.state.input);
+  };
+  handleQuantityDecreament = () => {
+    this.setState({ input: this.state.input === 0 ? 1 : this.state.input - 1 });
+    this.props.adjustQuantity(this.props.product.id, this.state.input);
   };
 
   handleNext = () => {
     this.setState((prevState) => ({
       currentIndex:
-        prevState.currentIndex !== this.props?.products.length - 1
+        prevState.currentIndex !== this.props?.product?.gallery.length - 1
           ? prevState.currentIndex + 1
           : prevState.currentIndex,
     }));
-    // this.setState({
-    //   currentIndex:
-    //     this.state.currentIndex !== this.props?.products.length - 1
-    //       ? this.state.currentIndex + 1
-    //       : this.state.currentIndex,
-    // });
-    console.log(this.state.currentIndex);
   };
 
   handlePrev = () => {
@@ -68,23 +68,18 @@ class Card extends Component {
           ? prevState.currentIndex - 1
           : prevState.currentIndex,
     }));
-
-    // this.setState({
-    //   currentIndex:
-    //     this.state.currentIndex !== -1
-    //       ? this.state.currentIndex - 1
-    //       : this.state.currentIndex,
-    // });
-    console.log(this.state.currentIndex);
   };
 
   render() {
     return (
       <CartCard>
         <CartCardLeftSide>
-          <ProductBrandName>{this.props.brandName}</ProductBrandName>
-          <ProductName>{this.props.productName}</ProductName>
-          <ProductPriceFigures>{this.props.price}</ProductPriceFigures>
+          <ProductBrandName>{this.props.product.brand}</ProductBrandName>
+          <ProductName>{this.props.product.name}</ProductName>
+          <ProductPriceFigures>
+            {this.props.price.currency.symbol}
+            {this.props.price.amount}
+          </ProductPriceFigures>
           <ProductSizeTitle>SIZE:</ProductSizeTitle>
           <ProductSizeBoxContainer>
             {this.props.size.map((item, index) => (
@@ -117,47 +112,44 @@ class Card extends Component {
         </CartCardLeftSide>
         <CartCardRight>
           <CartActionButtonsContainer>
-            <CartIncreamentButton
-              onClick={() => {
-                this.setState({
-                  quantity: this.state.quantity + 1,
-                });
-              }}
-            >
+            <CartIncreamentButton onClick={this.handleQuantityIncreament}>
               +
             </CartIncreamentButton>
             <CartQuantityBox
               type="number"
-              defaultValue={this.state.quantity}
-              onchange={this.handleChange}
+              value={this.state.input === 0 ? 1 : this.state.input}
+              onChange={this.handleChange}
+              min="1"
             />
-            <CartDecreamentButton
-              onClick={() => {
-                this.setState({
-                  quantity: this.state.quantity - 1,
-                });
-              }}
-            >
+            <CartDecreamentButton onClick={this.handleQuantityDecreament}>
               -
             </CartDecreamentButton>
           </CartActionButtonsContainer>
           <CartProductImageContainer>
-            {this.props?.products
-              ?.slice(this.state.currentIndex - 1, this.state.currentIndex)
+            {this.props?.product.gallery
+              ?.slice(this.state.currentIndex, this.state.currentIndex + 1)
               .map((item, index) => (
                 <CartProductImage src={item} alt="cart product " key={index} />
               ))}
             <CartSlideButtonsContainer>
-              {this.state.currentIndex !== 1 && (
-                <CartSlidePrevButton onClick={this.handlePrev}>
-                  ←
-                </CartSlidePrevButton>
-              )}
-              {this.state.currentIndex !== this.props?.products.length - 1 && (
-                <CartSlideNextButton onClick={this.handleNext}>
-                  →
-                </CartSlideNextButton>
-              )}
+              <CartSlidePrevButton
+                disabled={this.state.currentIndex === 0 ? true : false}
+                onClick={this.handlePrev}
+              >
+                <ArrowButton src={ArrowLeft} alt="arrow left" />
+              </CartSlidePrevButton>
+
+              <CartSlideNextButton
+                disabled={
+                  this.state.currentIndex ===
+                  this.props?.product.gallery.length - 1
+                    ? true
+                    : false
+                }
+                onClick={this.handleNext}
+              >
+                <ArrowButton src={ArrowRight} alt="arrow right" />
+              </CartSlideNextButton>
             </CartSlideButtonsContainer>
           </CartProductImageContainer>
         </CartCardRight>
@@ -166,4 +158,11 @@ class Card extends Component {
   }
 }
 
-export default Card;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    removeFromCart: (productId) => dispatch(removeFromCart(productId)),
+    adjustQuantity: (id, value) => dispatch(adjustQuantity(id, value)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Card);
