@@ -17,6 +17,7 @@ import CartOverlay from "./CartOverLay.js";
 import LogoImg from "./../../assets/a-logo.png";
 import Cart from "./../../assets/shoppingCart.png";
 import CurrencySwitcher from "./Switcher.js";
+import { connect } from "react-redux";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
 
@@ -45,6 +46,20 @@ class Navbar extends Component {
     });
   };
 
+  // componentDidUpdate() {
+  //   let count = 0;
+
+  //   if (this.props.cart || this.state.cartCount) {
+  //     this?.props?.cart?.forEach((element) => {
+  //       count += element.qty;
+  //     });
+
+  //     this.setState({
+  //       cartCount: count,
+  //     });
+  //   }
+  // }
+
   render() {
     return (
       <Fragment>
@@ -52,6 +67,12 @@ class Navbar extends Component {
           {({ loading, data, error }) => {
             if (loading) return <h1>Loading ...</h1>;
             if (error) console.log(error);
+
+            let count = 0;
+            this?.props?.cart?.forEach((element) => {
+              count += element.qty;
+            });
+            // console.log("navbar", this.props.cart);
             return (
               <NavbarContainer>
                 {this.state.showCart && <CartOverlay />}
@@ -96,7 +117,7 @@ class Navbar extends Component {
                       alt="cart"
                       onClick={this.handleShowCart}
                     />
-                    <CartItemNumber>30</CartItemNumber>
+                    <CartItemNumber>{count}</CartItemNumber>
                   </RightContainer>
                 </NavbarInnerContainer>
                 <MenuBar>&#8801;</MenuBar>
@@ -109,4 +130,9 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar;
+const mapStateToProps = (state) => {
+  return {
+    cart: state.shopping.cart,
+  };
+};
+export default connect(mapStateToProps)(Navbar);

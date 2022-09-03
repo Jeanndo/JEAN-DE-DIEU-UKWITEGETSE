@@ -49,6 +49,15 @@ export const ProductCard = styled.div`
   }
 `;
 
+export const CardCartIcon = styled.img`
+  visibility: ${(props) => (props.isHovered ? "visible" : "hidden")};
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  right: 30px;
+  bottom: 66px;
+  cursor: pointer;
+`;
 export const ProductImage = styled.img`
   width: 100%;
   height: 330px;
@@ -88,16 +97,6 @@ export const CardContentPrice = styled.span`
   line-height: 160%;
   text-align: right;
   color: #1d1f22;
-`;
-
-export const CardCartIcon = styled.img`
-  visibility: ${(props) => (props.isHovered ? "visible" : "hidden")};
-  position: absolute;
-  width: 60px;
-  height: 60px;
-  right: 30px;
-  bottom: 66px;
-  cursor: pointer;
 `;
 
 export const OutOfStockOverlay = styled.div`

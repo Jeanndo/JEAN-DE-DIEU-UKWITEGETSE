@@ -6,7 +6,7 @@ const initialState = {
   currentItem: null,
 };
 
-export const shoppingReducer = (state = initialState, action) => {
+export const shopping = (state = initialState, action) => {
   switch (action.type) {
     case type.ADD_TO_CART:
       /*=======get added product data from product array========*/

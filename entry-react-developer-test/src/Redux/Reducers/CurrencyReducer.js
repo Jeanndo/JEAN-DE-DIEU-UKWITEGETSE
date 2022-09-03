@@ -3,7 +3,7 @@ import * as type from "./../Actions/Types/ActionTypes.js";
 const initialState = {
   currency: {
     loading: false,
-    message: null,
+    message: "USD",
     success: false,
     error: null,
   },

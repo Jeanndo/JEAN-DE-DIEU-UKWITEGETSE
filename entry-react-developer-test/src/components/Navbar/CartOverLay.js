@@ -11,7 +11,7 @@ import {
   CheckoutActionButtonContainer,
   CheckoutActionButton,
 } from "./../styles/Overlay.styled.js";
-
+import { Link } from "react-router-dom";
 import Card from "./OverLayCard.js";
 
 const size1 = [
@@ -102,16 +102,20 @@ class CartOverlay extends Component {
             <TotalLabels>$200.00</TotalLabels>
           </TotalCostContainer>
           <CheckoutActionButtonContainer>
-            <CheckoutActionButton bgcolor="#ffffff" borderColor="#000000">
-              View Bag
-            </CheckoutActionButton>
-            <CheckoutActionButton
-              bgcolor="#5ECE7B"
-              borderColor="#5ECE7B"
-              color="#ffffff"
-            >
-              check out
-            </CheckoutActionButton>
+            <Link to="/cart">
+              <CheckoutActionButton bgcolor="#ffffff" borderColor="#000000">
+                View Bag
+              </CheckoutActionButton>
+            </Link>
+            <Link to="/cart">
+              <CheckoutActionButton
+                bgcolor="#5ECE7B"
+                borderColor="#5ECE7B"
+                color="#ffffff"
+              >
+                check out
+              </CheckoutActionButton>
+            </Link>
           </CheckoutActionButtonContainer>
         </OverlayContainer>
       </OverlayShow>

@@ -9,7 +9,7 @@ class MyRoutes extends Component {
     return (
       <Routes>
         <Route path="/" element={<Category />} />
-        <Route path="/product" element={<Product />} />
+        <Route path={`/product/:${this.props.id}`} element={<Product />} />
         <Route path="/cart" element={<Cart />} />
       </Routes>
     );

@@ -12,30 +12,10 @@ import {
   CartOrderTotal,
   CartOrderTotalValue,
   CartOrderButton,
+  EmptyCart,
 } from "./../../styles/Cart.styled.js";
 import CartCard from "./Card.js";
-import gql from "graphql-tag";
-import { Query } from "react-apollo";
-
-const SINGLE_PRODUCT = gql`
-  query SingleProduct($productId: String!) {
-    product(id: $productId) {
-      name
-      inStock
-      gallery
-      description
-      category
-      prices {
-        amount
-        currency {
-          label
-          symbol
-        }
-      }
-      brand
-    }
-  }
-`;
+import { connect } from "react-redux";
 
 const size1 = [
   {
@@ -81,20 +61,20 @@ const cardOneColors = [
   },
 ];
 
-const cardTwoColors = [
-  {
-    id: 1,
-    color: "#1D1F22",
-  },
-  {
-    id: 2,
-    color: "#15A4C3",
-  },
-  {
-    id: 3,
-    color: "#EA8120",
-  },
-];
+// const cardTwoColors = [
+//   {
+//     id: 1,
+//     color: "#1D1F22",
+//   },
+//   {
+//     id: 2,
+//     color: "#15A4C3",
+//   },
+//   {
+//     id: 3,
+//     color: "#EA8120",
+//   },
+// ];
 
 class Cart extends Component {
   constructor(props) {
@@ -105,6 +85,9 @@ class Cart extends Component {
       isClothes: false,
       isTech: false,
       categoryName: "all",
+      quantity: 1,
+      totalPrice: 0,
+      totalItems: 0,
     };
   }
 
@@ -135,7 +118,67 @@ class Cart extends Component {
     });
   };
 
+  componentDidMount() {
+    let items = 0;
+    let price = 0;
+    let currencyLabel;
+
+    const { message } = this.props.currency;
+    if (message) {
+      currencyLabel = message;
+    } else {
+      currencyLabel = "USD";
+    }
+    this.props.products.forEach((item) => {
+      items += item.qty;
+      if (items > 0) {
+        price +=
+          item.qty *
+          item.prices.filter(
+            (price) => price.currency.label === currencyLabel
+          )[0].amount;
+      }
+    });
+    this.setState({
+      totalItems: items,
+    });
+    this.setState({
+      totalPrice: price,
+    });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    let items = 0;
+    let price = 0;
+
+    if (
+      (prevState.totalItems === this.state.totalItems ||
+        prevState.totalPrice === this.state.totalPrice) &&
+      prevProps !== this.props
+    ) {
+      this.props.products.forEach((item) => {
+        items += item.qty;
+        if (items > 0) {
+          price +=
+            item.qty *
+            item.prices.filter(
+              (price) => price.currency.label === this.props.currency.message
+            )[0].amount;
+        }
+      });
+      this.setState({
+        totalItems: items,
+      });
+      this.setState({
+        totalPrice: price,
+      });
+    } else {
+      return;
+    }
+  }
+
   render() {
+    console.log(this.props.products);
     return (
       <Fragment>
         <Navigation
@@ -144,58 +187,70 @@ class Cart extends Component {
           handleTechTab={this.handleTechTab}
           state={this.state}
         />
-        <Query
-          query={SINGLE_PRODUCT}
-          variables={{ productId: "huarache-x-stussy-le" }}
-        >
-          {({ loading, data, error }) => {
-            if (loading) return <h1>Loading...</h1>;
-            if (error) console.log(error);
+        <CartContainer>
+          <CartTitle>CART</CartTitle>
 
-            console.log("data", data);
-            return (
-              <CartContainer>
-                <CartTitle>CART</CartTitle>
+          {this.props.products.length === 0 ? (
+            <EmptyCart>Empty Cart !!!</EmptyCart>
+          ) : (
+            this.props.products.map((product) => {
+              let currencyLabel;
+
+              const { message } = this.props.currency;
+              if (message) {
+                currencyLabel = message;
+              } else {
+                currencyLabel = "USD";
+              }
+              const filteredPrice = product.prices.filter(
+                (item) => item.currency.label === currencyLabel
+              );
+              return (
                 <CartCard
-                  brandName={data?.product?.brand}
-                  productName={data?.product?.name}
-                  price="$50.00"
-                  products={data?.product?.gallery}
+                  key={product.id}
+                  price={filteredPrice[0]}
+                  product={product}
                   colors={cardOneColors}
                   size={size1}
                 />
-                <CartCard
-                  brandName={data?.product?.brand}
-                  productName={data?.product?.name}
-                  price="$50.00"
-                  products={data?.product?.gallery}
-                  colors={cardTwoColors}
-                  size={size2}
-                />
-                <CartOrderCard>
-                  <CartOrderItemContainer>
-                    <CartOrderTax>Tax 21%:</CartOrderTax>
-                    <CartOrderTaxValue>$42.00</CartOrderTaxValue>
-                  </CartOrderItemContainer>
-                  <CartOrderItemContainer>
-                    <CartOrderQuantity>Quantity:</CartOrderQuantity>
-                    <CartOrderQuantityValue>3</CartOrderQuantityValue>
-                  </CartOrderItemContainer>
-                  <CartOrderItemContainer>
-                    <CartOrderTotal>Total:</CartOrderTotal>
-                    <CartOrderTotalValue>$200.00</CartOrderTotalValue>
-                  </CartOrderItemContainer>
-                  <CartOrderItemContainer>
-                    <CartOrderButton>ORDER</CartOrderButton>
-                  </CartOrderItemContainer>
-                </CartOrderCard>
-              </CartContainer>
-            );
-          }}
-        </Query>
+              );
+            })
+          )}
+          <CartOrderCard>
+            <CartOrderItemContainer>
+              <CartOrderTax>Tax 21%:</CartOrderTax>
+              <CartOrderTaxValue>
+                {this.props.currency.message}
+                {(this.state.totalPrice * 21) / 100}
+              </CartOrderTaxValue>
+            </CartOrderItemContainer>
+            <CartOrderItemContainer>
+              <CartOrderQuantity>Quantity:</CartOrderQuantity>
+              <CartOrderQuantityValue>
+                {this.state.totalItems}
+              </CartOrderQuantityValue>
+            </CartOrderItemContainer>
+            <CartOrderItemContainer>
+              <CartOrderTotal>Total:</CartOrderTotal>
+              <CartOrderTotalValue>
+                {this.props.currency.message}
+                {this.state.totalPrice}
+              </CartOrderTotalValue>
+            </CartOrderItemContainer>
+            <CartOrderItemContainer>
+              <CartOrderButton>ORDER</CartOrderButton>
+            </CartOrderItemContainer>
+          </CartOrderCard>
+        </CartContainer>
       </Fragment>
     );
   }
 }
 
-export default Cart;
+const mapStateToProps = (state) => {
+  return {
+    products: state.shopping.cart,
+    currency: state.CurrencyReducer.currency,
+  };
+};
+export default connect(mapStateToProps)(Cart);

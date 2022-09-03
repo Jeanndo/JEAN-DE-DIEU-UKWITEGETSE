@@ -24,12 +24,14 @@ import {
   ProductDescriptionText,
 } from "./../../styles/Product.styled.js";
 import { connect } from "react-redux";
+import { addToCart } from "./../../../Redux/Actions/ActionCreators/shoppingAction.js";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
 
 const SINGLE_PRODUCT = gql`
   query SingleProduct($productId: String!) {
     product(id: $productId) {
+      id
       name
       inStock
       gallery
@@ -134,7 +136,7 @@ class Product extends Component {
         />
         <Query
           query={SINGLE_PRODUCT}
-          variables={{ productId: localStorage.getItem("productId") }}
+          variables={{ productId: window.location.href.split("/")[4] }}
         >
           {({ loading, data, error }) => {
             if (loading) return <h1>Loading...</h1>;
@@ -153,8 +155,8 @@ class Product extends Component {
               (item) => item.currency.label === currencyLabel
             );
 
-            // console.log("filtredPrice", filteredPrice);
             const { amount, currency } = filteredPrice[0];
+
             return (
               <ProductContainer>
                 <ProductLeftSideDetails>
@@ -212,7 +214,13 @@ class Product extends Component {
                         </RightSideProductPriceFigures>
                       </RightSideProductPriceContainer>
                     </RightSideProductColorContainer>
-                    <AddToCartButton>ADD TO CART</AddToCartButton>
+                    <AddToCartButton
+                      onClick={() =>
+                        this.props.addToCart(data.product.id, data.product)
+                      }
+                    >
+                      ADD TO CART
+                    </AddToCartButton>
                     <ProductDescriptionText>
                       {data?.product?.description}
                     </ProductDescriptionText>
@@ -226,10 +234,15 @@ class Product extends Component {
     );
   }
 }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addToCart: (id, product) => dispatch(addToCart(id, product)),
+  };
+};
+
 const mapStateToProps = ({ CurrencyReducer }) => {
   const { currency } = CurrencyReducer;
-
   return { currency };
 };
 
-export default connect(mapStateToProps)(Product);
+export default connect(mapStateToProps, mapDispatchToProps)(Product);
