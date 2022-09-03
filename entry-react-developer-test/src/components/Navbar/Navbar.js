@@ -37,6 +37,7 @@ class Navbar extends Component {
     super(props);
     this.state = {
       showCart: false,
+      cartCount: 0,
     };
   }
 
@@ -46,19 +47,33 @@ class Navbar extends Component {
     });
   };
 
-  // componentDidUpdate() {
-  //   let count = 0;
+  componentDidMount() {
+    let count = 0;
 
-  //   if (this.props.cart || this.state.cartCount) {
-  //     this?.props?.cart?.forEach((element) => {
-  //       count += element.qty;
-  //     });
+    this?.props?.cart?.forEach((item) => {
+      count += item.qty;
+    });
 
-  //     this.setState({
-  //       cartCount: count,
-  //     });
-  //   }
-  // }
+    this.setState({
+      cartCount: count,
+    });
+  }
+  componentDidUpdate(prevProps, prevState) {
+    let count = 0;
+
+    if (
+      prevState.cartCount === this.state.cartCount &&
+      prevProps !== this.props
+    ) {
+      this?.props?.cart?.forEach((item) => {
+        count += item.qty;
+      });
+
+      this.setState({
+        cartCount: count,
+      });
+    } else return;
+  }
 
   render() {
     return (
@@ -67,12 +82,6 @@ class Navbar extends Component {
           {({ loading, data, error }) => {
             if (loading) return <h1>Loading ...</h1>;
             if (error) console.log(error);
-
-            let count = 0;
-            this?.props?.cart?.forEach((element) => {
-              count += element.qty;
-            });
-            // console.log("navbar", this.props.cart);
             return (
               <NavbarContainer>
                 {this.state.showCart && <CartOverlay />}
@@ -117,7 +126,7 @@ class Navbar extends Component {
                       alt="cart"
                       onClick={this.handleShowCart}
                     />
-                    <CartItemNumber>{count}</CartItemNumber>
+                    <CartItemNumber>{this.state.cartCount}</CartItemNumber>
                   </RightContainer>
                 </NavbarInnerContainer>
                 <MenuBar>&#8801;</MenuBar>

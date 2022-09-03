@@ -142,19 +142,10 @@ class Product extends Component {
             if (loading) return <h1>Loading...</h1>;
 
             if (error) console.log(error);
-            let currencyLabel;
-            const { message } = this.props.currency;
-
-            if (message) {
-              currencyLabel = message;
-            } else {
-              currencyLabel = "USD";
-            }
 
             const filteredPrice = data.product.prices.filter(
-              (item) => item.currency.label === currencyLabel
+              (item) => item.currency.label === this.props.currency.message
             );
-
             const { amount, currency } = filteredPrice[0];
 
             return (

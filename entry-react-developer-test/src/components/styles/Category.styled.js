@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const CategoryContainer = styled.div`
+  position: relative;
   width: 100%;
   margin-top: 80px;
   padding: 0px 50px 50px 50px;
@@ -34,15 +35,15 @@ export const ProductCard = styled.div`
   display: flex;
   position: relative;
   flex-direction: column;
-  align-items: flex-start;
   padding: 0px;
   width: 413px;
   height: 444px;
   padding: 16px;
   opacity: ${(props) => (props.outOfStock ? 0.5 : 1)};
-  cursor: pointer;
+  cursor: ${(props) => (props.outOfStock ? "not-allowed" : "pointer")};
   &:not(:last-child) {
     margin-right: 20px;
+    margin-bottom: 50px;
   }
   &:hover {
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -55,6 +56,7 @@ export const CardCartIcon = styled.img`
   width: 60px;
   height: 60px;
   right: 30px;
+  object-fit: contain;
   bottom: 66px;
   cursor: pointer;
 `;
@@ -120,20 +122,28 @@ export const OutOfStockText = styled.h4`
   color: #000; ;
 `;
 export const ProductPagination = styled.div`
-  display: flex;
-  justify-content: flex-end;
+  margin-top: 50px;
 `;
 
 export const PaginationContainer = styled.div`
   display: flex;
-  gap: 20px;
   justify-content: space-between;
 `;
 export const PaginationActionButton = styled.button`
+  position: absolute;
   border: none;
-  background: #5ece7b;
+  background: #000;
   color: #fff;
-  width: 100px;
+  width: 50px;
   padding: 5px;
+  top: 40%;
+  left: ${(props) => (props.prevBtn ? "20px" : "")};
+  right: ${(props) => (props.nextBtn ? "20px" : "")};
   cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
+`;
+
+export const ArrowButton = styled.img`
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
 `;
