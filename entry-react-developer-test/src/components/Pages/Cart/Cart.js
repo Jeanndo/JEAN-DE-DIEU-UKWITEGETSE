@@ -61,20 +61,20 @@ const cardOneColors = [
   },
 ];
 
-// const cardTwoColors = [
-//   {
-//     id: 1,
-//     color: "#1D1F22",
-//   },
-//   {
-//     id: 2,
-//     color: "#15A4C3",
-//   },
-//   {
-//     id: 3,
-//     color: "#EA8120",
-//   },
-// ];
+const cardTwoColors = [
+  {
+    id: 1,
+    color: "#1D1F22",
+  },
+  {
+    id: 2,
+    color: "#15A4C3",
+  },
+  {
+    id: 3,
+    color: "#EA8120",
+  },
+];
 
 class Cart extends Component {
   constructor(props) {
@@ -121,21 +121,14 @@ class Cart extends Component {
   componentDidMount() {
     let items = 0;
     let price = 0;
-    let currencyLabel;
 
-    const { message } = this.props.currency;
-    if (message) {
-      currencyLabel = message;
-    } else {
-      currencyLabel = "USD";
-    }
     this.props.products.forEach((item) => {
       items += item.qty;
       if (items > 0) {
         price +=
           item.qty *
           item.prices.filter(
-            (price) => price.currency.label === currencyLabel
+            (price) => price.currency.label === this.props.currency.message
           )[0].amount;
       }
     });
@@ -178,7 +171,6 @@ class Cart extends Component {
   }
 
   render() {
-    console.log(this.props.products);
     return (
       <Fragment>
         <Navigation
@@ -193,24 +185,16 @@ class Cart extends Component {
           {this.props.products.length === 0 ? (
             <EmptyCart>Empty Cart !!!</EmptyCart>
           ) : (
-            this.props.products.map((product) => {
-              let currencyLabel;
-
-              const { message } = this.props.currency;
-              if (message) {
-                currencyLabel = message;
-              } else {
-                currencyLabel = "USD";
-              }
+            this.props.products.map((product, index) => {
               const filteredPrice = product.prices.filter(
-                (item) => item.currency.label === currencyLabel
+                (item) => item.currency.label === this.props.currency.message
               );
               return (
                 <CartCard
                   key={product.id}
                   price={filteredPrice[0]}
                   product={product}
-                  colors={cardOneColors}
+                  colors={index % 2 === 0 ? cardTwoColors : cardOneColors}
                   size={size1}
                 />
               );
