@@ -31,6 +31,16 @@ export const ProductContainer = styled.div`
   margin-bottom: 20px;
 `;
 
+export const CardCartIcon = styled.img`
+  visibility: hidden;
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  right: 30px;
+  object-fit: contain;
+  bottom: 66px;
+  cursor: pointer;
+`;
 export const ProductCard = styled.div`
   display: flex;
   position: relative;
@@ -48,18 +58,11 @@ export const ProductCard = styled.div`
   &:hover {
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   }
+  &:hover ${CardCartIcon} {
+    visibility: visible;
+  }
 `;
 
-export const CardCartIcon = styled.img`
-  visibility: ${(props) => (props.isHovered ? "visible" : "hidden")};
-  position: absolute;
-  width: 60px;
-  height: 60px;
-  right: 30px;
-  object-fit: contain;
-  bottom: 66px;
-  cursor: pointer;
-`;
 export const ProductImage = styled.img`
   width: 100%;
   height: 330px;

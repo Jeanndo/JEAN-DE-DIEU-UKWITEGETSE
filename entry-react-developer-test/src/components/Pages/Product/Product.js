@@ -144,7 +144,7 @@ class Product extends Component {
             if (error) console.log(error);
 
             const filteredPrice = data.product.prices.filter(
-              (item) => item.currency.label === this.props.currency.message
+              (item) => item.currency.symbol === this.props.currency.message
             );
             const { amount, currency } = filteredPrice[0];
 

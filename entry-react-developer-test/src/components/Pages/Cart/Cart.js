@@ -128,7 +128,7 @@ class Cart extends Component {
         price +=
           item.qty *
           item.prices.filter(
-            (price) => price.currency.label === this.props.currency.message
+            (price) => price.currency.symbol === this.props.currency.message
           )[0].amount;
       }
     });
@@ -155,7 +155,7 @@ class Cart extends Component {
           price +=
             item.qty *
             item.prices.filter(
-              (price) => price.currency.label === this.props.currency.message
+              (price) => price.currency.symbol === this.props.currency.message
             )[0].amount;
         }
       });
@@ -187,7 +187,7 @@ class Cart extends Component {
           ) : (
             this.props.products.map((product, index) => {
               const filteredPrice = product.prices.filter(
-                (item) => item.currency.label === this.props.currency.message
+                (item) => item.currency.symbol === this.props.currency.message
               );
               return (
                 <CartCard
@@ -204,7 +204,7 @@ class Cart extends Component {
             <CartOrderItemContainer>
               <CartOrderTax>Tax 21%:</CartOrderTax>
               <CartOrderTaxValue>
-                {this.props.currency.message}
+                {this.props.currency.message} &nbsp;
                 {(this.state.totalPrice * 21) / 100}
               </CartOrderTaxValue>
             </CartOrderItemContainer>
@@ -218,6 +218,7 @@ class Cart extends Component {
               <CartOrderTotal>Total:</CartOrderTotal>
               <CartOrderTotalValue>
                 {this.props.currency.message}
+                &nbsp;
                 {this.state.totalPrice}
               </CartOrderTotalValue>
             </CartOrderItemContainer>

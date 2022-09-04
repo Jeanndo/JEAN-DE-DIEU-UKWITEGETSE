@@ -8,7 +8,6 @@ import {
   NavbarLinkContainer,
   Logo,
   CartContainer,
-  NavigationItems,
   CartItemNumber,
   MenuBar,
   NavbarLink,
@@ -20,14 +19,12 @@ import CurrencySwitcher from "./Switcher.js";
 import { connect } from "react-redux";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
+import { getCategoryName } from "./../../Redux/Actions/ActionCreators/CategoryAction.js";
 
 const getAllCategories = gql`
   query AllCategories {
     categories {
       name
-      products {
-        id
-      }
     }
   }
 `;
@@ -88,30 +85,22 @@ class Navbar extends Component {
                 <NavbarInnerContainer>
                   <LeftContainer>
                     <NavbarLinkContainer>
-                      <NavbarLink to="/">
-                        <NavigationItems
-                          active={this?.props?.state?.isAll}
-                          onClick={this?.props?.handleAllCategoriesTab}
+                      {data.categories.map((category, index) => (
+                        <NavbarLink
+                          to="/"
+                          key={index}
+                          active={
+                            this.props.categoryName.message.index === index
+                              ? true
+                              : false
+                          }
+                          onClick={() =>
+                            this.props.getCategoryName(category.name, index)
+                          }
                         >
-                          ALL
-                        </NavigationItems>
-                      </NavbarLink>
-                      <NavbarLink to="/">
-                        <NavigationItems
-                          active={this?.props?.state?.isClothes}
-                          onClick={this?.props?.handleClothesTab}
-                        >
-                          CLOTHES
-                        </NavigationItems>
-                      </NavbarLink>
-                      <NavbarLink to="/">
-                        <NavigationItems
-                          active={this?.props?.state?.isTech}
-                          onClick={this?.props?.handleTechTab}
-                        >
-                          TECH
-                        </NavigationItems>
-                      </NavbarLink>
+                          {category.name}
+                        </NavbarLink>
+                      ))}
                     </NavbarLinkContainer>
                   </LeftContainer>
                   <MiddleContainer>
@@ -142,6 +131,15 @@ class Navbar extends Component {
 const mapStateToProps = (state) => {
   return {
     cart: state.shopping.cart,
+    categoryName: state.CategoryNameReducer.categoryName,
   };
 };
-export default connect(mapStateToProps)(Navbar);
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getCategoryName: (categoryName, index) =>
+      dispatch(getCategoryName(categoryName, index)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
