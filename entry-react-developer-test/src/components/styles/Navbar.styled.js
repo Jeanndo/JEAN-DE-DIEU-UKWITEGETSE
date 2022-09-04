@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export const NavbarContainer = styled.nav`
   position: sticky;
@@ -61,11 +61,7 @@ export const NavbarLinkContainer = styled.div`
     margin-top: 10px;
   }
 `;
-export const NavbarLink = styled(Link)`
-  text-decoration: none;
-  color: #000;
-`;
-export const NavigationItems = styled.span`
+export const NavbarLink = styled(NavLink)`
   position: relative;
   font-family: "Raleway";
   font-style: normal;
@@ -76,11 +72,9 @@ export const NavigationItems = styled.span`
   align-items: center;
   text-align: center;
   text-transform: uppercase;
-  color: #000;
-  color: ${(props) => (props.active ? "#5ece7b" : "")};
-  cursor: pointer;
+  text-decoration: none;
+  color: ${(props) => (props.active ? "#5ece7b" : "#000")};
   font-weight: ${(props) => (props.active ? 600 : 400)};
-
   &::after {
     content: " ";
     position: absolute;
@@ -90,7 +84,6 @@ export const NavigationItems = styled.span`
     left: 0px;
     background-color: ${(props) => (props.active ? "#5ece7b" : "")};
   }
-
   @media (max-width: 425px) {
     &::after {
       top: 20px;

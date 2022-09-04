@@ -42,7 +42,7 @@ class CurrencySwitcher extends Component {
               >
                 <option value="$">$</option>
                 {data?.currencies?.map((currency) => (
-                  <option value={currency.label} key={currency.symbol}>
+                  <option value={currency.symbol} key={currency.symbol}>
                     {currency.symbol} {currency.label}
                   </option>
                 ))}

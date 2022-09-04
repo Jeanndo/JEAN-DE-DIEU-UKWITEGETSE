@@ -55,10 +55,10 @@ class Category extends Component {
       currentIndex: 0,
       productsPerPage: 6,
       skip: 6,
-      isAll: true,
+      isActive: false,
       isClothes: false,
       isTech: false,
-      categoryName: "all",
+      categoryName: this.props.categoryName.message.category,
     };
   }
 
@@ -74,7 +74,6 @@ class Category extends Component {
       currentIndex: prevState.currentIndex - this.state.skip,
       productsPerPage: prevState.productsPerPage - this.state.skip,
     }));
-    console.log("content", this.state.productsPerPage);
   };
 
   handleNext = () => {
@@ -82,13 +81,11 @@ class Category extends Component {
       currentIndex: prevState.currentIndex + this.state.skip,
       productsPerPage: prevState.productsPerPage + this.state.skip,
     }));
-
-    console.log("content", this.state.productsPerPage);
   };
 
   handleAllCategoriesTab = () => {
     this.setState({
-      isAll: true,
+      isActive: true,
       isClothes: false,
       isTech: false,
       categoryName: "all",
@@ -114,10 +111,11 @@ class Category extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.categoryName !== this.state.categoryName) {
+    if (prevProps.categoryName !== this.props.categoryName) {
       this.setState({
         currentIndex: 0,
         productsPerPage: 6,
+        categoryName: this.props.categoryName.message.category,
       });
     }
   }
@@ -137,12 +135,15 @@ class Category extends Component {
             if (error) console.log(error);
 
             const filteredData = data.categories.filter(
-              (category) => category.name === this.state.categoryName
+              (category) =>
+                category.name === this.props.categoryName.message.category
             );
             return (
               <>
                 <CategoryContainer>
-                  <CategoryName>{this.state.categoryName}</CategoryName>
+                  <CategoryName>
+                    {this.props.categoryName.message.category}
+                  </CategoryName>
                   <ProductContainer>
                     {filteredData[0].products
                       ?.slice(
@@ -152,15 +153,14 @@ class Category extends Component {
                       .map((product) => {
                         const filteredPrice = product.prices.filter(
                           (price) =>
-                            price.currency.label === this.props.currency.message
+                            price.currency.symbol ===
+                            this.props.currency.message
                         );
                         const { amount, currency } = filteredPrice[0];
                         return (
                           <ProductCard
                             key={product.id}
                             outOfStock={product.inStock}
-                            onMouseOver={this.handleHover}
-                            onMouseLeave={this.handelLeave}
                           >
                             <Link to={`/product/${product?.id}`}>
                               <ProductImage
@@ -171,7 +171,6 @@ class Category extends Component {
                             <CardCartIcon
                               src={CartIcon}
                               alt="cart icon"
-                              isHovered={this.state.isHovered}
                               onClick={() =>
                                 this.props.addToCart(product.id, product)
                               }
@@ -234,10 +233,10 @@ class Category extends Component {
     );
   }
 }
-const mapStateToProps = ({ CurrencyReducer }) => {
+const mapStateToProps = ({ CurrencyReducer, CategoryNameReducer }) => {
   const { currency } = CurrencyReducer;
-
-  return { currency };
+  const { categoryName } = CategoryNameReducer;
+  return { currency, categoryName };
 };
 
 const mapDispatchToProps = (dispatch) => {
