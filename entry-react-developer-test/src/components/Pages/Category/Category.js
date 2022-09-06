@@ -55,9 +55,6 @@ class Category extends Component {
       currentIndex: 0,
       productsPerPage: 6,
       skip: 6,
-      isActive: false,
-      isClothes: false,
-      isTech: false,
       categoryName: this.props.categoryName.message.category,
     };
   }
@@ -83,33 +80,6 @@ class Category extends Component {
     }));
   };
 
-  handleAllCategoriesTab = () => {
-    this.setState({
-      isActive: true,
-      isClothes: false,
-      isTech: false,
-      categoryName: "all",
-    });
-  };
-
-  handleClothesTab = () => {
-    this.setState({
-      isAll: false,
-      isClothes: true,
-      isTech: false,
-      categoryName: "clothes",
-    });
-  };
-
-  handleTechTab = () => {
-    this.setState({
-      isAll: false,
-      isClothes: false,
-      isTech: true,
-      categoryName: "tech",
-    });
-  };
-
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.categoryName !== this.props.categoryName) {
       this.setState({
@@ -123,17 +93,12 @@ class Category extends Component {
   render() {
     return (
       <Fragment>
-        <Navigation
-          handleAllCategoriesTab={this.handleAllCategoriesTab}
-          handleClothesTab={this.handleClothesTab}
-          handleTechTab={this.handleTechTab}
-          state={this.state}
-        />
+        <Navigation />
         <Query query={getAllCategories}>
           {({ loading, data, error }) => {
             if (loading) return <h1>Loading ...</h1>;
             if (error) console.log(error);
-
+            console.log("products", data);
             const filteredData = data.categories.filter(
               (category) =>
                 category.name === this.props.categoryName.message.category
@@ -146,10 +111,10 @@ class Category extends Component {
                   </CategoryName>
                   <ProductContainer>
                     {filteredData[0].products
-                      ?.slice(
-                        this.state.currentIndex,
-                        this.state.currentIndex + this.state.skip
-                      )
+                      // ?.slice(
+                      //   this.state.currentIndex,
+                      //   this.state.currentIndex + this.state.skip
+                      // )
                       .map((product) => {
                         const filteredPrice = product.prices.filter(
                           (price) =>
@@ -160,7 +125,7 @@ class Category extends Component {
                         return (
                           <ProductCard
                             key={product.id}
-                            outOfStock={product.inStock}
+                            inStock={product.inStock}
                           >
                             <Link to={`/product/${product?.id}`}>
                               <ProductImage
@@ -168,13 +133,15 @@ class Category extends Component {
                                 alt={product.name}
                               />
                             </Link>
-                            <CardCartIcon
-                              src={CartIcon}
-                              alt="cart icon"
-                              onClick={() =>
-                                this.props.addToCart(product.id, product)
-                              }
-                            />
+                            {product.inStock && (
+                              <CardCartIcon
+                                src={CartIcon}
+                                alt="cart icon"
+                                onClick={() =>
+                                  this.props.addToCart(product.id, product)
+                                }
+                              />
+                            )}
                             <CardContent>
                               <CardContentTitle>
                                 {product.name}
@@ -184,7 +151,7 @@ class Category extends Component {
                                 {amount}
                               </CardContentPrice>
                             </CardContent>
-                            {product.inStock && (
+                            {!product.inStock && (
                               <OutOfStockOverlay>
                                 <OutOfStockText>OUT OF STOCK</OutOfStockText>
                               </OutOfStockOverlay>
@@ -193,7 +160,7 @@ class Category extends Component {
                         );
                       })}
                   </ProductContainer>
-                  <ProductPagination>
+                  {/* <ProductPagination>
                     <PaginationContainer>
                       {this.state.currentIndex !== 0 && (
                         <PaginationActionButton
@@ -223,7 +190,7 @@ class Category extends Component {
                         </PaginationActionButton>
                       )}
                     </PaginationContainer>
-                  </ProductPagination>
+                  </ProductPagination> */}
                 </CategoryContainer>
               </>
             );

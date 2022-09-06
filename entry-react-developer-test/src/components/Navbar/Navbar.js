@@ -2,15 +2,16 @@ import React, { Component, Fragment } from "react";
 import {
   NavbarContainer,
   LeftContainer,
-  MiddleContainer,
+  ExtendedNavbarContainer,
   RightContainer,
   NavbarInnerContainer,
   NavbarLinkContainer,
   Logo,
   CartContainer,
   CartItemNumber,
-  MenuBar,
+  ShowMobileNav,
   NavbarLink,
+  NavbarLinkExtended,
 } from "./../styles/Navbar.styled.js";
 import CartOverlay from "./CartOverLay.js";
 import LogoImg from "./../../assets/a-logo.png";
@@ -20,6 +21,7 @@ import { connect } from "react-redux";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
 import { getCategoryName } from "./../../Redux/Actions/ActionCreators/CategoryAction.js";
+import { Link } from "react-router-dom";
 
 const getAllCategories = gql`
   query AllCategories {
@@ -35,9 +37,20 @@ class Navbar extends Component {
     this.state = {
       showCart: false,
       cartCount: 0,
+      extendNavbar: false,
     };
   }
+  handleShowMobileNav = () => {
+    this.setState({
+      extendNavbar: true,
+    });
+  };
 
+  handleHideMobileNav = () => {
+    this.setState({
+      extendNavbar: false,
+    });
+  };
   handleShowCart = () => {
     this.setState({
       showCart: !this.state.showCart,
@@ -80,8 +93,10 @@ class Navbar extends Component {
             if (loading) return <h1>Loading ...</h1>;
             if (error) console.log(error);
             return (
-              <NavbarContainer>
-                {this.state.showCart && <CartOverlay />}
+              <NavbarContainer extendedNavbar={this.state.extendNavbar}>
+                {this.state.showCart && (
+                  <CartOverlay disableCart={this.handleShowCart} />
+                )}
                 <NavbarInnerContainer>
                   <LeftContainer>
                     <NavbarLinkContainer>
@@ -101,14 +116,16 @@ class Navbar extends Component {
                           {category.name}
                         </NavbarLink>
                       ))}
+                      <ShowMobileNav onClick={this.handleShowMobileNav}>
+                        <> &#8801;</>
+                      </ShowMobileNav>
                     </NavbarLinkContainer>
                   </LeftContainer>
-                  <MiddleContainer>
-                    <NavbarLink to="/">
-                      <Logo src={LogoImg} alt="logo" />
-                    </NavbarLink>
-                  </MiddleContainer>
+
                   <RightContainer>
+                    <Link to="/">
+                      <Logo src={LogoImg} alt="logo" />
+                    </Link>
                     <CurrencySwitcher />
                     <CartContainer
                       src={Cart}
@@ -118,7 +135,29 @@ class Navbar extends Component {
                     <CartItemNumber>{this.state.cartCount}</CartItemNumber>
                   </RightContainer>
                 </NavbarInnerContainer>
-                <MenuBar>&#8801;</MenuBar>
+                {this.state.extendNavbar && (
+                  <ExtendedNavbarContainer>
+                    <ShowMobileNav onClick={this.handleHideMobileNav}>
+                      &#10005;
+                    </ShowMobileNav>
+                    {data.categories.map((category, index) => (
+                      <NavbarLinkExtended
+                        to="/"
+                        key={index}
+                        active={
+                          this.props.categoryName.message.index === index
+                            ? true
+                            : false
+                        }
+                        onClick={() =>
+                          this.props.getCategoryName(category.name, index)
+                        }
+                      >
+                        {category.name}
+                      </NavbarLinkExtended>
+                    ))}
+                  </ExtendedNavbarContainer>
+                )}
               </NavbarContainer>
             );
           }}

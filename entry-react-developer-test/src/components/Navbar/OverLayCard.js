@@ -20,16 +20,67 @@ import {
   CartDecreamentButton,
   CartProductImageContainer,
   CartProductImage,
+  CartSlideButtonsContainer,
+  CartSlideNextButton,
+  CartSlidePrevButton,
+  ArrowButton,
 } from "./../styles/Overlay.styled.js";
+import { connect } from "react-redux";
+import {
+  adjustQuantity,
+  removeFromCart,
+} from "./../../Redux/Actions/ActionCreators/shoppingAction.js";
+import ArrowRight from "./../../assets/NextButton.png";
+import ArrowLeft from "./../../assets/prevButton.png";
 
 class Card extends Component {
+  constructor(props) {
+    super();
+    this.state = {
+      input: props.product.qty,
+      currentIndex: 0,
+    };
+  }
+  handleQuantityIncreament = () => {
+    this.setState({ input: this.state.input === 0 ? 1 : this.state.input + 1 });
+    this.props.adjustQuantity(this.props.product.id, this.state.input);
+  };
+  handleQuantityDecreament = () => {
+    this.setState({ input: this.state.input === 0 ? 1 : this.state.input - 1 });
+    this.props.adjustQuantity(this.props.product.id, this.state.input);
+  };
+
+  handleNext = () => {
+    this.setState((prevState) => ({
+      currentIndex:
+        prevState.currentIndex !== this.props?.product?.gallery.length - 1
+          ? prevState.currentIndex + 1
+          : prevState.currentIndex,
+    }));
+  };
+
+  handlePrev = () => {
+    this.setState((prevState) => ({
+      currentIndex:
+        prevState.currentIndex !== -1
+          ? prevState.currentIndex - 1
+          : prevState.currentIndex,
+    }));
+  };
+  handleChange = (event) => {
+    console.log(event.target.value);
+  };
+
   render() {
     return (
       <CardContainer>
         <CardLeftSide>
-          <ProductBrandName>{this.props.brandName}</ProductBrandName>
-          <ProductName>{this.props.ProductName}</ProductName>
-          <ProductPrice>{this.props.price}</ProductPrice>
+          <ProductBrandName>{this.props.product.brand}</ProductBrandName>
+          <ProductName>{this.props.product.name}</ProductName>
+          <ProductPrice>
+            {this.props.price.currency.symbol}
+            {this.props.price.amount}
+          </ProductPrice>
           <ProductSizeTitle>SIZE:</ProductSizeTitle>
           <ProductSizeBoxContainer>
             {this.props.size.map((item, index) => (
@@ -53,12 +104,45 @@ class Card extends Component {
         </CardLeftSide>
         <CardRightSide>
           <CartActionButtonsContainer>
-            <CartIncreamentButton>+</CartIncreamentButton>
-            <CartQuantityBox>1</CartQuantityBox>
-            <CartDecreamentButton>-</CartDecreamentButton>
+            <CartIncreamentButton onClick={this.handleQuantityIncreament}>
+              +
+            </CartIncreamentButton>
+            <CartQuantityBox
+              type="number"
+              value={this.state.input === 0 ? 1 : this.state.input}
+              onChange={this.handleChange}
+              min="1"
+            />
+            <CartDecreamentButton onClick={this.handleQuantityDecreament}>
+              -
+            </CartDecreamentButton>
           </CartActionButtonsContainer>
           <CartProductImageContainer>
-            <CartProductImage src={this.props.Image} alt="product pic" />
+            {this.props.product.gallery
+              .slice(this.state.currentIndex, this.state.currentIndex + 1)
+              .map((item) => (
+                <CartProductImage src={item} alt="product pic" key={item} />
+              ))}
+            <CartSlideButtonsContainer>
+              <CartSlidePrevButton
+                disabled={this.state.currentIndex === 0 ? true : false}
+                onClick={this.handlePrev}
+              >
+                <ArrowButton src={ArrowLeft} alt="arrow left" />
+              </CartSlidePrevButton>
+
+              <CartSlideNextButton
+                disabled={
+                  this.state.currentIndex ===
+                  this.props?.product.gallery.length - 1
+                    ? true
+                    : false
+                }
+                onClick={this.handleNext}
+              >
+                <ArrowButton src={ArrowRight} alt="arrow right" />
+              </CartSlideNextButton>
+            </CartSlideButtonsContainer>
           </CartProductImageContainer>
         </CardRightSide>
       </CardContainer>
@@ -66,4 +150,11 @@ class Card extends Component {
   }
 }
 
-export default Card;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    removeFromCart: (productId) => dispatch(removeFromCart(productId)),
+    adjustQuantity: (id, value) => dispatch(adjustQuantity(id, value)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Card);

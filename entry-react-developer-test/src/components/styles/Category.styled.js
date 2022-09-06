@@ -26,6 +26,9 @@ export const CategoryName = styled.h2`
 
 export const ProductContainer = styled.div`
   display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
   margin-top: 80px;
   margin-bottom: 20px;
@@ -49,8 +52,8 @@ export const ProductCard = styled.div`
   width: 413px;
   height: 444px;
   padding: 16px;
-  opacity: ${(props) => (props.outOfStock ? 0.5 : 1)};
-  cursor: ${(props) => (props.outOfStock ? "not-allowed" : "pointer")};
+  opacity: ${(props) => (props.inStock ? 1 : 0.5)};
+  cursor: ${(props) => (props.inStock ? "pointer" : "not-allowed")};
   &:not(:last-child) {
     margin-right: 20px;
     margin-bottom: 50px;

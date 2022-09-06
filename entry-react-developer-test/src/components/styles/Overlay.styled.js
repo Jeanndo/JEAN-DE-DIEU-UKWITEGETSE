@@ -19,9 +19,10 @@ export const OverlayContainer = styled.div`
   position: absolute;
   width: 325px;
   height: 677px;
+  overflow-y: scroll;
+  background: #fff;
   left: 1043px;
   top: 0px;
-  background: #fff;
   z-index: 1;
   @media (max-width: 425px) {
     left: 50px;
@@ -53,7 +54,7 @@ export const CardContainer = styled.div`
   margin-top: 32px;
 `;
 export const CardLeftSide = styled.div`
-  width: 50%;
+  width: 40%;
   height: 100%;
 `;
 
@@ -171,16 +172,13 @@ export const CartIncreamentButton = styled.button`
   background: #fff;
 `;
 
-export const CartQuantityBox = styled.label`
-  display: block;
-  font-family: "Raleway";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 160%;
-  align-items: center;
-  text-align: center;
-  color: #1d1f22;
+export const CartQuantityBox = styled.input`
+  width: 35px;
+  height: 30px;
+  @media (max-width: 425px) {
+    width: 80%;
+    height: 30px;
+  }
 `;
 export const CartDecreamentButton = styled.button`
   display: block;
@@ -200,7 +198,7 @@ export const CartProductImageContainer = styled.div`
 export const CartProductImage = styled.img`
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 `;
 
 export const TotalCostContainer = styled.div`
@@ -238,4 +236,57 @@ export const CheckoutActionButton = styled.button`
   font-style: normal;
   font-size: 13px;
   cursor: pointer;
+`;
+
+/*=====EMPTY CART STYLING=====*/
+
+export const EmptyCart = styled.h1`
+  text-align: center;
+  text-transform: uppercase;
+  color: #555;
+  margin: 100px 0px;
+  font-size: 16px;
+  font-weight: 100;
+`;
+
+/*===PRODUCT SLIDES===*/
+
+export const CartSlideButtonsContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  width: 56px;
+  height: 24px;
+  top: 140px;
+  left: 50px;
+  @media (max-width: 425px) {
+    top: 100px;
+    left: 100px;
+  }
+`;
+
+export const CartSlideNextButton = styled.button`
+  width: 18px;
+  height: 17.98px;
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
+  background: rgba(0, 0, 0, 0.73);
+  color: #fff;
+  border-style: none;
+  outline: none;
+`;
+
+export const CartSlidePrevButton = styled.button`
+  width: 18px;
+  height: 17.98px;
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
+  background: rgba(0, 0, 0, 0.73);
+  color: #fff;
+  border-style: none;
+  outline: none;
+`;
+
+export const ArrowButton = styled.img`
+  width: 10px;
+  height: 10px;
+  object-fit: contain;
 `;

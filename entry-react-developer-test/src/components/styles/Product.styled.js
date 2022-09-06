@@ -48,9 +48,15 @@ export const ProductRightSideContainer = styled.div`
   }
 `;
 
-export const ProductRightSideImage = styled.img`
+export const ProductRightSideImageContainer = styled.div`
   width: 610px;
   height: 511px;
+  background: ${(props) => props.bgcolor};
+  padding: 20px 0px;
+`;
+export const ProductRightSideImage = styled.img`
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   @media (max-width: 425px) {
     width: 100%;
@@ -169,6 +175,7 @@ export const RightSideProductColorBox = styled.div`
   height: 32px;
   border: ${(props) => (props.index === 0 ? "1px solid #5ece7b" : "")};
   background: ${(props) => props.bgcolor};
+  cursor: pointer;
 `;
 export const RightSideProductPriceContainer = styled.div`
   width: 100%;

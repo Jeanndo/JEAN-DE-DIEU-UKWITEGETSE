@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import Image1 from "./../../assets/Image1.png";
-import Image2 from "./../../assets/glasses.png";
 import {
   OverlayContainer,
   OverlayShow,
@@ -10,9 +8,11 @@ import {
   TotalLabels,
   CheckoutActionButtonContainer,
   CheckoutActionButton,
+  EmptyCart,
 } from "./../styles/Overlay.styled.js";
 import { Link } from "react-router-dom";
 import Card from "./OverLayCard.js";
+import { connect } from "react-redux";
 
 const size1 = [
   {
@@ -74,32 +74,101 @@ const cardTwoColors = [
   },
 ];
 class CartOverlay extends Component {
+  constructor(props) {
+    super();
+    this.state = {
+      quantity: 1,
+      totalPrice: 0,
+      totalItems: 0,
+    };
+  }
+
+  componentDidMount() {
+    let items = 0;
+    let price = 0;
+
+    this.props.products.forEach((item) => {
+      items += item.qty;
+      if (items > 0) {
+        price +=
+          item.qty *
+          item.prices.filter(
+            (price) => price.currency.symbol === this.props.currency.message
+          )[0].amount;
+      }
+    });
+    this.setState({
+      totalItems: items,
+    });
+    this.setState({
+      totalPrice: price,
+    });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    let items = 0;
+    let price = 0;
+
+    if (
+      (prevState.totalItems === this.state.totalItems ||
+        prevState.totalPrice === this.state.totalPrice) &&
+      prevProps !== this.props
+    ) {
+      this.props.products.forEach((item) => {
+        items += item.qty;
+        if (items > 0) {
+          price +=
+            item.qty *
+            item.prices.filter(
+              (price) => price.currency.symbol === this.props.currency.message
+            )[0].amount;
+        }
+      });
+      this.setState({
+        totalItems: items,
+      });
+      this.setState({
+        totalPrice: price,
+      });
+    } else {
+      return;
+    }
+  }
+
   render() {
     return (
-      <OverlayShow>
+      <OverlayShow onClick={this.props.disableCart}>
         <OverlayContainer>
           <CartTitle>
-            My Bag, <CartItemNumber>3 items</CartItemNumber>
+            My Bag,
+            <CartItemNumber>{this.state.totalItems} items</CartItemNumber>
           </CartTitle>
-          <Card
-            brandName="Appolo"
-            productName="Running Short"
-            price="$50.00"
-            size={size1}
-            colors={cardOneColors}
-            Image={Image1}
-          />
-          <Card
-            brandName="Jupiter"
-            productName="Wayfarer"
-            price="$75.00"
-            size={size2}
-            colors={cardTwoColors}
-            Image={Image2}
-          />
+
+          {this.props.products.length === 0 ? (
+            <EmptyCart>Empty Cart !!!</EmptyCart>
+          ) : (
+            this.props.products.map((product, index) => {
+              const filteredPrice = product.prices.filter(
+                (item) => item.currency.symbol === this.props.currency.message
+              );
+              return (
+                <Card
+                  key={product.id}
+                  price={filteredPrice[0]}
+                  product={product}
+                  size={size1}
+                  colors={index % 2 === 0 ? cardTwoColors : cardOneColors}
+                />
+              );
+            })
+          )}
           <TotalCostContainer>
             <TotalLabels>Total</TotalLabels>
-            <TotalLabels>$200.00</TotalLabels>
+            <TotalLabels>
+              {this.props.currency.message}
+              &nbsp;
+              {this.state.totalPrice}
+            </TotalLabels>
           </TotalCostContainer>
           <CheckoutActionButtonContainer>
             <Link to="/cart">
@@ -122,5 +191,11 @@ class CartOverlay extends Component {
     );
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    products: state.shopping.cart,
+    currency: state.CurrencyReducer.currency,
+  };
+};
 
-export default CartOverlay;
+export default connect(mapStateToProps)(CartOverlay);
