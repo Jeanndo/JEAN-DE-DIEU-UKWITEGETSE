@@ -134,6 +134,7 @@ export const CartItemNumber = styled.span`
   position: absolute;
   border-radius: 100%;
   padding: 5px;
+
   top: 5px;
   right: 80px;
   background: #1d1f22;

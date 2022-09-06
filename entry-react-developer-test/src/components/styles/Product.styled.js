@@ -10,8 +10,16 @@ export const ProductContainer = styled.div`
     padding: 0px;
   }
 `;
+export const LeftSide = styled.div`
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  @media (max-width: 425px) {
+    flex-direction: column-reverse;
+  }
+`;
 
-export const ProductLeftSideDetails = styled.div`
+export const LeftSideProductGallery = styled.div`
   display: flex;
   flex-direction: column;
   margin-right: 40px;
@@ -25,8 +33,7 @@ export const ProductLeftSideDetails = styled.div`
     overflow-x: scroll;
   }
 `;
-
-export const ProductLeftSideImage = styled.img`
+export const LeftSideGalleryImage = styled.img`
   width: 79px;
   height: 80px;
   object-fit: contain;
@@ -39,22 +46,18 @@ export const ProductLeftSideImage = styled.img`
   }
 `;
 
-export const ProductRightSideContainer = styled.div`
-  display: flex;
-
+export const LeftSideMainProductContainer = styled.div`
+  width: 600px;
+  height: 500px;
+  background: ${(props) => props.bgcolor};
+  padding: 20px 0px;
   @media (max-width: 425px) {
-    gap: 50px;
-    flex-direction: column;
+    margin-right: 40px;
+    height: 250px;
   }
 `;
 
-export const ProductRightSideImageContainer = styled.div`
-  width: 610px;
-  height: 511px;
-  background: ${(props) => props.bgcolor};
-  padding: 20px 0px;
-`;
-export const ProductRightSideImage = styled.img`
+export const LeftSideMainProductImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -63,6 +66,8 @@ export const ProductRightSideImage = styled.img`
     height: 250px;
   }
 `;
+
+/*=======================*/
 
 export const ProductRightSideDetails = styled.div`
   width: 300px;
