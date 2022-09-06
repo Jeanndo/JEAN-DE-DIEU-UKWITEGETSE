@@ -70,6 +70,11 @@ class Card extends Component {
     }));
   };
 
+  handleChange = (event) => {
+    console.log(event.target.value);
+    console.log("changing");
+  };
+
   render() {
     return (
       <CartCard>
@@ -128,8 +133,8 @@ class Card extends Component {
           <CartProductImageContainer>
             {this.props?.product.gallery
               ?.slice(this.state.currentIndex, this.state.currentIndex + 1)
-              .map((item, index) => (
-                <CartProductImage src={item} alt="cart product " key={index} />
+              .map((item) => (
+                <CartProductImage src={item} alt="cart product " key={item} />
               ))}
             <CartSlideButtonsContainer>
               <CartSlidePrevButton

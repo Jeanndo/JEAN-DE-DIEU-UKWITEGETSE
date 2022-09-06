@@ -4,6 +4,7 @@ import {
   ProductContainer,
   ProductLeftSideDetails,
   ProductRightSideContainer,
+  ProductRightSideImageContainer,
   ProductLeftSideImage,
   ProductRightSideImage,
   ProductRightSideDetails,
@@ -92,6 +93,7 @@ class Product extends Component {
       isClothes: false,
       isTech: false,
       categoryName: "all",
+      background: "#fff",
     };
   }
   handleAllCategoriesTab = () => {
@@ -123,6 +125,17 @@ class Product extends Component {
 
   handleProductIndex = (index) => {
     this.setState({ productIndex: index });
+  };
+
+  // componentDidUpdate(prevProps, prevState){
+  //   if(prevState.background!==this.state.background){
+  //     this.setState({ background: this.state.background });
+  //   }
+  // }
+
+  handleBackgroundColor = (color) => {
+    this.setState({ background: color });
+    console.log("background", this.state.background);
   };
 
   render() {
@@ -160,11 +173,15 @@ class Product extends Component {
                     />
                   ))}
                 </ProductLeftSideDetails>
-                <ProductRightSideContainer>
-                  <ProductRightSideImage
-                    src={data?.product?.gallery[this.state.productIndex]}
-                    alt="full product view"
-                  />
+                <ProductRightSideContainer bgcolor={this.state.background}>
+                  <ProductRightSideImageContainer
+                    bgcolor={this.state.background}
+                  >
+                    <ProductRightSideImage
+                      src={data?.product?.gallery[this.state.productIndex]}
+                      alt="full product view"
+                    />
+                  </ProductRightSideImageContainer>
                   <ProductRightSideDetails>
                     <RightSideProductBrandName>
                       {data?.product?.brand}
@@ -192,6 +209,9 @@ class Product extends Component {
                             key={item.id}
                             bgcolor={item.color}
                             index={index}
+                            onClick={() =>
+                              this.handleBackgroundColor(item.color)
+                            }
                           />
                         ))}
                       </RightSideProductColorBoxContainer>

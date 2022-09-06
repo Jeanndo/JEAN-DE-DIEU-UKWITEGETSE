@@ -4,62 +4,38 @@ import { NavLink } from "react-router-dom";
 export const NavbarContainer = styled.nav`
   position: sticky;
   top: 0;
-  left: 0;
   z-index: 100;
   width: 100%;
   height: 80px;
-  padding: 0px 50px;
-  background: #fff;
-  @media (max-width: 425px) {
-    padding: 0px;
-    background: #5ece7b;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  @media (min-width: 700px) {
+    height: 80px;
   }
+`;
+export const LeftContainer = styled.div`
+  flex: 50%;
+  display: flex;
+  align-items: center;
+  padding-left: 5%;
+`;
+export const RightContainer = styled.div`
+  flex: 50%;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 50px;
 `;
 export const NavbarInnerContainer = styled.div`
   width: 100%;
   height: 80px;
   display: flex;
-  @media (max-width: 425px) {
-    display: none;
-    flex-direction: column;
-  }
-`;
-export const LeftContainer = styled.div`
-  flex: 30%;
-  align-items: center;
-  justify-content: flex-start;
-`;
-
-export const MiddleContainer = styled.div`
-  flex: 30%;
-  align-items: center;
-  padding-left: 5%;
-  position: relative;
-`;
-
-export const RightContainer = styled.div`
-  flex: 30%;
-  display: flex;
-  justify-content: flex-end;
-  position: relative;
-  @media (max-width: 425px) {
-    flex-direction: column;
-    margin-top: 50px;
-    justify-content: flex-start;
-  }
 `;
 
 export const NavbarLinkContainer = styled.div`
   display: flex;
-  gap: 50px;
-  margin-top: 30px;
-  @media (max-width: 425px) {
-    width: 100%;
-    flex-direction: column;
-    align-items: left;
-    padding-left: 40%;
-    margin-top: 10px;
-  }
+  width: 100%;
+  gap: 20px;
 `;
 export const NavbarLink = styled(NavLink)`
   position: relative;
@@ -68,7 +44,6 @@ export const NavbarLink = styled(NavLink)`
   font-weight: 400;
   font-size: 16px;
   line-height: 120%;
-  display: flex;
   align-items: center;
   text-align: center;
   text-transform: uppercase;
@@ -84,28 +59,50 @@ export const NavbarLink = styled(NavLink)`
     left: 0px;
     background-color: ${(props) => (props.active ? "#5ece7b" : "")};
   }
+  @media (max-width: 700px) {
+    display: none;
+  }
   @media (max-width: 425px) {
     &::after {
       top: 20px;
       left: 0px;
     }
-    &:not(:last-child) {
-      margin-right: 40px;
-      margin-bottom: 10px;
-    }
   }
 `;
-
+export const NavbarLinkExtended = styled(NavLink)`
+  position: relative;
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 120%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: ${(props) => (props.active ? "#5ece7b" : "#000")};
+  font-weight: ${(props) => (props.active ? 600 : 400)};
+`;
 export const Logo = styled.img`
-  position: absolute;
-  top: 0%;
-  left: 50%;
-  transform: translate(-50%, 50%);
-  @media (max-width: 425px) {
-    left: 45%;
-  }
+  margin: 10px;
+  max-width: 180px;
+  height: auto;
 `;
 
+export const ShowMobileNav = styled.button`
+  width: 70px;
+  height: 50px;
+  background: none;
+  border: none;
+  color: #000;
+  font-size: 45px;
+  cursor: pointer;
+
+  @media (min-width: 700px) {
+    display: none;
+  }
+`;
 export const Switcher = styled.select`
   color: black;
   outline: none;
@@ -132,14 +129,20 @@ export const CartContainer = styled.img`
 
 export const CartItemNumber = styled.span`
   text-align: center;
+  width: max-content;
+  height: max-content;
   position: absolute;
   border-radius: 100%;
   padding: 5px;
-  top: 10px;
-  left: 395px;
+  top: 5px;
+  right: 80px;
   background: #1d1f22;
   color: #fff;
   z-index: -1;
+  @media (min-width: 700px) {
+    top: 0px;
+    margin-left: 405px;
+  }
   @media (max-width: 1024px) {
     top: 7px;
     left: 255px;
@@ -150,17 +153,18 @@ export const CartItemNumber = styled.span`
   }
 `;
 
-export const MenuBar = styled.button`
-  width: 70px;
-  height: 50px;
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 45px;
-  cursor: pointer;
-  right: 0px;
+export const ExtendedNavbarContainer = styled.div`
   position: absolute;
-  top: 10px;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100vh;
+  background: #f3f3f3;
+  display: flex;
+  gap: 50px;
+  flex-direction: column;
+  align-items: center;
+  @media (min-width: 700px) {
+    display: none;
+  }
 `;
-
-export const NavbarExtendedContainer = styled.div``;

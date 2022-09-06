@@ -61,62 +61,32 @@ const cardOneColors = [
   },
 ];
 
-const cardTwoColors = [
-  {
-    id: 1,
-    color: "#1D1F22",
-  },
-  {
-    id: 2,
-    color: "#15A4C3",
-  },
-  {
-    id: 3,
-    color: "#EA8120",
-  },
-];
+// const cardTwoColors = [
+//   {
+//     id: 1,
+//     color: "#1D1F22",
+//   },
+//   {
+//     id: 2,
+//     color: "#15A4C3",
+//   },
+//   {
+//     id: 3,
+//     color: "#EA8120",
+//   },
+// ];
 
 class Cart extends Component {
   constructor(props) {
     super();
     this.state = {
       productIndex: 0,
-      isAll: true,
-      isClothes: false,
-      isTech: false,
       categoryName: "all",
       quantity: 1,
       totalPrice: 0,
       totalItems: 0,
     };
   }
-
-  handleAllCategoriesTab = () => {
-    this.setState({
-      isAll: true,
-      isClothes: false,
-      isTech: false,
-      categoryName: "all",
-    });
-  };
-
-  handleClothesTab = () => {
-    this.setState({
-      isAll: false,
-      isClothes: true,
-      isTech: false,
-      categoryName: "clothes",
-    });
-  };
-
-  handleTechTab = () => {
-    this.setState({
-      isAll: false,
-      isClothes: false,
-      isTech: true,
-      categoryName: "tech",
-    });
-  };
 
   componentDidMount() {
     let items = 0;
@@ -173,12 +143,7 @@ class Cart extends Component {
   render() {
     return (
       <Fragment>
-        <Navigation
-          handleAllCategoriesTab={this.handleAllCategoriesTab}
-          handleClothesTab={this.handleClothesTab}
-          handleTechTab={this.handleTechTab}
-          state={this.state}
-        />
+        <Navigation />
         <CartContainer>
           <CartTitle>CART</CartTitle>
 
@@ -194,7 +159,7 @@ class Cart extends Component {
                   key={product.id}
                   price={filteredPrice[0]}
                   product={product}
-                  colors={index % 2 === 0 ? cardTwoColors : cardOneColors}
+                  colors={cardOneColors}
                   size={size1}
                 />
               );
