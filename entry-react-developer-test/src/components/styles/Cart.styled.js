@@ -17,6 +17,7 @@ export const CartTitle = styled.h2`
 
 export const CartCard = styled.div`
   display: flex;
+  /* flex-wrap: wrap; */
   justify-content: space-between;
   width: 100%;
   height: 400px;

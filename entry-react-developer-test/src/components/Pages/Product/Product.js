@@ -1,12 +1,6 @@
 import React, { Component, Fragment } from "react";
-import Navigation from "./../../Navbar/Navbar.js";
 import {
   ProductContainer,
-  ProductLeftSideDetails,
-  ProductRightSideContainer,
-  ProductRightSideImageContainer,
-  ProductLeftSideImage,
-  ProductRightSideImage,
   ProductRightSideDetails,
   RightSideProductBrandName,
   RightSideProductName,
@@ -23,6 +17,11 @@ import {
   RightSideProductPriceFigures,
   AddToCartButton,
   ProductDescriptionText,
+  LeftSide,
+  LeftSideProductGallery,
+  LeftSideGalleryImage,
+  LeftSideMainProductContainer,
+  LeftSideMainProductImage,
 } from "./../../styles/Product.styled.js";
 import { connect } from "react-redux";
 import { addToCart } from "./../../../Redux/Actions/ActionCreators/shoppingAction.js";
@@ -92,46 +91,13 @@ class Product extends Component {
       isAll: true,
       isClothes: false,
       isTech: false,
-      categoryName: "all",
       background: "#fff",
     };
   }
-  handleAllCategoriesTab = () => {
-    this.setState({
-      isAll: true,
-      isClothes: false,
-      isTech: false,
-      categoryName: "all",
-    });
-  };
-
-  handleClothesTab = () => {
-    this.setState({
-      isAll: false,
-      isClothes: true,
-      isTech: false,
-      categoryName: "clothes",
-    });
-  };
-
-  handleTechTab = () => {
-    this.setState({
-      isAll: false,
-      isClothes: false,
-      isTech: true,
-      categoryName: "tech",
-    });
-  };
 
   handleProductIndex = (index) => {
     this.setState({ productIndex: index });
   };
-
-  // componentDidUpdate(prevProps, prevState){
-  //   if(prevState.background!==this.state.background){
-  //     this.setState({ background: this.state.background });
-  //   }
-  // }
 
   handleBackgroundColor = (color) => {
     this.setState({ background: color });
@@ -141,12 +107,6 @@ class Product extends Component {
   render() {
     return (
       <Fragment>
-        <Navigation
-          handleAllCategoriesTab={this.handleAllCategoriesTab}
-          handleClothesTab={this.handleClothesTab}
-          handleTechTab={this.handleTechTab}
-          state={this.state}
-        />
         <Query
           query={SINGLE_PRODUCT}
           variables={{ productId: window.location.href.split("/")[4] }}
@@ -163,80 +123,76 @@ class Product extends Component {
 
             return (
               <ProductContainer>
-                <ProductLeftSideDetails>
-                  {data?.product?.gallery.map((item, index) => (
-                    <ProductLeftSideImage
-                      src={item}
-                      alt="side product"
-                      key={index}
-                      onClick={() => this.handleProductIndex(index)}
-                    />
-                  ))}
-                </ProductLeftSideDetails>
-                <ProductRightSideContainer bgcolor={this.state.background}>
-                  <ProductRightSideImageContainer
-                    bgcolor={this.state.background}
-                  >
-                    <ProductRightSideImage
+                <LeftSide>
+                  <LeftSideProductGallery>
+                    {data?.product?.gallery.map((item, index) => (
+                      <LeftSideGalleryImage
+                        key={item}
+                        src={item}
+                        alt="product gallery image"
+                        onClick={() => this.handleProductIndex(index)}
+                      />
+                    ))}
+                  </LeftSideProductGallery>
+                  <LeftSideMainProductContainer bgcolor={this.state.background}>
+                    <LeftSideMainProductImage
                       src={data?.product?.gallery[this.state.productIndex]}
-                      alt="full product view"
+                      alt="main product image"
                     />
-                  </ProductRightSideImageContainer>
-                  <ProductRightSideDetails>
-                    <RightSideProductBrandName>
-                      {data?.product?.brand}
-                    </RightSideProductBrandName>
-                    <RightSideProductName>
-                      {data?.product?.name}
-                    </RightSideProductName>
-                    <RightSideProductSizeTitle>SIZE:</RightSideProductSizeTitle>
-                    <RightSideProductSizeBoxContainer>
-                      {size.map((item, index) => (
-                        <ProductSizeBox key={item.id} index={index}>
-                          <ProductSizeLable index={index}>
-                            {item.size}
-                          </ProductSizeLable>
-                        </ProductSizeBox>
+                  </LeftSideMainProductContainer>
+                </LeftSide>
+                <ProductRightSideDetails>
+                  <RightSideProductBrandName>
+                    {data?.product?.brand}
+                  </RightSideProductBrandName>
+                  <RightSideProductName>
+                    {data?.product?.name}
+                  </RightSideProductName>
+                  <RightSideProductSizeTitle>SIZE:</RightSideProductSizeTitle>
+                  <RightSideProductSizeBoxContainer>
+                    {size.map((item, index) => (
+                      <ProductSizeBox key={item.id} index={index}>
+                        <ProductSizeLable index={index}>
+                          {item.size}
+                        </ProductSizeLable>
+                      </ProductSizeBox>
+                    ))}
+                  </RightSideProductSizeBoxContainer>
+                  <RightSideProductColorContainer>
+                    <RightSideProductColorTitle>
+                      COLOR:
+                    </RightSideProductColorTitle>
+                    <RightSideProductColorBoxContainer>
+                      {colors.map((item, index) => (
+                        <RightSideProductColorBox
+                          key={item.id}
+                          bgcolor={item.color}
+                          index={index}
+                          onClick={() => this.handleBackgroundColor(item.color)}
+                        />
                       ))}
-                    </RightSideProductSizeBoxContainer>
-                    <RightSideProductColorContainer>
-                      <RightSideProductColorTitle>
-                        COLOR:
-                      </RightSideProductColorTitle>
-                      <RightSideProductColorBoxContainer>
-                        {colors.map((item, index) => (
-                          <RightSideProductColorBox
-                            key={item.id}
-                            bgcolor={item.color}
-                            index={index}
-                            onClick={() =>
-                              this.handleBackgroundColor(item.color)
-                            }
-                          />
-                        ))}
-                      </RightSideProductColorBoxContainer>
-                      <RightSideProductPriceContainer>
-                        <RightSideProductPriceLabel>
-                          PRICE:
-                        </RightSideProductPriceLabel>
-                        <RightSideProductPriceFigures>
-                          {currency.symbol}&nbsp;
-                          {amount}
-                        </RightSideProductPriceFigures>
-                      </RightSideProductPriceContainer>
-                    </RightSideProductColorContainer>
-                    <AddToCartButton
-                      onClick={() =>
-                        this.props.addToCart(data.product.id, data.product)
-                      }
-                    >
-                      ADD TO CART
-                    </AddToCartButton>
-                    <ProductDescriptionText>
-                      {data?.product?.description}
-                    </ProductDescriptionText>
-                  </ProductRightSideDetails>
-                </ProductRightSideContainer>
+                    </RightSideProductColorBoxContainer>
+                    <RightSideProductPriceContainer>
+                      <RightSideProductPriceLabel>
+                        PRICE:
+                      </RightSideProductPriceLabel>
+                      <RightSideProductPriceFigures>
+                        {currency.symbol}&nbsp;
+                        {amount}
+                      </RightSideProductPriceFigures>
+                    </RightSideProductPriceContainer>
+                  </RightSideProductColorContainer>
+                  <AddToCartButton
+                    onClick={() =>
+                      this.props.addToCart(data.product.id, data.product)
+                    }
+                  >
+                    ADD TO CART
+                  </AddToCartButton>
+                  <ProductDescriptionText>
+                    {data?.product?.description}
+                  </ProductDescriptionText>
+                </ProductRightSideDetails>
               </ProductContainer>
             );
           }}

@@ -33,16 +33,16 @@ const size1 = [
   },
 ];
 
-const size2 = [
-  {
-    id: 1,
-    size: "S",
-  },
-  {
-    id: 2,
-    size: "M",
-  },
-];
+// const size2 = [
+//   {
+//     id: 1,
+//     size: "S",
+//   },
+//   {
+//     id: 2,
+//     size: "M",
+//   },
+// ];
 
 const cardOneColors = [
   {

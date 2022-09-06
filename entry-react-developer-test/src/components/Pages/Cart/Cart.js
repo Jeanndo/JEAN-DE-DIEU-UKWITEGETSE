@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from "react";
-import Navigation from "./../../Navbar/Navbar.js";
 import {
   CartContainer,
   CartTitle,
@@ -36,16 +35,16 @@ const size1 = [
   },
 ];
 
-const size2 = [
-  {
-    id: 1,
-    size: "S",
-  },
-  {
-    id: 2,
-    size: "M",
-  },
-];
+// const size2 = [
+//   {
+//     id: 1,
+//     size: "S",
+//   },
+//   {
+//     id: 2,
+//     size: "M",
+//   },
+// ];
 const cardOneColors = [
   {
     id: 1,
@@ -143,7 +142,6 @@ class Cart extends Component {
   render() {
     return (
       <Fragment>
-        <Navigation />
         <CartContainer>
           <CartTitle>CART</CartTitle>
 
