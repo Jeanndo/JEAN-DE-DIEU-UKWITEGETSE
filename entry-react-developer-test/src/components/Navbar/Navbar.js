@@ -12,6 +12,8 @@ import {
   ShowMobileNav,
   NavbarLink,
   NavbarLinkExtended,
+  CartIcon,
+  SwitchAndCartContainer,
 } from "./../styles/Navbar.styled.js";
 import CartOverlay from "./CartOverLay.js";
 import LogoImg from "./../../assets/a-logo.png";
@@ -126,13 +128,17 @@ class Navbar extends Component {
                     <Link to="/">
                       <Logo src={LogoImg} alt="logo" />
                     </Link>
-                    <CurrencySwitcher />
-                    <CartContainer
-                      src={Cart}
-                      alt="cart"
-                      onClick={this.handleShowCart}
-                    />
-                    <CartItemNumber>{this.state.cartCount}</CartItemNumber>
+                    <SwitchAndCartContainer>
+                      <CurrencySwitcher />
+                      <CartContainer>
+                        <CartIcon
+                          src={Cart}
+                          alt="cart"
+                          onClick={this.handleShowCart}
+                        />
+                        <CartItemNumber>{this.state.cartCount}</CartItemNumber>
+                      </CartContainer>
+                    </SwitchAndCartContainer>
                   </RightContainer>
                 </NavbarInnerContainer>
                 {this.state.extendNavbar && (

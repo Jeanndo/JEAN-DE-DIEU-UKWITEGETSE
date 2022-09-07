@@ -90,7 +90,6 @@ class Category extends Component {
           {({ loading, data, error }) => {
             if (loading) return <h1>Loading ...</h1>;
             if (error) console.log(error);
-            console.log("products", data);
             const filteredData = data.categories.filter(
               (category) =>
                 category.name === this.props.categoryName.message.category

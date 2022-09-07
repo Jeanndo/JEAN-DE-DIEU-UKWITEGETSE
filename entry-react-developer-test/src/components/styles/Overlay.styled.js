@@ -9,7 +9,7 @@ export const OverlayShow = styled.div`
   background: rgba(57, 55, 72, 0.22);
   z-index: 1;
   @media (max-width: 425px) {
-    top: 250px;
+    top: 80px;
   }
 `;
 
@@ -22,11 +22,17 @@ export const OverlayContainer = styled.div`
   overflow-y: scroll;
   background: #fff;
   left: 1043px;
-  top: 0px;
-  z-index: 1;
+  top: 80px;
+  z-index: 999;
   @media (max-width: 425px) {
-    left: 50px;
-    top: 0px;
+    left: 0px;
+    top: 80px;
+  }
+  @media (max-width: 320px) {
+    width: 290px;
+    left: 0px;
+    top: 80px;
+    padding: 0 5px;
   }
 `;
 
@@ -260,8 +266,8 @@ export const CartSlideButtonsContainer = styled.div`
   top: 140px;
   left: 50px;
   @media (max-width: 425px) {
-    top: 100px;
-    left: 100px;
+    top: 140px;
+    left: 50px;
   }
 `;
 
