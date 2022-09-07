@@ -9,7 +9,8 @@ export const NavbarContainer = styled.nav`
   height: 80px;
   background-color: #fff;
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
+
   @media (min-width: 700px) {
     height: 80px;
   }
@@ -21,10 +22,15 @@ export const LeftContainer = styled.div`
   padding-left: 5%;
 `;
 export const RightContainer = styled.div`
+  width: 100%;
   flex: 50%;
   display: flex;
   justify-content: space-between;
-  padding-right: 50px;
+  margin-right: 40px;
+  /* @media (max-width: 425px) {
+    justify-content: center;
+    flex: 20%;
+  } */
 `;
 export const NavbarInnerContainer = styled.div`
   width: 100%;
@@ -108,50 +114,52 @@ export const Switcher = styled.select`
   outline: none;
   border-style: none;
   cursor: pointer;
-  @media (max-width: 425px) {
-    margin-top: 40px;
-    margin-left: 150px;
-    width: 100px;
-  }
 `;
 
-export const CartContainer = styled.img`
+export const SwitchAndCartContainer = styled.div`
+  display: flex;
+  gap: 30px;
+`;
+
+export const CartContainer = styled.div`
+  position: relative;
+  width: max-content;
+  height: max-content;
+`;
+export const CartIcon = styled.img`
   width: 100px;
   height: 20px;
   object-fit: contain;
   margin-top: 28px;
   cursor: pointer;
-  @media (max-width: 425px) {
-    margin-top: 30px;
-    margin-left: 150px;
-  }
 `;
 
 export const CartItemNumber = styled.span`
-  text-align: center;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  bottom: 50%;
+  right: 50%;
   width: max-content;
   height: max-content;
-  position: absolute;
-  border-radius: 100%;
+  border-radius: 50%;
   padding: 5px;
-
-  top: 5px;
-  right: 80px;
+  cursor: pointer;
   background: #1d1f22;
   color: #fff;
-  z-index: -1;
-  @media (min-width: 700px) {
+  z-index: 1;
+  /* @media (min-width: 700px) {
     top: 0px;
     margin-left: 405px;
   }
   @media (max-width: 1024px) {
-    top: 7px;
-    left: 255px;
+    top: 0px;
+    left: 500px;
   }
   @media (max-width: 425px) {
     top: 70px;
     left: 200px;
-  }
+  } */
 `;
 
 export const ExtendedNavbarContainer = styled.div`

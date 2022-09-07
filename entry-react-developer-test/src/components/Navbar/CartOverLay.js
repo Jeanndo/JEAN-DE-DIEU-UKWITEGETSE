@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import {
   OverlayContainer,
   OverlayShow,
@@ -137,7 +137,8 @@ class CartOverlay extends Component {
 
   render() {
     return (
-      <OverlayShow onClick={this.props.disableCart}>
+      <Fragment>
+        <OverlayShow onClick={this.props.disableCart}></OverlayShow>
         <OverlayContainer>
           <CartTitle>
             My Bag,
@@ -187,7 +188,7 @@ class CartOverlay extends Component {
             </Link>
           </CheckoutActionButtonContainer>
         </OverlayContainer>
-      </OverlayShow>
+      </Fragment>
     );
   }
 }

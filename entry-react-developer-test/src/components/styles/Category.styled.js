@@ -7,28 +7,28 @@ export const CategoryContainer = styled.div`
   padding: 0px 50px 50px 50px;
   @media (max-width: 425px) {
     padding: 0px;
+    margin-top: 30px;
   }
 `;
 
 export const CategoryName = styled.h2`
-  width: 299px;
-  height: 68px;
   font-family: "Raleway";
   font-style: normal;
   font-weight: 400;
   font-size: 42px;
   line-height: 160%;
-  display: flex;
-  align-items: center;
   text-transform: capitalize;
   color: #1d1f22;
+  text-align: left;
+  padding-left: 10px;
+  @media (min-width: 425px) {
+    padding-left: 40px;
+  }
 `;
 
 export const ProductContainer = styled.div`
   display: flex;
   gap: 20px;
-  justify-content: center;
-  align-items: center;
   flex-wrap: wrap;
   margin-top: 80px;
   margin-bottom: 20px;
@@ -48,10 +48,10 @@ export const ProductCard = styled.div`
   display: flex;
   position: relative;
   flex-direction: column;
-  padding: 0px;
+  padding: 0;
+  background: #fff;
   width: 413px;
   height: 444px;
-  padding: 16px;
   opacity: ${(props) => (props.inStock ? 1 : 0.5)};
   cursor: ${(props) => (props.inStock ? "pointer" : "not-allowed")};
   &:not(:last-child) {
@@ -59,10 +59,21 @@ export const ProductCard = styled.div`
     margin-bottom: 50px;
   }
   &:hover {
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    box-shadow: ${(props) =>
+        props.inStock ? "rgba(100, 100, 111, 0.2) 0px 7px" : "none"}
+      29px 0px;
   }
   &:hover ${CardCartIcon} {
     visibility: visible;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: 444px;
+  }
+  @media (max-width: 320px) {
+    width: 100%;
+    height: 444px;
   }
 `;
 
@@ -79,31 +90,29 @@ export const CardContent = styled.div`
   width: 354px;
   height: 58px;
   padding: 16px;
+  @media (max-width: 768px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 export const CardContentTitle = styled.span`
-  display: block;
-  width: 354px;
-  height: 29px;
   font-family: "Raleway";
   font-style: normal;
   font-weight: 300;
   font-size: 18px;
   line-height: 160%;
-  display: flex;
-  align-items: center;
   color: #1d1f22;
 `;
 
 export const CardContentPrice = styled.span`
-  width: 58px;
-  height: 29px;
+  display: block;
   font-family: "Raleway";
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
   line-height: 160%;
-  text-align: right;
   color: #1d1f22;
 `;
 

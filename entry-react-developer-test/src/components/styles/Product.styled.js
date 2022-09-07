@@ -5,6 +5,13 @@ export const ProductContainer = styled.div`
   width: 100%;
   margin-top: 60px;
   padding: 0px 50px 0px 50px;
+  @media (max-width: 768px) {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 0px;
+    gap: 50px;
+  }
   @media (max-width: 425px) {
     flex-direction: column;
     padding: 0px;
@@ -12,10 +19,15 @@ export const ProductContainer = styled.div`
 `;
 export const LeftSide = styled.div`
   display: flex;
-  gap: 20px;
+  gap: 100px;
   flex-wrap: wrap;
+  flex: 50%;
   @media (max-width: 425px) {
     flex-direction: column-reverse;
+  }
+  @media (max-width: 320px) {
+    flex-direction: column-reverse;
+    gap: 50px;
   }
 `;
 
@@ -29,7 +41,8 @@ export const LeftSideProductGallery = styled.div`
     flex-direction: row;
     padding-left: 50px;
     height: 80px;
-    overflow-y: hidden;
+    width: 100%;
+    overflow-y: scroll;
     overflow-x: scroll;
   }
 `;
@@ -50,8 +63,8 @@ export const LeftSideMainProductContainer = styled.div`
   width: 600px;
   height: 500px;
   background: ${(props) => props.bgcolor};
-  padding: 20px 0px;
   @media (max-width: 425px) {
+    width: 100%;
     margin-right: 40px;
     height: 250px;
   }
@@ -66,8 +79,6 @@ export const LeftSideMainProductImage = styled.img`
     height: 250px;
   }
 `;
-
-/*=======================*/
 
 export const ProductRightSideDetails = styled.div`
   width: 300px;
@@ -87,12 +98,10 @@ export const RightSideProductBrandName = styled.h2`
 `;
 
 export const RightSideProductName = styled.h2`
-  width: 292px;
-  height: 27px;
   font-family: "Raleway";
   font-style: normal;
   font-weight: 400;
-  font-size: 30px;
+  font-size: 25px;
   line-height: 27px;
   align-items: center;
   color: #1d1f22;
@@ -227,6 +236,9 @@ export const AddToCartButton = styled.button`
   cursor: pointer;
   background: #5ece7b;
   margin-bottom: 40px;
+  @media (min-width: 320px) {
+    width: 250px;
+  }
 `;
 
 export const ProductDescriptionText = styled.p`

@@ -4,6 +4,12 @@ export const CartContainer = styled.div`
   width: 100%;
   margin-top: 80px;
   padding: 0px 50px 0px 50px;
+  @media (max-width: 425px) {
+    padding: 0 50px;
+  }
+  @media (max-width: 320px) {
+    padding: 20px;
+  }
 `;
 
 export const CartTitle = styled.h2`
@@ -17,7 +23,6 @@ export const CartTitle = styled.h2`
 
 export const CartCard = styled.div`
   display: flex;
-  /* flex-wrap: wrap; */
   justify-content: space-between;
   width: 100%;
   height: 400px;
@@ -81,6 +86,9 @@ export const ProductSizeBoxContainer = styled.div`
   width: 100%;
   margin-top: 8px;
   margin-bottom: 24px;
+  @media (min-width: 320px) {
+    width: 80%;
+  }
 `;
 
 export const ProductSizeBox = styled.div`
