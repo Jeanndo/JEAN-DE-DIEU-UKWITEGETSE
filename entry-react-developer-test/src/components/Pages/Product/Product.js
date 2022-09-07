@@ -101,7 +101,6 @@ class Product extends Component {
 
   handleBackgroundColor = (color) => {
     this.setState({ background: color });
-    console.log("background", this.state.background);
   };
 
   render() {

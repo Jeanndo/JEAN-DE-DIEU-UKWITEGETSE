@@ -136,7 +136,11 @@ class Navbar extends Component {
                           alt="cart"
                           onClick={this.handleShowCart}
                         />
-                        <CartItemNumber>{this.state.cartCount}</CartItemNumber>
+                        {this.state.cartCount !== 0 && (
+                          <CartItemNumber>
+                            {this.state.cartCount}
+                          </CartItemNumber>
+                        )}
                       </CartContainer>
                     </SwitchAndCartContainer>
                   </RightContainer>
