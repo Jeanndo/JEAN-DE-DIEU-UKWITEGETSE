@@ -137,7 +137,7 @@ export const ProductColorBoxContainer = styled.div`
 export const ProductColorBox = styled.div`
   width: 32px;
   height: 32px;
-  border: ${(props) => (props.index === 0 ? "1px solid #5ece7b" : "")};
+  border: ${(props) => (props.index ? "1px solid #5ece7b" : "")};
   background: ${(props) => props.bgcolor};
 `;
 

@@ -109,7 +109,12 @@ class Card extends Component {
                 <ProductColorBox
                   key={item.id}
                   bgcolor={item.color}
-                  index={index}
+                  index={
+                    index === this.props.colorIndex &&
+                    this.props.product.id === this.props.productId
+                      ? true
+                      : false
+                  }
                 />
               ))}
             </ProductColorBoxContainer>

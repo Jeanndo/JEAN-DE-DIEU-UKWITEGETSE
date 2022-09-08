@@ -41,7 +41,7 @@ export const LeftSideProductGallery = styled.div`
     flex-direction: row;
     padding-left: 50px;
     height: 80px;
-    width: 100%;
+    width: 300px;
     overflow-y: scroll;
     overflow-x: scroll;
   }
@@ -187,7 +187,7 @@ export const RightSideProductColorBoxContainer = styled.div`
 export const RightSideProductColorBox = styled.div`
   width: 32px;
   height: 32px;
-  border: ${(props) => (props.index === 0 ? "1px solid #5ece7b" : "")};
+  border: ${(props) => (props.index ? "1px solid #5ece7b" : "")};
   background: ${(props) => props.bgcolor};
   cursor: pointer;
 `;
