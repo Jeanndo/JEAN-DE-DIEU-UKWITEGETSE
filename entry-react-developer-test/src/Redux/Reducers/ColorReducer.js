@@ -4,8 +4,9 @@ const initialState = {
   color: {
     loading: false,
     message: {
-      color: null,
+      color: "#fff",
       index: 0,
+      prodId: null,
     },
     success: false,
     error: null,
@@ -22,12 +23,14 @@ export const ColorReducer = (state = initialState, action) => {
           message: {
             color: null,
             index: 0,
+            prodId: null,
           },
           success: false,
           error: null,
         },
       };
     case type.GET_COLOR_SUCCESS:
+      console.log("reducer color", action.payload);
       return {
         ...state,
         color: {
@@ -35,6 +38,7 @@ export const ColorReducer = (state = initialState, action) => {
           message: {
             color: action.payload.color,
             index: action.payload.index,
+            prodId: action.payload.prodId,
           },
           success: true,
           error: null,
@@ -48,6 +52,7 @@ export const ColorReducer = (state = initialState, action) => {
           message: {
             color: null,
             index: 0,
+            prodId: null,
           },
           success: false,
           error: action.payload,

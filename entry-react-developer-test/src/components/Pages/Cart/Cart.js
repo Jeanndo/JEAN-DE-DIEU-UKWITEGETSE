@@ -84,6 +84,8 @@ class Cart extends Component {
       quantity: 1,
       totalPrice: 0,
       totalItems: 0,
+      colorIndex: props.color.message.index,
+      productId: props.color.message.prodId,
     };
   }
 
@@ -106,6 +108,11 @@ class Cart extends Component {
     });
     this.setState({
       totalPrice: price,
+    });
+
+    this.setState({
+      colorIndex: this.props.color.message.index,
+      productId: this.props.color.message.prodId,
     });
   }
 
@@ -158,6 +165,8 @@ class Cart extends Component {
                   price={filteredPrice[0]}
                   product={product}
                   colors={cardOneColors}
+                  colorIndex={this.state.colorIndex}
+                  productId={this.state.productId}
                   size={size1}
                 />
               );
@@ -199,6 +208,7 @@ const mapStateToProps = (state) => {
   return {
     products: state.shopping.cart,
     currency: state.CurrencyReducer.currency,
+    color: state.ColorReducer.color,
   };
 };
 export default connect(mapStateToProps)(Cart);

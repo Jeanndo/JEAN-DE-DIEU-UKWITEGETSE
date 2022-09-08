@@ -25,6 +25,7 @@ import {
 } from "./../../styles/Product.styled.js";
 import { connect } from "react-redux";
 import { addToCart } from "./../../../Redux/Actions/ActionCreators/shoppingAction.js";
+import { getColor } from "./../../../Redux/Actions/ActionCreators/ColorAction.js";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
 
@@ -92,6 +93,8 @@ class Product extends Component {
       isClothes: false,
       isTech: false,
       background: "#fff",
+      colorIndex: props.color.message.index,
+      productId: props.color.message.prodId,
     };
   }
 
@@ -103,7 +106,14 @@ class Product extends Component {
     this.setState({ background: color });
   };
 
+  componentDidMount() {
+    this.setState({
+      colorIndex: this.props.color.message.index,
+      productId: this.props.color.message.prodId,
+    });
+  }
   render() {
+    console.log("props color", this.props.color.message);
     return (
       <Fragment>
         <Query
@@ -133,7 +143,13 @@ class Product extends Component {
                       />
                     ))}
                   </LeftSideProductGallery>
-                  <LeftSideMainProductContainer bgcolor={this.state.background}>
+                  <LeftSideMainProductContainer
+                    bgcolor={
+                      !this.props.color.message.color
+                        ? "#D3D2D5"
+                        : this.props.color.message.color
+                    }
+                  >
                     <LeftSideMainProductImage
                       src={data?.product?.gallery[this.state.productIndex]}
                       alt="main product image"
@@ -166,8 +182,19 @@ class Product extends Component {
                         <RightSideProductColorBox
                           key={item.id}
                           bgcolor={item.color}
-                          index={index}
-                          onClick={() => this.handleBackgroundColor(item.color)}
+                          index={
+                            index === this.state.colorIndex &&
+                            this.state.productId === data.product.id
+                              ? true
+                              : false
+                          }
+                          onClick={() =>
+                            this.props.getColor(
+                              item.color,
+                              index,
+                              data.product.id
+                            )
+                          }
                         />
                       ))}
                     </RightSideProductColorBoxContainer>
@@ -203,12 +230,15 @@ class Product extends Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     addToCart: (id, product) => dispatch(addToCart(id, product)),
+    getColor: (color, index, prodId) =>
+      dispatch(getColor(color, index, prodId)),
   };
 };
 
-const mapStateToProps = ({ CurrencyReducer }) => {
+const mapStateToProps = ({ CurrencyReducer, ColorReducer }) => {
   const { currency } = CurrencyReducer;
-  return { currency };
+  const { color } = ColorReducer;
+  return { currency, color };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Product);
