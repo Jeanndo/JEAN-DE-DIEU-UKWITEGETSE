@@ -2,82 +2,143 @@ import styled from "styled-components";
 
 export const ProductContainer = styled.div`
   display: flex;
+  gap: 100px;
   width: 100%;
-  margin-top: 60px;
-  padding: 0px 50px 0px 50px;
+  padding: 5%;
+  background: #fff;
+
   @media (max-width: 768px) {
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
-    padding: 0px;
-    gap: 50px;
+    gap: 150px;
   }
   @media (max-width: 425px) {
     flex-direction: column;
-    padding: 0px;
+    gap: 40px;
+  }
+  @media (max-width: 375px) {
+    flex-direction: column;
+    gap: 40px;
+  }
+  @media (max-width: 320px) {
+    flex-direction: column;
+    gap: 40px;
   }
 `;
-export const LeftSide = styled.div`
-  display: flex;
-  gap: 100px;
-  flex-wrap: wrap;
-  flex: 50%;
+
+export const LeftSideContainer = styled.div`
+  width: 929px;
+  height: 511px;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
   @media (max-width: 425px) {
+    width: 100%;
+    height: 400px;
+  }
+  @media (max-width: 375px) {
+    width: 100%;
+  }
+  @media (max-width: 320px) {
+    width: 100%;
+  }
+`;
+
+export const LeftSideInnerContainer = styled.div`
+  display: flex;
+  gap: 40px;
+  width: 100%;
+  @media (max-width: 768px) {
+    flex-direction: column-reverse;
+  }
+  @media (max-width: 425px) {
+    flex-direction: column-reverse;
+  }
+  @media (max-width: 375px) {
     flex-direction: column-reverse;
   }
   @media (max-width: 320px) {
     flex-direction: column-reverse;
-    gap: 50px;
   }
 `;
 
-export const LeftSideProductGallery = styled.div`
+export const LeftSideInnerProductGallery = styled.div`
   display: flex;
   flex-direction: column;
-  margin-right: 40px;
-  height: 300px;
+  gap: 40px;
+  width: 79px;
+  height: 511px;
   overflow-y: scroll;
+  @media (max-width: 768px) {
+    flex-direction: row;
+    width: 100%;
+    height: 80px;
+    overflow-y: scroll;
+    overflow-x: scroll;
+  }
   @media (max-width: 425px) {
     flex-direction: row;
-    padding-left: 50px;
-    height: 80px;
-    width: 300px;
+    width: 100%;
+    height: 50px !important;
+    overflow-y: scroll;
+    overflow-x: scroll;
+  }
+  @media (max-width: 375px) {
+    flex-direction: row;
+    width: 100%;
+    height: 50px !important;
+    overflow-y: scroll;
+    overflow-x: scroll;
+  }
+  @media (max-width: 320px) {
+    flex-direction: row;
+    width: 100%;
+    height: 50px !important;
     overflow-y: scroll;
     overflow-x: scroll;
   }
 `;
-export const LeftSideGalleryImage = styled.img`
-  width: 79px;
+
+export const LeftSideInnerProductGalleryImage = styled.img`
+  width: 100%;
   height: 80px;
   object-fit: contain;
   cursor: pointer;
-  &:not(:last-child) {
-    margin-bottom: 40px;
-  }
   @media (max-width: 425px) {
-    margin-right: 40px;
+    height: 50px;
+  }
+  @media (max-width: 375px) {
+    height: 50px;
+  }
+  @media (max-width: 320px) {
+    height: 50px;
   }
 `;
 
-export const LeftSideMainProductContainer = styled.div`
-  width: 600px;
-  height: 500px;
+export const LeftSideInnerMainProductContainer = styled.div`
+  width: 100%;
+  max-width: 810px;
+  height: 511px;
   background: ${(props) => props.bgcolor};
   @media (max-width: 425px) {
-    width: 100%;
-    margin-right: 40px;
-    height: 250px;
+    height: 300px;
+  }
+  @media (max-width: 375px) {
+    height: 300px;
+  }
+  @media (max-width: 320px) {
+    height: 300px;
   }
 `;
 
-export const LeftSideMainProductImage = styled.img`
+export const LeftSideInnerMainProductImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: contain;
-  @media (max-width: 425px) {
-    width: 100%;
-    height: 250px;
-  }
+`;
+
+export const RightSideContainer = styled.div`
+  width: 292px;
+  height: 511px;
 `;
 
 export const ProductRightSideDetails = styled.div`
