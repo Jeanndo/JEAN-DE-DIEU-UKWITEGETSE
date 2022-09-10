@@ -148,18 +148,6 @@ export const CartItemNumber = styled.span`
   background: #1d1f22;
   color: #fff;
   z-index: 1;
-  /* @media (min-width: 700px) {
-    top: 0px;
-    margin-left: 405px;
-  }
-  @media (max-width: 1024px) {
-    top: 0px;
-    left: 500px;
-  }
-  @media (max-width: 425px) {
-    top: 70px;
-    left: 200px;
-  } */
 `;
 
 export const ExtendedNavbarContainer = styled.div`

@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import {
   ProductContainer,
-  ProductRightSideDetails,
+  RightSideContainer,
   RightSideProductBrandName,
   RightSideProductName,
   RightSideProductSizeTitle,
@@ -17,11 +17,12 @@ import {
   RightSideProductPriceFigures,
   AddToCartButton,
   ProductDescriptionText,
-  LeftSide,
-  LeftSideProductGallery,
-  LeftSideGalleryImage,
-  LeftSideMainProductContainer,
-  LeftSideMainProductImage,
+  LeftSideContainer,
+  LeftSideInnerContainer,
+  LeftSideInnerProductGallery,
+  LeftSideInnerProductGalleryImage,
+  LeftSideInnerMainProductContainer,
+  LeftSideInnerMainProductImage,
 } from "./../../styles/Product.styled.js";
 import { connect } from "react-redux";
 import { addToCart } from "./../../../Redux/Actions/ActionCreators/shoppingAction.js";
@@ -132,31 +133,33 @@ class Product extends Component {
 
             return (
               <ProductContainer>
-                <LeftSide>
-                  <LeftSideProductGallery>
-                    {data?.product?.gallery.map((item, index) => (
-                      <LeftSideGalleryImage
-                        key={item}
-                        src={item}
-                        alt="product gallery image"
-                        onClick={() => this.handleProductIndex(index)}
+                <LeftSideContainer>
+                  <LeftSideInnerContainer>
+                    <LeftSideInnerProductGallery>
+                      {data?.product?.gallery.map((item, index) => (
+                        <LeftSideInnerProductGalleryImage
+                          key={item}
+                          src={item}
+                          alt="product gallery image"
+                          onClick={() => this.handleProductIndex(index)}
+                        />
+                      ))}
+                    </LeftSideInnerProductGallery>
+                    <LeftSideInnerMainProductContainer
+                      bgcolor={
+                        !this.props.color.message.color
+                          ? "#D3D2D5"
+                          : this.props.color.message.color
+                      }
+                    >
+                      <LeftSideInnerMainProductImage
+                        src={data?.product?.gallery[this.state.productIndex]}
+                        alt="main product image"
                       />
-                    ))}
-                  </LeftSideProductGallery>
-                  <LeftSideMainProductContainer
-                    bgcolor={
-                      !this.props.color.message.color
-                        ? "#D3D2D5"
-                        : this.props.color.message.color
-                    }
-                  >
-                    <LeftSideMainProductImage
-                      src={data?.product?.gallery[this.state.productIndex]}
-                      alt="main product image"
-                    />
-                  </LeftSideMainProductContainer>
-                </LeftSide>
-                <ProductRightSideDetails>
+                    </LeftSideInnerMainProductContainer>
+                  </LeftSideInnerContainer>
+                </LeftSideContainer>
+                <RightSideContainer>
                   <RightSideProductBrandName>
                     {data?.product?.brand}
                   </RightSideProductBrandName>
@@ -218,7 +221,7 @@ class Product extends Component {
                   <ProductDescriptionText>
                     {data?.product?.description}
                   </ProductDescriptionText>
-                </ProductRightSideDetails>
+                </RightSideContainer>
               </ProductContainer>
             );
           }}

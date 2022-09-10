@@ -21,7 +21,7 @@ export const OverlayContainer = styled.div`
   height: 677px;
   overflow-y: scroll;
   background: #fff;
-  left: 1043px;
+  right: 72px;
   top: 80px;
   z-index: 999;
   @media (max-width: 425px) {

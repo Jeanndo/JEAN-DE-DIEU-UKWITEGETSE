@@ -4,7 +4,7 @@ export const CategoryContainer = styled.div`
   position: relative;
   width: 100%;
   margin-top: 80px;
-  padding: 0px 50px 50px 50px;
+  padding: 0 5%;
   @media (max-width: 425px) {
     padding: 0px;
     margin-top: 30px;
@@ -20,15 +20,17 @@ export const CategoryName = styled.h2`
   text-transform: capitalize;
   color: #1d1f22;
   text-align: left;
-  padding-left: 10px;
-  @media (min-width: 425px) {
-    padding-left: 40px;
+  @media (max-width: 768px) {
+    text-align: center;
+  }
+  @media (max-width: 425px) {
+    text-align: center;
   }
 `;
 
 export const ProductContainer = styled.div`
   display: flex;
-  gap: 20px;
+  gap: 50px;
   flex-wrap: wrap;
   margin-top: 80px;
   margin-bottom: 20px;
@@ -50,14 +52,11 @@ export const ProductCard = styled.div`
   flex-direction: column;
   padding: 0;
   background: #fff;
-  width: 413px;
+  width: 446px;
   height: 444px;
   opacity: ${(props) => (props.inStock ? 1 : 0.5)};
   cursor: ${(props) => (props.inStock ? "pointer" : "not-allowed")};
-  &:not(:last-child) {
-    margin-right: 20px;
-    margin-bottom: 50px;
-  }
+
   &:hover {
     box-shadow: ${(props) =>
         props.inStock ? "rgba(100, 100, 111, 0.2) 0px 7px" : "none"}
