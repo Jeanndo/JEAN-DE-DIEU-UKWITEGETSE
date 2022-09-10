@@ -168,7 +168,7 @@ class CartOverlay extends Component {
             <TotalLabels>
               {this.props.currency.message}
               &nbsp;
-              {this.state.totalPrice}
+              {this.state.totalPrice.toFixed(2)}
             </TotalLabels>
           </TotalCostContainer>
           <CheckoutActionButtonContainer>

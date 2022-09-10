@@ -42,13 +42,19 @@ class Card extends Component {
     };
   }
   handleQuantityIncreament = () => {
-    this.setState({ input: this.state.input === 0 ? 1 : this.state.input + 1 });
-    this.props.adjustQuantity(this.props.product.id, this.state.input);
+    this.setState({ input: this.state.input + 1 });
   };
   handleQuantityDecreament = () => {
-    this.setState({ input: this.state.input === 0 ? 1 : this.state.input - 1 });
-    this.props.adjustQuantity(this.props.product.id, this.state.input);
+    this.setState({ input: this.state.input - 1 });
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.input !== this.state.input) {
+      this.props.adjustQuantity(this.props.product.id, this.state.input);
+    } else {
+      return;
+    }
+  }
 
   handleNext = () => {
     this.setState((prevState) => ({
@@ -68,7 +74,7 @@ class Card extends Component {
     }));
   };
   handleChange = (event) => {
-    console.log(event.target.value);
+    this.props.adjustQuantity(this.props.product.id, event.target.value);
   };
 
   render() {
@@ -109,11 +115,14 @@ class Card extends Component {
             </CartIncreamentButton>
             <CartQuantityBox
               type="number"
-              value={this.state.input === 0 ? 1 : this.state.input}
+              value={this.state.input}
               onChange={this.handleChange}
               min="1"
             />
-            <CartDecreamentButton onClick={this.handleQuantityDecreament}>
+            <CartDecreamentButton
+              disabled={this.state.input === 0}
+              onClick={this.handleQuantityDecreament}
+            >
               -
             </CartDecreamentButton>
           </CartActionButtonsContainer>
