@@ -177,7 +177,7 @@ class Cart extends Component {
               <CartOrderTax>Tax 21%:</CartOrderTax>
               <CartOrderTaxValue>
                 {this.props.currency.message} &nbsp;
-                {(this.state.totalPrice * 21) / 100}
+                {((this.state.totalPrice * 21) / 100).toFixed(2)}
               </CartOrderTaxValue>
             </CartOrderItemContainer>
             <CartOrderItemContainer>
@@ -191,7 +191,7 @@ class Cart extends Component {
               <CartOrderTotalValue>
                 {this.props.currency.message}
                 &nbsp;
-                {this.state.totalPrice}
+                {this.state.totalPrice.toFixed(2)}
               </CartOrderTotalValue>
             </CartOrderItemContainer>
             <CartOrderItemContainer>
