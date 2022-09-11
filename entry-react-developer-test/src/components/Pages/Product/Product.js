@@ -35,6 +35,7 @@ const SINGLE_PRODUCT = gql`
     product(id: $productId) {
       id
       name
+      brand
       inStock
       gallery
       description
@@ -46,7 +47,16 @@ const SINGLE_PRODUCT = gql`
           symbol
         }
       }
-      brand
+      attributes {
+        id
+        name
+        type
+        items {
+          displayValue
+          value
+          id
+        }
+      }
     }
   }
 `;
@@ -124,6 +134,8 @@ class Product extends Component {
             if (loading) return <h1>Loading...</h1>;
 
             if (error) console.log(error);
+
+            console.log("single Product", data);
 
             const filteredPrice = data.product.prices.filter(
               (item) =>
