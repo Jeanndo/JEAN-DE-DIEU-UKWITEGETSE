@@ -181,7 +181,6 @@ export const CartQuantityBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  /* text-align: center; */
   border: 1px solid #1d1f22;
   @media (max-width: 425px) {
     width: 80%;
@@ -362,4 +361,20 @@ export const EmptyCart = styled.h1`
   margin: 100px 0px;
   font-size: 16px;
   font-weight: 100;
+`;
+
+export const RemoveFromCart = styled.button`
+  margin-top: 25px;
+  width: 20px;
+  height: 20px;
+  border-radius: 3px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+`;
+
+export const TrushIconImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 `;

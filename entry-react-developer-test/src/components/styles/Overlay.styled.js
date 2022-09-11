@@ -296,3 +296,18 @@ export const ArrowButton = styled.img`
   height: 10px;
   object-fit: contain;
 `;
+
+export const RemoveFromCart = styled.button`
+  width: 20px;
+  height: 20px;
+  border-radius: 3px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+`;
+
+export const TrushIconImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+`;

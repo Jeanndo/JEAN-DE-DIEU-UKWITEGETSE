@@ -6,11 +6,11 @@ export const SwitcherContainer = styled.div`
 export const DropdownMenuButton = styled.div`
   margin-top: 20px;
   background: transparent;
-  height: 40px;
+  width: 50px;
+  height: max-content;
   cursor: pointer;
   display: flex;
-  align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   font-family: "Raleway";
   font-style: normal;
   font-weight: 800;
@@ -19,8 +19,9 @@ export const DropdownMenuButton = styled.div`
 `;
 
 export const ArrowImage = styled.img`
-  width: 20px;
-  height: 20px;
+  margin-top: 7px;
+  width: 15px;
+  height: 15px;
   object-fit: contain;
 `;
 export const DropdownCurrencyContainer = styled.div`
