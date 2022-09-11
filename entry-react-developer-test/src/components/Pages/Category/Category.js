@@ -26,6 +26,7 @@ const getAllCategories = gql`
       products {
         id
         name
+        brand
         inStock
         prices {
           amount
@@ -96,7 +97,7 @@ class Category extends Component {
             );
             return (
               <>
-                <CategoryContainer>
+                <CategoryContainer onClick={this.props.closeSwitcher}>
                   <CategoryName>
                     {this.props.categoryName.message.category}
                   </CategoryName>
@@ -104,7 +105,8 @@ class Category extends Component {
                     {filteredData[0].products.map((product) => {
                       const filteredPrice = product.prices.filter(
                         (price) =>
-                          price.currency.symbol === this.props.currency.message
+                          price.currency.symbol ===
+                          this.props.currency.message.symbol
                       );
                       const { amount, currency } = filteredPrice[0];
                       return (
@@ -125,7 +127,10 @@ class Category extends Component {
                             />
                           )}
                           <CardContent>
-                            <CardContentTitle>{product.name}</CardContentTitle>
+                            <CardContentTitle>
+                              {product.brand} &nbsp;
+                              {product.name}
+                            </CardContentTitle>
                             <CardContentPrice>
                               {currency.symbol}&nbsp;
                               {amount}

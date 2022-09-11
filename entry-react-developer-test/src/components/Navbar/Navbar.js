@@ -18,12 +18,12 @@ import {
 import CartOverlay from "./CartOverLay.js";
 import LogoImg from "./../../assets/a-logo.png";
 import Cart from "./../../assets/shoppingCart.png";
-import CurrencySwitcher from "./Switcher.js";
 import { connect } from "react-redux";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
 import { getCategoryName } from "./../../Redux/Actions/ActionCreators/CategoryAction.js";
 import { Link } from "react-router-dom";
+import Switcher from "./../Switcher/Switcher.js";
 
 const getAllCategories = gql`
   query AllCategories {
@@ -128,8 +128,12 @@ class Navbar extends Component {
                     <Link to="/">
                       <Logo src={LogoImg} alt="logo" />
                     </Link>
+
                     <SwitchAndCartContainer>
-                      <CurrencySwitcher />
+                      <Switcher
+                        switcher={this.props.switcher}
+                        toggleSwitcher={this.props.toggleSwitcher}
+                      />
                       <CartContainer>
                         <CartIcon
                           src={Cart}

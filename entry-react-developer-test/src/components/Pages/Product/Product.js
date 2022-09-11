@@ -114,7 +114,6 @@ class Product extends Component {
     });
   }
   render() {
-    console.log("props color", this.props.color.message);
     return (
       <Fragment>
         <Query
@@ -127,12 +126,13 @@ class Product extends Component {
             if (error) console.log(error);
 
             const filteredPrice = data.product.prices.filter(
-              (item) => item.currency.symbol === this.props.currency.message
+              (item) =>
+                item.currency.symbol === this.props.currency.message.symbol
             );
             const { amount, currency } = filteredPrice[0];
 
             return (
-              <ProductContainer>
+              <ProductContainer onClick={this.props.closeSwitcher}>
                 <LeftSideContainer>
                   <LeftSideInnerContainer>
                     <LeftSideInnerProductGallery>

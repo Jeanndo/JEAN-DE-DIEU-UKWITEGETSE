@@ -3,8 +3,7 @@ import styled from "styled-components";
 export const CategoryContainer = styled.div`
   position: relative;
   width: 100%;
-  margin-top: 80px;
-  padding: 0 5%;
+  padding: 80px 5% 0 5%;
   @media (max-width: 425px) {
     padding: 0px;
     margin-top: 30px;

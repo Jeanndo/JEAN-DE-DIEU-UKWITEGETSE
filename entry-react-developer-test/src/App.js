@@ -5,12 +5,31 @@ import MyRoutes from "./routes/index.js";
 import Navigation from "./components/Navbar/Navbar.js";
 
 class App extends Component {
+  constructor(props) {
+    super();
+    this.state = {
+      showSwitcher: false,
+    };
+  }
+
+  toggleSwitcher = () => {
+    this.setState((prevState) => ({ showSwitcher: !prevState.showSwitcher }));
+  };
+
+  closeSwitcher = () => {
+    this.setState({ showSwitcher: false });
+  };
+
   render() {
     return (
       <Router>
-        <Navigation />
+        <Navigation
+          switcher={this.state.showSwitcher}
+          toggleSwitcher={this.toggleSwitcher}
+          closeSwitcher={this.closeSwitcher}
+        />
         <GlobalStyles />
-        <MyRoutes />
+        <MyRoutes closeSwitcher={this.closeSwitcher} />
       </Router>
     );
   }

@@ -3,7 +3,10 @@ import * as type from "./../Actions/Types/ActionTypes.js";
 const initialState = {
   currency: {
     loading: false,
-    message: "$",
+    message: {
+      symbol: "$",
+      index: 0,
+    },
     success: false,
     error: null,
   },
@@ -16,7 +19,10 @@ export const CurrencyReducer = (state = initialState, action) => {
         ...state,
         currency: {
           loading: true,
-          message: null,
+          message: {
+            symbol: "$",
+            index: 0,
+          },
           success: false,
           error: null,
         },
@@ -26,7 +32,10 @@ export const CurrencyReducer = (state = initialState, action) => {
         ...state,
         currency: {
           loading: false,
-          message: action.payload,
+          message: {
+            symbol: action.payload.symbol,
+            index: action.payload.index,
+          },
           success: true,
           error: null,
         },
@@ -36,7 +45,10 @@ export const CurrencyReducer = (state = initialState, action) => {
         ...state,
         currency: {
           loading: false,
-          message: null,
+          message: {
+            symbol: "$",
+            index: 0,
+          },
           success: false,
           error: action.payload,
         },

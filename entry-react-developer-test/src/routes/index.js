@@ -8,9 +8,18 @@ class MyRoutes extends Component {
   render() {
     return (
       <Routes>
-        <Route path="/" element={<Category />} />
-        <Route path={`/product/:${this.props.id}`} element={<Product />} />
-        <Route path="/cart" element={<Cart />} />
+        <Route
+          path="/"
+          element={<Category closeSwitcher={this.props.closeSwitcher} />}
+        />
+        <Route
+          path={`/product/:${this.props.id}`}
+          element={<Product closeSwitcher={this.props.closeSwitcher} />}
+        />
+        <Route
+          path="/cart"
+          element={<Cart closeSwitcher={this.props.closeSwitcher} />}
+        />
       </Routes>
     );
   }

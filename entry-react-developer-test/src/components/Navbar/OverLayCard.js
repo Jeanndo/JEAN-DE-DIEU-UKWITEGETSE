@@ -132,26 +132,28 @@ class Card extends Component {
               .map((item) => (
                 <CartProductImage src={item} alt="product pic" key={item} />
               ))}
-            <CartSlideButtonsContainer>
-              <CartSlidePrevButton
-                disabled={this.state.currentIndex === 0 ? true : false}
-                onClick={this.handlePrev}
-              >
-                <ArrowButton src={ArrowLeft} alt="arrow left" />
-              </CartSlidePrevButton>
+            {this.props?.product.gallery.length !== 1 && (
+              <CartSlideButtonsContainer>
+                <CartSlidePrevButton
+                  disabled={this.state.currentIndex === 0 ? true : false}
+                  onClick={this.handlePrev}
+                >
+                  <ArrowButton src={ArrowLeft} alt="arrow left" />
+                </CartSlidePrevButton>
 
-              <CartSlideNextButton
-                disabled={
-                  this.state.currentIndex ===
-                  this.props?.product.gallery.length - 1
-                    ? true
-                    : false
-                }
-                onClick={this.handleNext}
-              >
-                <ArrowButton src={ArrowRight} alt="arrow right" />
-              </CartSlideNextButton>
-            </CartSlideButtonsContainer>
+                <CartSlideNextButton
+                  disabled={
+                    this.state.currentIndex ===
+                    this.props?.product.gallery.length - 1
+                      ? true
+                      : false
+                  }
+                  onClick={this.handleNext}
+                >
+                  <ArrowButton src={ArrowRight} alt="arrow right" />
+                </CartSlideNextButton>
+              </CartSlideButtonsContainer>
+            )}
           </CartProductImageContainer>
         </CardRightSide>
       </CardContainer>
