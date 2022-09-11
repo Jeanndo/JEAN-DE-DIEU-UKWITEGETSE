@@ -36,6 +36,16 @@ const getAllCategories = gql`
           }
         }
         gallery
+        attributes {
+          id
+          name
+          type
+          items {
+            displayValue
+            value
+            id
+          }
+        }
       }
     }
   }
