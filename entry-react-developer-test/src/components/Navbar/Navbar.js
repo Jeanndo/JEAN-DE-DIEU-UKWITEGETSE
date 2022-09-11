@@ -15,7 +15,7 @@ import {
   CartIcon,
   SwitchAndCartContainer,
 } from "./../styles/Navbar.styled.js";
-import CartOverlay from "./CartOverLay.js";
+import CartOverlay from "./../CartOverLay/CartOverLay.js";
 import LogoImg from "./../../assets/a-logo.png";
 import Cart from "./../../assets/shoppingCart.png";
 import { connect } from "react-redux";

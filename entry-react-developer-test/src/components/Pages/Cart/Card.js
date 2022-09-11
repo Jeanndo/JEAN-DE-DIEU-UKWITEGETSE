@@ -24,6 +24,8 @@ import {
   CartSlidePrevButton,
   CartSlideNextButton,
   ArrowButton,
+  RemoveFromCart,
+  TrushIconImage,
 } from "./../../styles/Cart.styled.js";
 import { connect } from "react-redux";
 import {
@@ -33,6 +35,7 @@ import {
 
 import ArrowRight from "./../../../assets/NextButton.png";
 import ArrowLeft from "./../../../assets/prevButton.png";
+import TrushIcon from "./../../../assets/bin.png";
 
 class Card extends Component {
   constructor(props) {
@@ -131,7 +134,13 @@ class Card extends Component {
               ))}
             </ProductColorBoxContainer>
           </ProductColorContainer>
+          <RemoveFromCart
+            onClick={() => this.props.removeFromCart(this.props.product.id)}
+          >
+            <TrushIconImage src={TrushIcon} alt="trush" />
+          </RemoveFromCart>
         </CartCardLeftSide>
+
         <CartCardRight>
           <CartActionButtonsContainer>
             <CartIncreamentButton onClick={this.handleQuantityIncreament}>

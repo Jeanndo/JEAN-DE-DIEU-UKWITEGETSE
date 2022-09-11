@@ -102,16 +102,9 @@ export const ShowMobileNav = styled.button`
     display: none;
   }
 `;
-export const Switcher = styled.select`
-  color: black;
-  outline: none;
-  border-style: none;
-  cursor: pointer;
-`;
 
 export const SwitchAndCartContainer = styled.div`
   display: flex;
-  gap: 30px;
 `;
 
 export const CartContainer = styled.div`
