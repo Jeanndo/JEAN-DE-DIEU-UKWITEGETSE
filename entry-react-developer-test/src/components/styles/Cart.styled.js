@@ -2,8 +2,7 @@ import styled from "styled-components";
 
 export const CartContainer = styled.div`
   width: 100%;
-  margin-top: 80px;
-  padding: 0px 50px 0px 50px;
+  padding: 80px 5% 0 5%;
   @media (max-width: 425px) {
     padding: 0 50px;
   }
@@ -176,10 +175,14 @@ export const CartIncreamentButton = styled.button`
   }
 `;
 
-export const CartQuantityBox = styled.input`
+export const CartQuantityBox = styled.div`
   width: 100%;
   height: 45px;
-  text-indent: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* text-align: center; */
+  border: 1px solid #1d1f22;
   @media (max-width: 425px) {
     width: 80%;
     height: 30px;

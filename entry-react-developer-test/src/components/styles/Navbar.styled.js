@@ -9,8 +9,7 @@ export const NavbarContainer = styled.nav`
   height: 80px;
   background-color: #fff;
   display: flex;
-  /* flex-direction: column; */
-
+  padding: 0 5%;
   @media (min-width: 700px) {
     height: 80px;
   }
@@ -19,18 +18,12 @@ export const LeftContainer = styled.div`
   flex: 50%;
   display: flex;
   align-items: center;
-  padding-left: 5%;
 `;
 export const RightContainer = styled.div`
   width: 100%;
   flex: 50%;
   display: flex;
   justify-content: space-between;
-  margin-right: 40px;
-  /* @media (max-width: 425px) {
-    justify-content: center;
-    flex: 20%;
-  } */
 `;
 export const NavbarInnerContainer = styled.div`
   width: 100%;

@@ -137,12 +137,7 @@ class Card extends Component {
             <CartIncreamentButton onClick={this.handleQuantityIncreament}>
               +
             </CartIncreamentButton>
-            <CartQuantityBox
-              type="number"
-              value={this.state.input}
-              onChange={this.handleChange}
-              min="1"
-            />
+            <CartQuantityBox>{this.state.input}</CartQuantityBox>
 
             <CartDecreamentButton
               disabled={this.state.input === 0}
@@ -157,26 +152,28 @@ class Card extends Component {
               .map((item) => (
                 <CartProductImage src={item} alt="cart product " key={item} />
               ))}
-            <CartSlideButtonsContainer>
-              <CartSlidePrevButton
-                disabled={this.state.currentIndex === 0 ? true : false}
-                onClick={this.handlePrev}
-              >
-                <ArrowButton src={ArrowLeft} alt="arrow left" />
-              </CartSlidePrevButton>
+            {this.props.product.gallery.length !== 1 && (
+              <CartSlideButtonsContainer>
+                <CartSlidePrevButton
+                  disabled={this.state.currentIndex === 0 ? true : false}
+                  onClick={this.handlePrev}
+                >
+                  <ArrowButton src={ArrowLeft} alt="arrow left" />
+                </CartSlidePrevButton>
 
-              <CartSlideNextButton
-                disabled={
-                  this.state.currentIndex ===
-                  this.props?.product.gallery.length - 1
-                    ? true
-                    : false
-                }
-                onClick={this.handleNext}
-              >
-                <ArrowButton src={ArrowRight} alt="arrow right" />
-              </CartSlideNextButton>
-            </CartSlideButtonsContainer>
+                <CartSlideNextButton
+                  disabled={
+                    this.state.currentIndex ===
+                    this.props?.product.gallery.length - 1
+                      ? true
+                      : false
+                  }
+                  onClick={this.handleNext}
+                >
+                  <ArrowButton src={ArrowRight} alt="arrow right" />
+                </CartSlideNextButton>
+              </CartSlideButtonsContainer>
+            )}
           </CartProductImageContainer>
         </CartCardRight>
       </CartCard>

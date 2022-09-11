@@ -93,7 +93,8 @@ class CartOverlay extends Component {
         price +=
           item.qty *
           item.prices.filter(
-            (price) => price.currency.symbol === this.props.currency.message
+            (price) =>
+              price.currency.symbol === this.props.currency.message.symbol
           )[0].amount;
       }
     });
@@ -120,7 +121,8 @@ class CartOverlay extends Component {
           price +=
             item.qty *
             item.prices.filter(
-              (price) => price.currency.symbol === this.props.currency.message
+              (price) =>
+                price.currency.symbol === this.props.currency.message.symbol
             )[0].amount;
         }
       });
@@ -150,7 +152,8 @@ class CartOverlay extends Component {
           ) : (
             this.props.products.map((product, index) => {
               const filteredPrice = product.prices.filter(
-                (item) => item.currency.symbol === this.props.currency.message
+                (item) =>
+                  item.currency.symbol === this.props.currency.message.symbol
               );
               return (
                 <Card
@@ -166,7 +169,7 @@ class CartOverlay extends Component {
           <TotalCostContainer>
             <TotalLabels>Total</TotalLabels>
             <TotalLabels>
-              {this.props.currency.message}
+              {this.props.currency.message.symbol}
               &nbsp;
               {this.state.totalPrice.toFixed(2)}
             </TotalLabels>
@@ -177,21 +180,21 @@ class CartOverlay extends Component {
                 View Bag
               </CheckoutActionButton>
             </Link>
-            <Link to="/cart">
-              <CheckoutActionButton
-                bgcolor="#5ECE7B"
-                borderColor="#5ECE7B"
-                color="#ffffff"
-              >
-                check out
-              </CheckoutActionButton>
-            </Link>
+
+            <CheckoutActionButton
+              bgcolor="#5ECE7B"
+              borderColor="#5ECE7B"
+              color="#ffffff"
+            >
+              check out
+            </CheckoutActionButton>
           </CheckoutActionButtonContainer>
         </OverlayContainer>
       </Fragment>
     );
   }
 }
+
 const mapStateToProps = (state) => {
   return {
     products: state.shopping.cart,

@@ -99,7 +99,8 @@ class Cart extends Component {
         price +=
           item.qty *
           item.prices.filter(
-            (price) => price.currency.symbol === this.props.currency.message
+            (price) =>
+              price.currency.symbol === this.props.currency.message.symbol
           )[0].amount;
       }
     });
@@ -131,7 +132,8 @@ class Cart extends Component {
           price +=
             item.qty *
             item.prices.filter(
-              (price) => price.currency.symbol === this.props.currency.message
+              (price) =>
+                price.currency.symbol === this.props.currency.message.symbol
             )[0].amount;
         }
       });
@@ -149,7 +151,7 @@ class Cart extends Component {
   render() {
     return (
       <Fragment>
-        <CartContainer>
+        <CartContainer onClick={this.props.closeSwitcher}>
           <CartTitle>CART</CartTitle>
 
           {this.props.products.length === 0 ? (
@@ -157,7 +159,8 @@ class Cart extends Component {
           ) : (
             this.props.products.map((product, index) => {
               const filteredPrice = product.prices.filter(
-                (item) => item.currency.symbol === this.props.currency.message
+                (item) =>
+                  item.currency.symbol === this.props.currency.message.symbol
               );
               return (
                 <CartCard
@@ -176,7 +179,7 @@ class Cart extends Component {
             <CartOrderItemContainer>
               <CartOrderTax>Tax 21%:</CartOrderTax>
               <CartOrderTaxValue>
-                {this.props.currency.message} &nbsp;
+                {this.props.currency.message.symbol} &nbsp;
                 {((this.state.totalPrice * 21) / 100).toFixed(2)}
               </CartOrderTaxValue>
             </CartOrderItemContainer>
@@ -189,7 +192,7 @@ class Cart extends Component {
             <CartOrderItemContainer>
               <CartOrderTotal>Total:</CartOrderTotal>
               <CartOrderTotalValue>
-                {this.props.currency.message}
+                {this.props.currency.message.symbol}
                 &nbsp;
                 {this.state.totalPrice.toFixed(2)}
               </CartOrderTotalValue>
