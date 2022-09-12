@@ -175,46 +175,49 @@ export const RightSideProductSizeContainer = styled.div`
   height: 53px;
 `;
 
-export const RightSideProductSizeTitle = styled.h4`
-  width: 38px;
-  height: 18px;
+export const RightSideProductAttributeName = styled.h4`
   font-family: "Raleway";
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
   line-height: 18px;
-  align-items: center;
-  text-align: center;
   color: #1d1f22;
+  text-transform: uppercase;
 `;
 
-export const RightSideProductSizeBoxContainer = styled.div`
+export const ProductAttributesContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
+
+export const RightSideProductAttributeBoxContainer = styled.div`
   display: flex;
   width: 100%;
   margin-top: 8px;
   margin-bottom: 24px;
 `;
 
-export const ProductSizeBox = styled.div`
-  width: 46px;
+export const ProductAttributeBox = styled.div`
+  width: 70px;
   height: 35px;
   border: 1px solid #1d1f22;
   text-align: center;
-  padding-top: 8px;
-  background-color: ${(props) => (props.index === 1 ? "#000" : "#fff")};
+  padding: 8px;
+  cursor: pointer;
+  background-color: ${(props) => props.color};
   &:not(:last-child) {
     margin-right: 12px;
   }
 `;
-export const ProductSizeLable = styled.label`
-  width: 18px;
-  height: 18px;
+export const ProductAttributeValue = styled.label`
   font-family: "Raleway";
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 18px;
   letter-spacing: 0.05em;
+  cursor: pointer;
   color: ${(props) => (props.index === 1 ? "#fff" : "#1d1f22")};
 `;
 
@@ -235,7 +238,7 @@ export const RightSideProductColorTitle = styled.h4`
   margin-bottom: 10px;
 `;
 
-export const RightSideProductColorBoxContainer = styled.div`
+export const RightSideProductAttributeTwoBoxContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -245,7 +248,7 @@ export const RightSideProductColorBoxContainer = styled.div`
   height: 36px;
 `;
 
-export const RightSideProductColorBox = styled.div`
+export const RightSideProductSecondAttributeBox = styled.div`
   width: 32px;
   height: 32px;
   border: ${(props) => (props.index ? "1px solid #5ece7b" : "")};

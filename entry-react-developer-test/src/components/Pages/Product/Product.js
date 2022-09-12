@@ -4,14 +4,13 @@ import {
   RightSideContainer,
   RightSideProductBrandName,
   RightSideProductName,
-  RightSideProductSizeTitle,
-  RightSideProductSizeBoxContainer,
-  ProductSizeBox,
-  ProductSizeLable,
+  RightSideProductAttributeName,
+  RightSideProductAttributeBoxContainer,
+  ProductAttributeBox,
+  ProductAttributeValue,
   RightSideProductColorContainer,
-  RightSideProductColorTitle,
-  RightSideProductColorBoxContainer,
-  RightSideProductColorBox,
+  RightSideProductAttributeTwoBoxContainer,
+  RightSideProductSecondAttributeBox,
   RightSideProductPriceContainer,
   RightSideProductPriceLabel,
   RightSideProductPriceFigures,
@@ -23,7 +22,9 @@ import {
   LeftSideInnerProductGalleryImage,
   LeftSideInnerMainProductContainer,
   LeftSideInnerMainProductImage,
+  ProductAttributesContainer,
 } from "./../../styles/Product.styled.js";
+import ProductAttributes from "./Attributes.js";
 import { connect } from "react-redux";
 import { addToCart } from "./../../../Redux/Actions/ActionCreators/shoppingAction.js";
 import { getColor } from "./../../../Redux/Actions/ActionCreators/ColorAction.js";
@@ -135,7 +136,7 @@ class Product extends Component {
 
             if (error) console.log(error);
 
-            console.log("single Product", data);
+            console.log("Product Attributes", data.product.attributes);
 
             const filteredPrice = data.product.prices.filter(
               (item) =>
@@ -178,51 +179,30 @@ class Product extends Component {
                   <RightSideProductName>
                     {data?.product?.name}
                   </RightSideProductName>
-                  <RightSideProductSizeTitle>SIZE:</RightSideProductSizeTitle>
-                  <RightSideProductSizeBoxContainer>
-                    {size.map((item, index) => (
-                      <ProductSizeBox key={item.id} index={index}>
-                        <ProductSizeLable index={index}>
-                          {item.size}
-                        </ProductSizeLable>
-                      </ProductSizeBox>
-                    ))}
-                  </RightSideProductSizeBoxContainer>
-                  <RightSideProductColorContainer>
-                    <RightSideProductColorTitle>
-                      COLOR:
-                    </RightSideProductColorTitle>
-                    <RightSideProductColorBoxContainer>
-                      {colors.map((item, index) => (
-                        <RightSideProductColorBox
-                          key={item.id}
-                          bgcolor={item.color}
-                          index={
-                            index === this.state.colorIndex &&
-                            this.state.productId === data.product.id
-                              ? true
-                              : false
-                          }
-                          onClick={() =>
-                            this.props.getColor(
-                              item.color,
-                              index,
-                              data.product.id
-                            )
-                          }
+                  <ProductAttributesContainer>
+                    {data.product.attributes.map((attribute, index) => (
+                      <Fragment>
+                        <RightSideProductAttributeName key={attribute.id}>
+                          {attribute.name}:
+                        </RightSideProductAttributeName>
+                        <ProductAttributes
+                          items={attribute.items}
+                          type={attribute.type}
+                          key={index}
                         />
-                      ))}
-                    </RightSideProductColorBoxContainer>
-                    <RightSideProductPriceContainer>
-                      <RightSideProductPriceLabel>
-                        PRICE:
-                      </RightSideProductPriceLabel>
-                      <RightSideProductPriceFigures>
-                        {currency.symbol}&nbsp;
-                        {amount}
-                      </RightSideProductPriceFigures>
-                    </RightSideProductPriceContainer>
-                  </RightSideProductColorContainer>
+                      </Fragment>
+                    ))}
+                  </ProductAttributesContainer>
+
+                  <RightSideProductPriceContainer>
+                    <RightSideProductPriceLabel>
+                      PRICE:
+                    </RightSideProductPriceLabel>
+                    <RightSideProductPriceFigures>
+                      {currency.symbol}&nbsp;
+                      {amount}
+                    </RightSideProductPriceFigures>
+                  </RightSideProductPriceContainer>
                   <AddToCartButton
                     onClick={() =>
                       this.props.addToCart(data.product.id, data.product)
