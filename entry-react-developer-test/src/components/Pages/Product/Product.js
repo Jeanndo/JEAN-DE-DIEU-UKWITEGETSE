@@ -5,12 +5,6 @@ import {
   RightSideProductBrandName,
   RightSideProductName,
   RightSideProductAttributeName,
-  RightSideProductAttributeBoxContainer,
-  ProductAttributeBox,
-  ProductAttributeValue,
-  RightSideProductColorContainer,
-  RightSideProductAttributeTwoBoxContainer,
-  RightSideProductSecondAttributeBox,
   RightSideProductPriceContainer,
   RightSideProductPriceLabel,
   RightSideProductPriceFigures,
@@ -61,40 +55,6 @@ const SINGLE_PRODUCT = gql`
     }
   }
 `;
-
-const size = [
-  {
-    id: 1,
-    size: "XS",
-  },
-  {
-    id: 2,
-    size: "S",
-  },
-  {
-    id: 3,
-    size: "M",
-  },
-  {
-    id: 4,
-    size: "L",
-  },
-];
-
-const colors = [
-  {
-    id: 1,
-    color: "#D3D2D5",
-  },
-  {
-    id: 2,
-    color: "#2B2B2B",
-  },
-  {
-    id: 3,
-    color: "#0F6450",
-  },
-];
 
 class Product extends Component {
   constructor(props) {
@@ -189,6 +149,7 @@ class Product extends Component {
                           items={attribute.items}
                           type={attribute.type}
                           key={index}
+                          productId={data?.product?.id}
                         />
                       </Fragment>
                     ))}
