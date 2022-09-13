@@ -19,6 +19,7 @@ export const shopping = (state = initialState, action) => {
       );
 
       /*=========check if the item is in the cart already=========*/
+
       const inCart = state.cart.find((product) =>
         product.id === action.payload.id ? true : false
       );
@@ -48,11 +49,28 @@ export const shopping = (state = initialState, action) => {
             : product
         ),
       };
+
+    case type.GET_ATTRIBUTE_VALUE:
+      console.log("reducers", action.payload.attributeId);
+      console.log("reducers", state.cart);
+
+      return {
+        ...state,
+        cart: state.cart.map((product) =>
+          product.attributes.fileter(
+            (attribute) => attribute.id === action.payload.attributeId
+          )
+            ? { ...product, attribute: action.payload.attributeId }
+            : product
+        ),
+      };
+
     case type.LOAD_CURRENT_ITEM:
       return {
         ...state,
         currentItem: action.payload,
       };
+
     default:
       return state;
   }

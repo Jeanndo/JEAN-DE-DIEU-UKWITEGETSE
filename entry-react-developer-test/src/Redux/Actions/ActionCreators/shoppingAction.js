@@ -29,6 +29,17 @@ export const adjustQuantity = (productId, value) => async (dispatch) => {
   });
 };
 
+export const getAttributeValue = (productId, attribute) => async (dispatch) => {
+  console.table("attributes", productId, attribute);
+  return dispatch({
+    type: type.GET_ATTRIBUTE_VALUE,
+    payload: {
+      id: productId,
+      attributeId: attribute,
+    },
+  });
+};
+
 export const loadCurrentProduct = (product) => async (dispatch) => {
   return dispatch({
     type: type.LOAD_CURRENT_ITEM,

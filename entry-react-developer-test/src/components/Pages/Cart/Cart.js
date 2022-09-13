@@ -149,6 +149,7 @@ class Cart extends Component {
   }
 
   render() {
+    console.log("cart", this.props.products);
     return (
       <Fragment>
         <CartContainer onClick={this.props.closeSwitcher}>

@@ -5,6 +5,9 @@ import {
   ProductAttributeValue,
 } from "./../../styles/Product.styled.js";
 
+import { getAttributeValue } from "./../../../Redux/Actions/ActionCreators/shoppingAction.js";
+import { connect } from "react-redux";
+
 class Attributes extends Component {
   constructor(props) {
     super();
@@ -19,7 +22,11 @@ class Attributes extends Component {
               key={item.id}
               color={this.props.type === "swatch" ? item.value : ""}
             >
-              <ProductAttributeValue>
+              <ProductAttributeValue
+                onClick={() =>
+                  this.props.getAttributeValue(item.id, this.props.productId)
+                }
+              >
                 {this.props.type === "swatch" ? "" : item.value}
               </ProductAttributeValue>
             </ProductAttributeBox>
@@ -30,4 +37,11 @@ class Attributes extends Component {
   }
 }
 
-export default Attributes;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getAttributeValue: (id, attributeId) =>
+      dispatch(getAttributeValue(id, attributeId)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Attributes);
