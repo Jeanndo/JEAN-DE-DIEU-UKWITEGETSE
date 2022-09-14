@@ -99,7 +99,7 @@ class Card extends Component {
           <ProductAttributesContainer>
             {this.props.attributes.map((attribute, index) => (
               <Fragment>
-                <RightSideProductAttributeName>
+                <RightSideProductAttributeName key={attribute.id}>
                   {attribute.name}:
                 </RightSideProductAttributeName>
                 <ProductAttributes

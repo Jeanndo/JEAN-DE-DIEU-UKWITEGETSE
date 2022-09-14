@@ -14,54 +14,6 @@ import { Link } from "react-router-dom";
 import Card from "./OverLayCard.js";
 import { connect } from "react-redux";
 
-const size1 = [
-  {
-    id: 1,
-    size: "XS",
-  },
-  {
-    id: 2,
-    size: "S",
-  },
-  {
-    id: 3,
-    size: "M",
-  },
-  {
-    id: 4,
-    size: "L",
-  },
-];
-
-const cardOneColors = [
-  {
-    id: 1,
-    color: "#D3D2D5",
-  },
-  {
-    id: 2,
-    color: "#2B2B2B",
-  },
-  {
-    id: 3,
-    color: "#0F6450",
-  },
-];
-
-const cardTwoColors = [
-  {
-    id: 1,
-    color: "#1D1F22",
-  },
-  {
-    id: 2,
-    color: "#15A4C3",
-  },
-  {
-    id: 3,
-    color: "#EA8120",
-  },
-];
 class CartOverlay extends Component {
   constructor(props) {
     super();
@@ -149,8 +101,6 @@ class CartOverlay extends Component {
                   key={product.id}
                   price={filteredPrice[0]}
                   product={product}
-                  size={size1}
-                  colors={index % 2 === 0 ? cardTwoColors : cardOneColors}
                 />
               );
             })

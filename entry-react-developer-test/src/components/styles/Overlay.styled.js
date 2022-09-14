@@ -92,63 +92,58 @@ export const ProductPrice = styled.h4`
   color: #1d1f22;
 `;
 
-export const ProductSizeTitle = styled.h5`
+/***Attributes styles**/
+export const ProductAttributesContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 30px;
+`;
+export const ProductAttributeName = styled.h4`
   font-family: "Raleway";
   font-style: normal;
-  font-weight: 200;
+  font-weight: 700;
   font-size: 14px;
   color: #1d1f22;
-  margin-top: 10px;
-`;
-export const ProductSizeBoxContainer = styled.div`
-  display: flex;
-  width: 100%;
-  margin-top: 8px;
-  margin-bottom: 10px;
-  gap: 5px;
+  text-transform: uppercase;
 `;
 
-export const ProductSizeBox = styled.div`
-  width: 15%;
+export const ProductAttributeBoxContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  width: 100%;
+  margin-top: 8px;
+  margin-bottom: 24px;
+`;
+
+export const ProductAttributeBox = styled.div`
+  width: max-content;
   height: 20px;
   border: 1px solid #1d1f22;
   text-align: center;
-  background-color: ${(props) => (props.index === 1 ? "#000" : "#fff")};
+  /* padding: 8px; */
+  cursor: pointer;
+  background-color: ${(props) => props.color};
+  border: ${(props) =>
+    props.selected ? "3px solid #5ECE7B" : "2px solid black"};
+  &:not(:last-child) {
+    margin-right: 12px;
+  }
 `;
 
-export const ProductSizeLable = styled.label`
+export const ProductAttributeValue = styled.label`
   font-family: "Raleway";
   font-style: normal;
   font-weight: 400;
-  font-size: 13px;
+  font-size: 16px;
+  line-height: 18px;
+  letter-spacing: 0.05em;
+  cursor: pointer;
   color: ${(props) => (props.index === 1 ? "#fff" : "#1d1f22")};
 `;
-export const ProductColorContainer = styled.div`
-  width: 100%;
-`;
-export const ProductColorTitle = styled.h4`
-  font-family: "Raleway";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 13px;
-  text-transform: uppercase;
-  color: #1d1f22;
-  margin-bottom: 10px;
-`;
 
-export const ProductColorBoxContainer = styled.div`
-  display: flex;
-  padding: 0px;
-  gap: 8px;
-  width: 116px;
-  height: 36px;
-`;
-export const ProductColorBox = styled.div`
-  width: 16px;
-  height: 16px;
-  border: ${(props) => (props.index === 0 ? "1px solid #5ECE7B" : "")};
-  background: ${(props) => props.bgcolor};
-`;
+/**end of Attributes styles**/
 
 // RIGHT SIDE
 
@@ -211,7 +206,7 @@ export const TotalCostContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  margin-top: 32px;
+  margin-top: 100px;
 `;
 
 export const TotalLabels = styled.span`
@@ -310,4 +305,5 @@ export const TrushIconImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: contain;
+  margin-bottom: 20px;
 `;

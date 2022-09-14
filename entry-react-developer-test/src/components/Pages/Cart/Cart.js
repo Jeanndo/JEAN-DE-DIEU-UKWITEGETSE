@@ -17,40 +17,6 @@ import CartCard from "./Card.js";
 
 import { connect } from "react-redux";
 
-const size1 = [
-  {
-    id: 1,
-    size: "XS",
-  },
-  {
-    id: 2,
-    size: "S",
-  },
-  {
-    id: 3,
-    size: "M",
-  },
-  {
-    id: 4,
-    size: "L",
-  },
-];
-
-const cardOneColors = [
-  {
-    id: 1,
-    color: "#D3D2D5",
-  },
-  {
-    id: 2,
-    color: "#2B2B2B",
-  },
-  {
-    id: 3,
-    color: "#0F6450",
-  },
-];
-
 class Cart extends Component {
   constructor(props) {
     super();
@@ -143,10 +109,6 @@ class Cart extends Component {
                   key={product.id}
                   price={filteredPrice[0]}
                   product={product}
-                  colors={cardOneColors}
-                  colorIndex={this.state.colorIndex}
-                  productId={this.state.productId}
-                  size={size1}
                   attributes={product.attributes}
                 />
               );
