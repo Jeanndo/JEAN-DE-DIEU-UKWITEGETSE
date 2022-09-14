@@ -71,74 +71,56 @@ export const ProductPriceFigures = styled.h4`
   align-items: center;
   color: #1d1f22;
 `;
-export const ProductSizeTitle = styled.h4`
+
+/**Attributes styles***/
+export const ProductAttributesContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 30px;
+`;
+export const RightSideProductAttributeName = styled.h4`
   font-family: "Raleway";
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
   line-height: 18px;
   color: #1d1f22;
-  margin-top: 20px;
+  text-transform: uppercase;
 `;
-export const ProductSizeBoxContainer = styled.div`
+export const RightSideProductAttributeBoxContainer = styled.div`
   display: flex;
+  gap: 20px;
   width: 100%;
   margin-top: 8px;
   margin-bottom: 24px;
-  @media (min-width: 320px) {
-    width: 80%;
-  }
 `;
-
-export const ProductSizeBox = styled.div`
-  width: 46px;
+export const ProductAttributeBox = styled.div`
+  width: 70px;
   height: 35px;
   border: 1px solid #1d1f22;
   text-align: center;
-  padding-top: 6px;
-  background-color: ${(props) => (props.index === 1 ? "#1d1f22" : "#fff")};
+  padding: 8px;
+  cursor: pointer;
+  background-color: ${(props) => props.color};
+  border: ${(props) =>
+    props.selected ? "3px solid #5ECE7B" : "2px solid black"};
   &:not(:last-child) {
     margin-right: 12px;
   }
 `;
-export const ProductSizeLable = styled.label`
+export const ProductAttributeValue = styled.label`
   font-family: "Raleway";
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 18px;
   letter-spacing: 0.05em;
+  cursor: pointer;
   color: ${(props) => (props.index === 1 ? "#fff" : "#1d1f22")};
 `;
-export const ProductColorContainer = styled.div`
-  width: 100%;
-`;
-export const ProductColorTitle = styled.h4`
-  font-family: "Raleway";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 18px;
-  color: #1d1f22;
-  margin-bottom: 10px;
-`;
 
-export const ProductColorBoxContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0px;
-  gap: 8px;
-  width: 116px;
-  height: 36px;
-`;
-
-export const ProductColorBox = styled.div`
-  width: 32px;
-  height: 32px;
-  border: ${(props) => (props.index ? "1px solid #5ece7b" : "")};
-  background: ${(props) => props.bgcolor};
-`;
+/**end of attributes styles */
 
 export const CartCardRight = styled.div`
   display: flex;
@@ -261,6 +243,7 @@ export const CartOrderCard = styled.div`
   width: 100%;
   padding: 32px 0px;
   border-top: 2px solid #e5e5e5;
+  margin-top: 100px;
 `;
 export const CartOrderItemContainer = styled.div`
   width: 100%;

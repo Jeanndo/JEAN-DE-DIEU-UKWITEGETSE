@@ -50,21 +50,6 @@ export const shopping = (state = initialState, action) => {
         ),
       };
 
-    case type.GET_ATTRIBUTE_VALUE:
-      console.log("reducers", action.payload.attributeId);
-      console.log("reducers", state.cart);
-
-      return {
-        ...state,
-        cart: state.cart.map((product) =>
-          product.attributes.fileter(
-            (attribute) => attribute.id === action.payload.attributeId
-          )
-            ? { ...product, attribute: action.payload.attributeId }
-            : product
-        ),
-      };
-
     case type.LOAD_CURRENT_ITEM:
       return {
         ...state,

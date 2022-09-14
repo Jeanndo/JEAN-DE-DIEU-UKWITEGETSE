@@ -170,11 +170,6 @@ export const RightSideProductName = styled.h2`
   margin-bottom: 43px;
 `;
 
-export const RightSideProductSizeContainer = styled.div`
-  width: 100%;
-  height: 53px;
-`;
-
 export const RightSideProductAttributeName = styled.h4`
   font-family: "Raleway";
   font-style: normal;
@@ -193,6 +188,7 @@ export const ProductAttributesContainer = styled.div`
 
 export const RightSideProductAttributeBoxContainer = styled.div`
   display: flex;
+  gap: 20px;
   width: 100%;
   margin-top: 8px;
   margin-bottom: 24px;
@@ -206,6 +202,8 @@ export const ProductAttributeBox = styled.div`
   padding: 8px;
   cursor: pointer;
   background-color: ${(props) => props.color};
+  border: ${(props) =>
+    props.selected ? "3px solid #5ECE7B" : "2px solid black"};
   &:not(:last-child) {
     margin-right: 12px;
   }

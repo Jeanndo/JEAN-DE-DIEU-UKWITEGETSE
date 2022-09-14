@@ -14,6 +14,7 @@ import {
   EmptyCart,
 } from "./../../styles/Cart.styled.js";
 import CartCard from "./Card.js";
+
 import { connect } from "react-redux";
 
 const size1 = [
@@ -35,16 +36,6 @@ const size1 = [
   },
 ];
 
-// const size2 = [
-//   {
-//     id: 1,
-//     size: "S",
-//   },
-//   {
-//     id: 2,
-//     size: "M",
-//   },
-// ];
 const cardOneColors = [
   {
     id: 1,
@@ -59,21 +50,6 @@ const cardOneColors = [
     color: "#0F6450",
   },
 ];
-
-// const cardTwoColors = [
-//   {
-//     id: 1,
-//     color: "#1D1F22",
-//   },
-//   {
-//     id: 2,
-//     color: "#15A4C3",
-//   },
-//   {
-//     id: 3,
-//     color: "#EA8120",
-//   },
-// ];
 
 class Cart extends Component {
   constructor(props) {
@@ -149,7 +125,6 @@ class Cart extends Component {
   }
 
   render() {
-    console.log("cart", this.props.products);
     return (
       <Fragment>
         <CartContainer onClick={this.props.closeSwitcher}>
@@ -172,6 +147,7 @@ class Cart extends Component {
                   colorIndex={this.state.colorIndex}
                   productId={this.state.productId}
                   size={size1}
+                  attributes={product.attributes}
                 />
               );
             })

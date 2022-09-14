@@ -33,17 +33,6 @@ const size1 = [
   },
 ];
 
-// const size2 = [
-//   {
-//     id: 1,
-//     size: "S",
-//   },
-//   {
-//     id: 2,
-//     size: "M",
-//   },
-// ];
-
 const cardOneColors = [
   {
     id: 1,
@@ -140,7 +129,7 @@ class CartOverlay extends Component {
   render() {
     return (
       <Fragment>
-        <OverlayShow onClick={this.props.disableCart}></OverlayShow>
+        <OverlayShow onClick={this.props.hideCart}></OverlayShow>
         <OverlayContainer>
           <CartTitle>
             My Bag,
@@ -176,7 +165,11 @@ class CartOverlay extends Component {
           </TotalCostContainer>
           <CheckoutActionButtonContainer>
             <Link to="/cart">
-              <CheckoutActionButton bgcolor="#ffffff" borderColor="#000000">
+              <CheckoutActionButton
+                bgcolor="#ffffff"
+                borderColor="#000000"
+                onClick={this.props.hideCart}
+              >
                 View Bag
               </CheckoutActionButton>
             </Link>

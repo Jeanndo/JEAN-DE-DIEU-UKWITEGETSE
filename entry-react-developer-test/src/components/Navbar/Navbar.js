@@ -97,7 +97,7 @@ class Navbar extends Component {
             return (
               <NavbarContainer extendedNavbar={this.state.extendNavbar}>
                 {this.state.showCart && (
-                  <CartOverlay disableCart={this.handleShowCart} />
+                  <CartOverlay hideCart={this.handleShowCart} />
                 )}
                 <NavbarInnerContainer>
                   <LeftContainer>
