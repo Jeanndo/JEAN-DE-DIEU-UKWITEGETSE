@@ -3,9 +3,7 @@ import {
   RightSideProductAttributeBoxContainer,
   ProductAttributeBox,
   ProductAttributeValue,
-} from "./../../styles/Product.styled.js";
-
-import { getAttributeValue } from "./../../../Redux/Actions/ActionCreators/AttributeAction.js";
+} from "./../../styles/Cart.styled.js";
 import { connect } from "react-redux";
 
 class Attributes extends Component {
@@ -14,6 +12,8 @@ class Attributes extends Component {
   }
 
   render() {
+    console.log("cart attributes", this.props.attributes);
+
     return (
       <Fragment>
         <RightSideProductAttributeBoxContainer>
@@ -27,9 +27,6 @@ class Attributes extends Component {
                   ? true
                   : false
               )}
-              onClick={() =>
-                this.props.getAttributeValue(this.props.productId, item.value)
-              }
             >
               <ProductAttributeValue>
                 {this.props.type === "swatch" ? "" : item.value}
@@ -42,17 +39,10 @@ class Attributes extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getAttributeValue: (id, attribute) =>
-      dispatch(getAttributeValue(id, attribute)),
-  };
-};
-
 const mapStateToProps = (state) => {
   return {
     attributes: state.attributeReducer.attributes,
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Attributes);
+export default connect(mapStateToProps)(Attributes);

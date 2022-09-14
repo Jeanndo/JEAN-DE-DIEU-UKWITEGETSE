@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import {
   CartCard,
   CartCardLeftSide,
@@ -6,14 +6,6 @@ import {
   ProductBrandName,
   ProductName,
   ProductPriceFigures,
-  ProductSizeTitle,
-  ProductSizeBoxContainer,
-  ProductSizeBox,
-  ProductSizeLable,
-  ProductColorContainer,
-  ProductColorTitle,
-  ProductColorBoxContainer,
-  ProductColorBox,
   CartActionButtonsContainer,
   CartProductImageContainer,
   CartIncreamentButton,
@@ -26,6 +18,8 @@ import {
   ArrowButton,
   RemoveFromCart,
   TrushIconImage,
+  ProductAttributesContainer,
+  RightSideProductAttributeName,
 } from "./../../styles/Cart.styled.js";
 import { connect } from "react-redux";
 import {
@@ -36,6 +30,7 @@ import {
 import ArrowRight from "./../../../assets/NextButton.png";
 import ArrowLeft from "./../../../assets/prevButton.png";
 import TrushIcon from "./../../../assets/bin.png";
+import ProductAttributes from "./Attributes.js";
 
 class Card extends Component {
   constructor(props) {
@@ -100,40 +95,22 @@ class Card extends Component {
             {this.props.price.currency.symbol}
             {this.props.price.amount}
           </ProductPriceFigures>
-          <ProductSizeTitle>SIZE:</ProductSizeTitle>
-          <ProductSizeBoxContainer>
-            {this.props.size.map((item, index) => (
-              <ProductSizeBox
-                key={item.id}
-                size={item.size === "S" ? "S" : ""}
-                index={index}
-              >
-                <ProductSizeLable
-                  size={item.size === "S" ? "S" : ""}
-                  index={index}
-                >
-                  {item.size}
-                </ProductSizeLable>
-              </ProductSizeBox>
-            ))}
-          </ProductSizeBoxContainer>
-          <ProductColorContainer>
-            <ProductColorTitle>COLOR:</ProductColorTitle>
-            <ProductColorBoxContainer>
-              {this.props.colors.map((item, index) => (
-                <ProductColorBox
-                  key={item.id}
-                  bgcolor={item.color}
-                  index={
-                    index === this.props.colorIndex &&
-                    this.props.product.id === this.props.productId
-                      ? true
-                      : false
-                  }
+
+          <ProductAttributesContainer>
+            {this.props.attributes.map((attribute, index) => (
+              <Fragment>
+                <RightSideProductAttributeName>
+                  {attribute.name}:
+                </RightSideProductAttributeName>
+                <ProductAttributes
+                  items={attribute.items}
+                  type={attribute.type}
+                  key={index}
+                  productId={this.props.product.id}
                 />
-              ))}
-            </ProductColorBoxContainer>
-          </ProductColorContainer>
+              </Fragment>
+            ))}
+          </ProductAttributesContainer>
           <RemoveFromCart
             onClick={() => this.props.removeFromCart(this.props.product.id)}
           >
