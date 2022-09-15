@@ -14,7 +14,6 @@ export const OverlayShow = styled.div`
 `;
 
 export const OverlayContainer = styled.div`
-  justify-content: center;
   padding: 32px 16px;
   position: absolute;
   width: 325px;
@@ -67,7 +66,7 @@ export const CardLeftSide = styled.div`
 export const ProductBrandName = styled.h4`
   font-family: "Raleway";
   font-style: normal;
-  font-weight: 200;
+  font-weight: 300;
   font-size: 16px;
   align-items: center;
   color: #1d1f22;
@@ -76,7 +75,7 @@ export const ProductBrandName = styled.h4`
 export const ProductName = styled.h5`
   font-family: "Raleway";
   font-style: normal;
-  font-weight: 100;
+  font-weight: 300;
   font-size: 16px;
   align-items: center;
   color: #1d1f22;
@@ -89,10 +88,9 @@ export const ProductPrice = styled.h4`
   font-weight: 400;
   font-size: 16px;
   align-items: center;
-  color: #1d1f22;
+  color: #1d1f22; ;
 `;
 
-/***Attributes styles**/
 export const ProductAttributesContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -105,6 +103,7 @@ export const ProductAttributeName = styled.h4`
   font-weight: 700;
   font-size: 14px;
   color: #1d1f22;
+
   text-transform: uppercase;
 `;
 
@@ -118,18 +117,14 @@ export const ProductAttributeBoxContainer = styled.div`
 `;
 
 export const ProductAttributeBox = styled.div`
-  width: max-content;
-  height: 20px;
+  width: 50px;
+  height: 25px;
   border: 1px solid #1d1f22;
   text-align: center;
-  /* padding: 8px; */
   cursor: pointer;
   background-color: ${(props) => props.color};
   border: ${(props) =>
-    props.selected ? "3px solid #5ECE7B" : "2px solid black"};
-  &:not(:last-child) {
-    margin-right: 12px;
-  }
+    props.selected ? "1px solid #5ECE7B" : "1px solid black"};
 `;
 
 export const ProductAttributeValue = styled.label`
@@ -142,8 +137,6 @@ export const ProductAttributeValue = styled.label`
   cursor: pointer;
   color: ${(props) => (props.index === 1 ? "#fff" : "#1d1f22")};
 `;
-
-/**end of Attributes styles**/
 
 // RIGHT SIDE
 
@@ -206,7 +199,7 @@ export const TotalCostContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  margin-top: 100px;
+  margin-top: 32px;
 `;
 
 export const TotalLabels = styled.span`
@@ -218,16 +211,22 @@ export const TotalLabels = styled.span`
   color: #1d1f22;
 `;
 
+export const CheckoutContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
+
 export const CheckoutActionButtonContainer = styled.div`
   width: 100%;
   display: flex;
+  gap: 20px;
   justify-content: space-between;
-  margin-top: 32px;
 `;
 export const CheckoutActionButton = styled.button`
   text-align: center;
-  padding: 16px 32px;
-  /* width: 50%; */
+  /* padding: 16px 32px; */
+  width: 120px;
   height: 43px;
   background: ${(props) => props.bgcolor};
   color: ${(props) => props.color};
@@ -269,7 +268,7 @@ export const CartSlideButtonsContainer = styled.div`
 export const CartSlideNextButton = styled.button`
   width: 18px;
   height: 17.98px;
-  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
+  cursor: ${(props) => (props.disabled ? "default" : "pointer")};
   background: rgba(0, 0, 0, 0.73);
   color: #fff;
   border-style: none;
@@ -279,7 +278,7 @@ export const CartSlideNextButton = styled.button`
 export const CartSlidePrevButton = styled.button`
   width: 18px;
   height: 17.98px;
-  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
+  cursor: ${(props) => (props.disabled ? "default" : "pointer")};
   background: rgba(0, 0, 0, 0.73);
   color: #fff;
   border-style: none;

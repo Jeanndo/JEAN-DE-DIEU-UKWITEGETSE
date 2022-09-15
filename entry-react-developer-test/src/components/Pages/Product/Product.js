@@ -21,7 +21,6 @@ import {
 import ProductAttributes from "./Attributes.js";
 import { connect } from "react-redux";
 import { addToCart } from "./../../../Redux/Actions/ActionCreators/shoppingAction.js";
-import { getColor } from "./../../../Redux/Actions/ActionCreators/ColorAction.js";
 import gql from "graphql-tag";
 import { Query } from "react-apollo";
 
@@ -64,9 +63,6 @@ class Product extends Component {
       isAll: true,
       isClothes: false,
       isTech: false,
-      background: "#fff",
-      colorIndex: props.color.message.index,
-      productId: props.color.message.prodId,
     };
   }
 
@@ -74,16 +70,6 @@ class Product extends Component {
     this.setState({ productIndex: index });
   };
 
-  handleBackgroundColor = (color) => {
-    this.setState({ background: color });
-  };
-
-  componentDidMount() {
-    this.setState({
-      colorIndex: this.props.color.message.index,
-      productId: this.props.color.message.prodId,
-    });
-  }
   render() {
     return (
       <Fragment>
@@ -95,8 +81,6 @@ class Product extends Component {
             if (loading) return <h1>Loading...</h1>;
 
             if (error) console.log(error);
-
-            console.log("Product Attributes", data.product.attributes);
 
             const filteredPrice = data.product.prices.filter(
               (item) =>
@@ -118,13 +102,7 @@ class Product extends Component {
                         />
                       ))}
                     </LeftSideInnerProductGallery>
-                    <LeftSideInnerMainProductContainer
-                      bgcolor={
-                        !this.props.color.message.color
-                          ? "#D3D2D5"
-                          : this.props.color.message.color
-                      }
-                    >
+                    <LeftSideInnerMainProductContainer>
                       <LeftSideInnerMainProductImage
                         src={data?.product?.gallery[this.state.productIndex]}
                         alt="main product image"
@@ -186,15 +164,13 @@ class Product extends Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     addToCart: (id, product) => dispatch(addToCart(id, product)),
-    getColor: (color, index, prodId) =>
-      dispatch(getColor(color, index, prodId)),
   };
 };
 
-const mapStateToProps = ({ CurrencyReducer, ColorReducer }) => {
+const mapStateToProps = ({ CurrencyReducer }) => {
   const { currency } = CurrencyReducer;
-  const { color } = ColorReducer;
-  return { currency, color };
+
+  return { currency };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Product);

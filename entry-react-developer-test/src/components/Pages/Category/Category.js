@@ -101,10 +101,12 @@ class Category extends Component {
           {({ loading, data, error }) => {
             if (loading) return <h1>Loading ...</h1>;
             if (error) console.log(error);
+
             const filteredData = data.categories.filter(
               (category) =>
                 category.name === this.props.categoryName.message.category
             );
+
             return (
               <>
                 <CategoryContainer onClick={this.props.closeSwitcher}>
@@ -127,15 +129,16 @@ class Category extends Component {
                               alt={product.name}
                             />
                           </Link>
-                          {product.inStock && (
-                            <CardCartIcon
-                              src={CartIcon}
-                              alt="cart icon"
-                              onClick={() =>
-                                this.props.addToCart(product.id, product)
-                              }
-                            />
-                          )}
+                          {product.inStock &&
+                            product.attributes.length !== 0 && (
+                              <CardCartIcon
+                                src={CartIcon}
+                                alt="cart icon"
+                                onClick={() =>
+                                  this.props.addToCart(product.id, product)
+                                }
+                              />
+                            )}
                           <CardContent>
                             <CardContentTitle>
                               {product.brand} &nbsp;

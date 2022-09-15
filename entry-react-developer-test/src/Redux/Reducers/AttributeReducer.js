@@ -6,7 +6,7 @@ const initialState = {
 
 export const attributeReducer = (state = initialState, action) => {
   switch (action.type) {
-    case type.GET_ATTRIBUTE_VALUE_SUCCESS:
+    case type.GET_ATTRIBUTE_VALUE:
       const isInAttribute = state.attributes.find((attribute) =>
         attribute === action.payload.attribute ? true : false
       );

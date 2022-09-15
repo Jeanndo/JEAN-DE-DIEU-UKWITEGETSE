@@ -104,7 +104,7 @@ export const ProductAttributeBox = styled.div`
   cursor: pointer;
   background-color: ${(props) => props.color};
   border: ${(props) =>
-    props.selected ? "3px solid #5ECE7B" : "2px solid black"};
+    props.selected ? "1px solid #5ECE7B" : "1px solid black"};
   &:not(:last-child) {
     margin-right: 12px;
   }
@@ -216,7 +216,7 @@ export const CartSlideButtonsContainer = styled.div`
 export const CartSlideNextButton = styled.button`
   width: 18px;
   height: 17.98px;
-  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
+  cursor: ${(props) => (props.disabled ? "default" : "pointer")};
   background: rgba(0, 0, 0, 0.73);
   color: #fff;
   border-style: none;
@@ -226,7 +226,7 @@ export const CartSlideNextButton = styled.button`
 export const CartSlidePrevButton = styled.button`
   width: 18px;
   height: 17.98px;
-  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
+  cursor: ${(props) => (props.disabled ? "default" : "pointer")};
   background: rgba(0, 0, 0, 0.73);
   color: #fff;
   border-style: none;
