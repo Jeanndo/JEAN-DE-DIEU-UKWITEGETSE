@@ -9,6 +9,7 @@ import {
   CheckoutActionButtonContainer,
   CheckoutActionButton,
   EmptyCart,
+  CheckoutContainer,
 } from "./../styles/Overlay.styled.js";
 import { Link } from "react-router-dom";
 import Card from "./OverLayCard.js";
@@ -105,33 +106,35 @@ class CartOverlay extends Component {
               );
             })
           )}
-          <TotalCostContainer>
-            <TotalLabels>Total</TotalLabels>
-            <TotalLabels>
-              {this.props.currency.message.symbol}
-              &nbsp;
-              {this.state.totalPrice.toFixed(2)}
-            </TotalLabels>
-          </TotalCostContainer>
-          <CheckoutActionButtonContainer>
-            <Link to="/cart">
-              <CheckoutActionButton
-                bgcolor="#ffffff"
-                borderColor="#000000"
-                onClick={this.props.hideCart}
-              >
-                View Bag
-              </CheckoutActionButton>
-            </Link>
+          <CheckoutContainer>
+            <TotalCostContainer>
+              <TotalLabels>Total</TotalLabels>
+              <TotalLabels>
+                {this.props.currency.message.symbol}
+                &nbsp;
+                {this.state.totalPrice.toFixed(2)}
+              </TotalLabels>
+            </TotalCostContainer>
+            <CheckoutActionButtonContainer>
+              <Link to="/cart">
+                <CheckoutActionButton
+                  bgcolor="#ffffff"
+                  borderColor="#000000"
+                  onClick={this.props.hideCart}
+                >
+                  View Bag
+                </CheckoutActionButton>
+              </Link>
 
-            <CheckoutActionButton
-              bgcolor="#5ECE7B"
-              borderColor="#5ECE7B"
-              color="#ffffff"
-            >
-              check out
-            </CheckoutActionButton>
-          </CheckoutActionButtonContainer>
+              <CheckoutActionButton
+                bgcolor="#5ECE7B"
+                borderColor="#5ECE7B"
+                color="#ffffff"
+              >
+                check out
+              </CheckoutActionButton>
+            </CheckoutActionButtonContainer>
+          </CheckoutContainer>
         </OverlayContainer>
       </Fragment>
     );

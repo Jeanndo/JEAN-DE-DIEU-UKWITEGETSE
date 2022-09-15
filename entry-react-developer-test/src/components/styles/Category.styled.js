@@ -54,7 +54,7 @@ export const ProductCard = styled.div`
   width: 446px;
   height: 444px;
   opacity: ${(props) => (props.inStock ? 1 : 0.5)};
-  cursor: ${(props) => (props.inStock ? "pointer" : "not-allowed")};
+  cursor: ${(props) => (props.inStock ? "pointer" : "default")};
 
   &:hover {
     box-shadow: ${(props) =>

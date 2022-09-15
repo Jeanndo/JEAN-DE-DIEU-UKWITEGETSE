@@ -118,7 +118,6 @@ export const LeftSideInnerMainProductContainer = styled.div`
   width: 100%;
   max-width: 810px;
   height: 511px;
-  background: ${(props) => props.bgcolor};
   @media (max-width: 425px) {
     height: 300px;
   }
@@ -203,7 +202,7 @@ export const ProductAttributeBox = styled.div`
   cursor: pointer;
   background-color: ${(props) => props.color};
   border: ${(props) =>
-    props.selected ? "3px solid #5ECE7B" : "2px solid black"};
+    props.selected ? "1px solid #5ECE7B" : "1px solid black"};
   &:not(:last-child) {
     margin-right: 12px;
   }
@@ -216,7 +215,6 @@ export const ProductAttributeValue = styled.label`
   line-height: 18px;
   letter-spacing: 0.05em;
   cursor: pointer;
-  color: ${(props) => (props.index === 1 ? "#fff" : "#1d1f22")};
 `;
 
 export const RightSideProductColorContainer = styled.div`

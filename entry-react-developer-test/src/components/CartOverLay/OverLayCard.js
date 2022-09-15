@@ -16,8 +16,6 @@ import {
   CartSlideNextButton,
   CartSlidePrevButton,
   ArrowButton,
-  RemoveFromCart,
-  TrushIconImage,
   ProductAttributesContainer,
   ProductAttributeName,
 } from "./../styles/Overlay.styled.js";
@@ -28,7 +26,6 @@ import {
 } from "./../../Redux/Actions/ActionCreators/shoppingAction.js";
 import ArrowRight from "./../../assets/NextButton.png";
 import ArrowLeft from "./../../assets/prevButton.png";
-import TrushIcon from "./../../assets/bin.png";
 import ProductAttributes from "./Attributes.js";
 
 class Card extends Component {
@@ -101,11 +98,6 @@ class Card extends Component {
               </Fragment>
             ))}
           </ProductAttributesContainer>
-          <RemoveFromCart
-            onClick={() => this.props.removeFromCart(this.props.product.id)}
-          >
-            <TrushIconImage src={TrushIcon} alt="trush" />
-          </RemoveFromCart>
         </CardLeftSide>
         <CardRightSide>
           <CartActionButtonsContainer>
