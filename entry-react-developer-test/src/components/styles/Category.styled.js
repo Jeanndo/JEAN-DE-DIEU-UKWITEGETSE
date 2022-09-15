@@ -51,7 +51,7 @@ export const ProductCard = styled.div`
   flex-direction: column;
   padding: 0;
   background: #fff;
-  width: 446px;
+  width: 386px;
   height: 444px;
   opacity: ${(props) => (props.inStock ? 1 : 0.5)};
   cursor: ${(props) => (props.inStock ? "pointer" : "default")};
@@ -133,26 +133,6 @@ export const OutOfStockText = styled.h4`
   text-align: center;
   text-transform: uppercase;
   color: #000; ;
-`;
-export const ProductPagination = styled.div`
-  margin-top: 50px;
-`;
-
-export const PaginationContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-export const PaginationActionButton = styled.button`
-  position: absolute;
-  border: none;
-  background: #000;
-  color: #fff;
-  width: 50px;
-  padding: 5px;
-  top: 40%;
-  left: ${(props) => (props.prevBtn ? "20px" : "")};
-  right: ${(props) => (props.nextBtn ? "20px" : "")};
-  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
 `;
 
 export const ArrowButton = styled.img`
