@@ -14,10 +14,11 @@ export const CartContainer = styled.div`
 export const CartTitle = styled.h2`
   font-family: "Raleway";
   font-style: normal;
-  font-weight: 400;
+  font-weight: bold;
   font-size: 32px;
   line-height: 160%;
   color: #1d1f22;
+  margin-bottom: 55px;
 `;
 
 export const CartCard = styled.div`
@@ -72,7 +73,6 @@ export const ProductPriceFigures = styled.h4`
   color: #1d1f22;
 `;
 
-/**Attributes styles***/
 export const ProductAttributesContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -88,26 +88,24 @@ export const RightSideProductAttributeName = styled.h4`
   color: #1d1f22;
   text-transform: uppercase;
 `;
-export const RightSideProductAttributeBoxContainer = styled.div`
+export const ProductAttributeBoxContainer = styled.div`
   display: flex;
-  gap: 20px;
+  gap: 12px;
   width: 100%;
   margin-top: 8px;
   margin-bottom: 24px;
 `;
 export const ProductAttributeBox = styled.div`
-  width: 70px;
-  height: 35px;
+  width: 63px;
+  height: 45px;
   border: 1px solid #1d1f22;
-  text-align: center;
-  padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   background-color: ${(props) => props.color};
   border: ${(props) =>
     props.selected ? "1px solid #5ECE7B" : "1px solid black"};
-  &:not(:last-child) {
-    margin-right: 12px;
-  }
 `;
 export const ProductAttributeValue = styled.label`
   font-family: "Raleway";
@@ -120,13 +118,11 @@ export const ProductAttributeValue = styled.label`
   color: ${(props) => (props.index === 1 ? "#fff" : "#1d1f22")};
 `;
 
-/**end of attributes styles */
-
 export const CartCardRight = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: 400px;
-  height: 100%;
+  height: 336px;
 `;
 
 export const CartActionButtonsContainer = styled.div`
@@ -145,7 +141,7 @@ export const CartActionButtonsContainer = styled.div`
 
 export const CartIncreamentButton = styled.button`
   display: block;
-  width: 100%;
+  width: 45px;
   height: 45px;
   text-align: center;
   border: 1px solid #1d1f22;
@@ -163,7 +159,7 @@ export const CartQuantityBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid #1d1f22;
+  border: none;
   @media (max-width: 425px) {
     width: 80%;
     height: 30px;
@@ -171,7 +167,7 @@ export const CartQuantityBox = styled.div`
 `;
 export const CartDecreamentButton = styled.button`
   display: block;
-  width: 100%;
+  width: 45px;
   height: 45px;
   text-align: center;
   border: 1px solid #1d1f22;
@@ -360,4 +356,12 @@ export const TrushIconImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: contain;
+`;
+
+export const AddIconImage = styled.img`
+  width: 20px;
+  height: 20px;
+`;
+export const DecreaseIconImage = styled.img`
+  width: 20px;
 `;

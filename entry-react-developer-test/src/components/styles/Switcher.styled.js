@@ -13,7 +13,7 @@ export const DropdownMenuButton = styled.div`
   justify-content: space-between;
   font-family: "Raleway";
   font-style: normal;
-  font-weight: 800;
+  font-weight: 400;
   font-size: 18px;
   line-height: 160%;
 `;
@@ -43,8 +43,8 @@ export const DropdownCurrencyItem = styled.div`
   text-align: center;
   font-family: "Raleway";
   font-style: normal;
-  font-weight: 800;
-  font-size: 18px;
+  font-weight: 500;
+  font-size: 16px;
   line-height: 160%;
   &:hover {
     background: #eeeeee;

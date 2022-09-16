@@ -68,9 +68,6 @@ class Card extends Component {
           : prevState.currentIndex,
     }));
   };
-  handleChange = (event) => {
-    this.props.adjustQuantity(this.props.product.id, event.target.value);
-  };
 
   render() {
     return (
@@ -104,12 +101,7 @@ class Card extends Component {
             <CartIncreamentButton onClick={this.handleQuantityIncreament}>
               +
             </CartIncreamentButton>
-            <CartQuantityBox
-              type="number"
-              value={this.state.input}
-              onChange={this.handleChange}
-              min="1"
-            />
+            <CartQuantityBox>{this.state.input}</CartQuantityBox>
             <CartDecreamentButton
               disabled={this.state.input === 0}
               onClick={this.handleQuantityDecreament}

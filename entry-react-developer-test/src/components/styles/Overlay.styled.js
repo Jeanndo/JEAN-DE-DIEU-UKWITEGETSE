@@ -55,8 +55,8 @@ export const CartItemNumber = styled.span`
 export const CardContainer = styled.div`
   display: flex;
   width: 100%;
-  height: 200px;
-  margin-top: 32px;
+  height: 260px;
+  margin-bottom: 40px;
 `;
 export const CardLeftSide = styled.div`
   width: 40%;
@@ -94,8 +94,8 @@ export const ProductPrice = styled.h4`
 export const ProductAttributesContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  margin-top: 30px;
+  gap: 5px;
+  margin-top: 10px;
 `;
 export const ProductAttributeName = styled.h4`
   font-family: "Raleway";
@@ -117,10 +117,12 @@ export const ProductAttributeBoxContainer = styled.div`
 `;
 
 export const ProductAttributeBox = styled.div`
-  width: 50px;
-  height: 25px;
+  width: 24px;
+  height: 24px;
   border: 1px solid #1d1f22;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   background-color: ${(props) => props.color};
   border: ${(props) =>
@@ -131,7 +133,7 @@ export const ProductAttributeValue = styled.label`
   font-family: "Raleway";
   font-style: normal;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 10px;
   line-height: 18px;
   letter-spacing: 0.05em;
   cursor: pointer;
@@ -166,9 +168,10 @@ export const CartIncreamentButton = styled.button`
   background: #fff;
 `;
 
-export const CartQuantityBox = styled.input`
+export const CartQuantityBox = styled.div`
   width: 35px;
   height: 30px;
+  border: none;
   @media (max-width: 425px) {
     width: 80%;
     height: 30px;
@@ -199,7 +202,7 @@ export const TotalCostContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  margin-top: 32px;
+  margin-top: 80px;
 `;
 
 export const TotalLabels = styled.span`
@@ -212,6 +215,7 @@ export const TotalLabels = styled.span`
 `;
 
 export const CheckoutContainer = styled.div`
+  margin-top: 50px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -225,7 +229,6 @@ export const CheckoutActionButtonContainer = styled.div`
 `;
 export const CheckoutActionButton = styled.button`
   text-align: center;
-  /* padding: 16px 32px; */
   width: 120px;
   height: 43px;
   background: ${(props) => props.bgcolor};

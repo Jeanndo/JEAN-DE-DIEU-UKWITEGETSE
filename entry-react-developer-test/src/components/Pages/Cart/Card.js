@@ -20,6 +20,8 @@ import {
   TrushIconImage,
   ProductAttributesContainer,
   RightSideProductAttributeName,
+  AddIconImage,
+  DecreaseIconImage,
 } from "./../../styles/Cart.styled.js";
 import { connect } from "react-redux";
 import {
@@ -31,6 +33,8 @@ import ArrowRight from "./../../../assets/NextButton.png";
 import ArrowLeft from "./../../../assets/prevButton.png";
 import TrushIcon from "./../../../assets/bin.png";
 import ProductAttributes from "./Attributes.js";
+import AddIcon from "./../../../assets/add.png";
+import MinusIcon from "./../../../assets/minus.png";
 
 class Card extends Component {
   constructor(props) {
@@ -121,7 +125,7 @@ class Card extends Component {
         <CartCardRight>
           <CartActionButtonsContainer>
             <CartIncreamentButton onClick={this.handleQuantityIncreament}>
-              +
+              <AddIconImage src={AddIcon} alt="add icon" />
             </CartIncreamentButton>
             <CartQuantityBox>{this.state.input}</CartQuantityBox>
 
@@ -129,7 +133,7 @@ class Card extends Component {
               disabled={this.state.input === 0}
               onClick={this.handleQuantityDecreament}
             >
-              -
+              <DecreaseIconImage src={MinusIcon} alt="minus icon" />
             </CartDecreamentButton>
           </CartActionButtonsContainer>
           <CartProductImageContainer>
