@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import {
-  RightSideProductAttributeBoxContainer,
+  ProductAttributeBoxContainer,
   ProductAttributeBox,
   ProductAttributeValue,
 } from "./../../styles/Cart.styled.js";
@@ -16,7 +16,7 @@ class Attributes extends Component {
 
     return (
       <Fragment>
-        <RightSideProductAttributeBoxContainer>
+        <ProductAttributeBoxContainer>
           {this.props.items.map((item) => (
             <ProductAttributeBox
               key={item.id}
@@ -33,7 +33,7 @@ class Attributes extends Component {
               </ProductAttributeValue>
             </ProductAttributeBox>
           ))}
-        </RightSideProductAttributeBoxContainer>
+        </ProductAttributeBoxContainer>
       </Fragment>
     );
   }

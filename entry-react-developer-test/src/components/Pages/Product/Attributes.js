@@ -20,6 +20,7 @@ class Attributes extends Component {
           {this.props.items.map((item) => (
             <ProductAttributeBox
               key={item.id}
+              color={this.props.type === "swatch" ? item.value : ""}
               selected={this.props.attributes.find((attribute) =>
                 attribute.attribute === item.value &&
                 attribute.productId === this.props.productId

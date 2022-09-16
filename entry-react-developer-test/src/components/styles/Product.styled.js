@@ -26,7 +26,7 @@ export const ProductContainer = styled.div`
 `;
 
 export const LeftSideContainer = styled.div`
-  width: 929px;
+  width: 730px;
   height: 511px;
   @media (max-width: 768px) {
     width: 100%;
@@ -115,7 +115,7 @@ export const LeftSideInnerProductGalleryImage = styled.img`
 `;
 
 export const LeftSideInnerMainProductContainer = styled.div`
-  width: 100%;
+  width: 610px;
   max-width: 810px;
   height: 511px;
   @media (max-width: 425px) {
@@ -187,25 +187,23 @@ export const ProductAttributesContainer = styled.div`
 
 export const RightSideProductAttributeBoxContainer = styled.div`
   display: flex;
-  gap: 20px;
+  gap: 12px;
   width: 100%;
   margin-top: 8px;
   margin-bottom: 24px;
 `;
 
 export const ProductAttributeBox = styled.div`
-  width: 70px;
-  height: 35px;
+  width: 63px;
+  height: 45px;
   border: 1px solid #1d1f22;
-  text-align: center;
-  padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   background-color: ${(props) => props.color};
   border: ${(props) =>
     props.selected ? "1px solid #5ECE7B" : "1px solid black"};
-  &:not(:last-child) {
-    margin-right: 12px;
-  }
 `;
 export const ProductAttributeValue = styled.label`
   font-family: "Raleway";
