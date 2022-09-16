@@ -17,3 +17,5 @@
 ### PART III `Cart page + Cart overlay (minicart)`
 
 <img width="1440" alt="Screen Shot 2022-09-15 at 12 32 09" src="https://user-images.githubusercontent.com/59208992/190382455-a13dc426-64b8-43c1-bde7-4fe3342a390c.png">
+<img width="1440" alt="Screen Shot 2022-09-16 at 21 44 49" src="https://user-images.githubusercontent.com/59208992/190718854-baf6ac38-eb7d-4162-8588-27e85ee3ae02.png">
+<img width="1440" alt="Screen Shot 2022-09-16 at 21 46 40" src="https://user-images.githubusercontent.com/59208992/190718928-b467d996-7e2c-4398-9ba6-b39dadabf76d.png">
